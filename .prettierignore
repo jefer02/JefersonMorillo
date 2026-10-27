@@ -1,0 +1,9 @@
+.next
+node_modules
+public
+docs/brief.md
+docs/guia-curso.md
+package-lock.json
+screenshots
+test-results
+.impeccable
