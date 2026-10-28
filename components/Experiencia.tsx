@@ -14,13 +14,9 @@ export default function Experiencia() {
 
   return (
     <section id="experiencia" aria-labelledby="experiencia-titulo" className="border-rule bg-paper-2/45 border-t">
-      <div className="mx-auto max-w-[1440px] px-4 py-20 sm:px-6 md:py-28 lg:px-10">
-        <ChapterOpener
-          chapter={chapter}
-          headingId="experiencia-titulo"
-          lede="La historia se cuenta desde el último punto de guardado hacia atrás."
-        />
-        <div className="mt-14 md:mt-20">
+      <div className="mx-auto max-w-[1440px] px-4 py-14 sm:px-6 md:py-20 lg:px-10">
+        <ChapterOpener chapter={chapter} headingId="experiencia-titulo" lede="De lo más reciente a lo más antiguo." />
+        <div className="mt-8 md:mt-12">
           <Island>
             <Chronicle entries={entries} projectTitles={projectTitles} />
           </Island>
