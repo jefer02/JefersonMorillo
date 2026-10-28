@@ -20,7 +20,7 @@ export default function Testimonios() {
 
   return (
     <section id="testimonios" aria-labelledby="testimonios-titulo" className="border-rule border-t">
-      <div className="mx-auto max-w-[1440px] px-4 py-20 sm:px-6 md:py-28 lg:px-10">
+      <div className="mx-auto max-w-[1440px] px-4 py-14 sm:px-6 md:py-20 lg:px-10">
         <ChapterOpener
           chapter={chapter}
           headingId="testimonios-titulo"
@@ -34,9 +34,9 @@ export default function Testimonios() {
           </p>
         )}
 
-        <ul className="mt-14 grid gap-10 md:mt-20 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+        <ul className="mt-8 grid gap-8 md:mt-12 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
           {letters.map((t, i) => (
-            <li key={t.id} className={i % 3 === 1 ? "lg:translate-y-10" : ""}>
+            <li key={t.id}>
               <Island>
                 <WaxSealLetter index={i}>
                   <figure className="flex min-h-[22rem] flex-col px-7 pt-14 pb-7">
