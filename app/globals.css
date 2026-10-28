@@ -102,10 +102,38 @@
 @theme {
   --ease-book: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-scrub: cubic-bezier(0.45, 0, 0.2, 1);
+  /* A lightly damped spring (damping ≈ 0.78, ~2% overshoot) sampled for CSS. */
+  --ease-spring: linear(
+    0,
+    0.049,
+    0.164,
+    0.306,
+    0.452,
+    0.587,
+    0.703,
+    0.798,
+    0.872,
+    0.927,
+    0.965,
+    0.991,
+    1.007,
+    1.016,
+    1.019,
+    1.02,
+    1.018,
+    1.016,
+    1.013,
+    1.01,
+    1.007,
+    1.005,
+    1.003,
+    1.002,
+    1
+  );
 
   --text-folio: 0.6875rem;
   --text-display: clamp(2.75rem, 1.6rem + 5.6vw, 6rem);
-  --text-chapter: clamp(2.25rem, 1.5rem + 3.4vw, 4.25rem);
+  --text-chapter: clamp(2rem, 1.55rem + 2.2vw, 3.25rem);
   --text-lede: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
 
   --animate-gem: gem 2.8s var(--ease-book) infinite;
@@ -195,12 +223,12 @@
   }
   rt {
     font-family: var(--font-mono);
-    font-size: max(0.3em, 0.6875rem);
-    font-weight: 500;
-    letter-spacing: 0.14em;
+    font-size: 0.6875rem;
+    font-weight: 400;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--vermilion);
-    padding-bottom: 0.35em;
+    color: var(--ink-soft);
+    padding-bottom: 0.6em;
   }
 }
 
@@ -278,38 +306,15 @@ dialog::backdrop {
 /* Progressive reveal (components/fx/Reveal.tsx): only armed elements are ever hidden. */
 [data-armed] .reveal-item {
   opacity: 0;
-  transform: translateY(14px);
+  transform: translateY(8px);
 }
 [data-armed][data-in] .reveal-item {
   opacity: 1;
   transform: none;
   transition:
-    opacity 0.7s var(--ease-book),
-    transform 0.9s var(--ease-book);
-  transition-delay: calc(var(--i, 0) * 110ms);
-}
-
-@keyframes twinkle {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.35;
-  }
-}
-@keyframes mist {
-  from {
-    transform: translateX(-24px);
-  }
-  to {
-    transform: translateX(24px);
-  }
-}
-@keyframes shimmer {
-  to {
-    stroke-dashoffset: -32;
-  }
+    opacity 0.4s var(--ease-book),
+    transform 0.5s var(--ease-book);
+  transition-delay: calc(var(--i, 0) * 50ms);
 }
 
 /* Spell sigils draw themselves on hover/focus (pathLength=1 on every stroke). */
@@ -317,7 +322,7 @@ dialog::backdrop {
   .spell:hover .sigil-strokes > *,
   .spell:focus-within .sigil-strokes > * {
     stroke-dasharray: 1;
-    animation: sigil-draw 1.1s var(--ease-book) both;
+    animation: sigil-draw 0.6s var(--ease-book) both;
   }
 }
 @keyframes sigil-draw {
@@ -363,25 +368,13 @@ dialog::backdrop {
   }
 }
 
-/* Save-point rail transitions */
+/* The 404 page's rewinding clock. */
 @keyframes rewind {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(-720deg);
-  }
-}
-@keyframes page-turn {
-  0% {
-    transform: translateX(100%) skewX(-6deg);
-  }
-  48%,
-  52% {
-    transform: translateX(0) skewX(0);
-  }
-  100% {
-    transform: translateX(-100%) skewX(6deg);
   }
 }
 
@@ -408,16 +401,4 @@ main > section:not(#inicio),
 body > footer {
   content-visibility: auto;
   contain-intrinsic-size: auto 1200px;
-}
-
-/* Scroll cue: a gentle downward nudge (exponential ease-out, no bounce). */
-@keyframes nudge {
-  0%,
-  60%,
-  100% {
-    transform: translateY(0);
-  }
-  30% {
-    transform: translateY(4px);
-  }
 }
