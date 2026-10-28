@@ -29,9 +29,13 @@ export const profile = {
   email: "jefersonmorillo5858@gmail.com",
   siteUrl: "https://jeferson-morillo.vercel.app",
   cvPath: "/cv/CV-Jeferson-Morillo.pdf",
-  /** Set to an ImageAsset once public/images/profile.jpg exists. */
-  photo: undefined as ImageAsset | undefined,
-  photoTodo: todo("foto de perfil en public/images/profile.jpg (ponla en _material/ y la proceso)"),
+  photo: {
+    src: "/mi_FOTO_PERFIL/mi_Foto.jpg",
+    width: 959,
+    height: 1280,
+    alt: "Jeferson Morillo, con gafas y buzo con capucha",
+  } as ImageAsset | undefined,
+  photoTodo: todo("foto de perfil"),
 } as const;
 
 export const statusTag = `Actualmente estudiando · ${profile.studies.degree} · ${profile.studies.universityShort} ${profile.studies.campus}`;
