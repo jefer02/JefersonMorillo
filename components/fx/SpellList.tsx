@@ -10,7 +10,7 @@ export function SpellList({ skills, projects }: Props) {
   return (
     <ul className="grid gap-x-8 sm:grid-cols-2">
       {skills.map((skill) => (
-        <li key={skill.id} className="spell group/spell border-rule flex gap-4 border-t py-5">
+        <li key={skill.id} className="spell group/spell border-rule flex gap-4 border-t py-4">
           <Sigil
             name={skill.name}
             drawable
@@ -20,7 +20,7 @@ export function SpellList({ skills, projects }: Props) {
             <h4 className="font-display text-[1.1rem] leading-tight font-bold">{skill.name}</h4>
             <p className="text-ink-soft mt-1.5 text-[0.92rem] leading-relaxed">{skill.use}</p>
             <p className="mt-3 flex flex-wrap items-center gap-1.5 text-[0.8rem]">
-              <span className="text-ink-soft font-mono text-[0.72rem] tracking-[0.08em] uppercase">Invocado en:</span>
+              <span className="text-ink-soft font-mono text-[0.72rem] tracking-[0.08em] uppercase">Usado en:</span>
               {skill.usedIn.map((slug) => (
                 <Link
                   key={slug}
