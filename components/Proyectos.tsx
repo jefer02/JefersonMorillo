@@ -16,14 +16,14 @@ export default function Proyectos() {
   const chapter = chapterById["proyectos"];
   return (
     <section id="proyectos" aria-labelledby="proyectos-titulo" className="border-rule bg-paper-2/45 border-t">
-      <div className="mx-auto max-w-[1440px] px-4 py-20 sm:px-6 md:py-28 lg:px-10">
+      <div className="mx-auto max-w-[1440px] px-4 py-14 sm:px-6 md:py-20 lg:px-10">
         <ChapterOpener
           chapter={chapter}
           headingId="proyectos-titulo"
-          lede="Cada proyecto es un volumen: un problema real, una solución y lo que aprendí en el camino."
+          lede="Cada proyecto parte de un problema real: cómo lo resolví y qué aprendí en el camino."
         />
 
-        <Reveal as="ul" className="mt-14 grid gap-x-8 gap-y-16 sm:grid-cols-2 md:mt-20 lg:grid-cols-3 lg:gap-x-10" threshold={0.05}>
+        <Reveal as="ul" className="mt-8 grid gap-x-8 gap-y-12 sm:grid-cols-2 md:mt-12 lg:grid-cols-3 lg:gap-x-10" threshold={0.05}>
           {orderedProjects.map((project, i) => (
             <li key={project.slug} id={`vol-${project.slug}`} className="reveal-item flex flex-col" style={{ ["--i" as string]: i % 3 }}>
               <Link
@@ -33,7 +33,7 @@ export default function Proyectos() {
                 aria-label={`${project.title}: leer el caso de estudio`}
               >
                 <ViewTransition name={`cover-${project.slug}`} share="morph" default="none">
-                  <div className="ease-book transition-transform duration-500 group-hover:-translate-y-2 group-hover:-rotate-1">
+                  <div className="transition-transform duration-200 ease-out group-hover:-translate-y-1.5">
                     <VolumeCover project={project} />
                   </div>
                 </ViewTransition>
