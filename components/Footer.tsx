@@ -65,7 +65,7 @@ export default function Footer() {
               {navChapters.map((c) => (
                 <li key={c.id}>
                   <a href={`/#${c.id}`} className="hover:text-vermilion inline-flex min-h-10 items-center text-[0.92rem]">
-                    {c.name === "Experiencia académica y laboral" ? "Experiencia" : c.name}
+                    {c.name}
                   </a>
                 </li>
               ))}
