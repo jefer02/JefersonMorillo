@@ -19,7 +19,7 @@ async function getLatestPush(): Promise<{ repo: string; date: string } | null> {
   }
 }
 
-/** "Último hechizo lanzado": his latest public push on GitHub. Fails silently. */
+/** "Última actividad en GitHub": his latest public push. Fails silently. */
 export async function LatestSpell() {
   const latest = await getLatestPush();
   if (!latest) return null;
@@ -28,8 +28,8 @@ export async function LatestSpell() {
   );
   return (
     <p className="text-ink-soft inline-flex flex-wrap items-center gap-x-2 gap-y-1 text-[0.9rem]">
-      <span aria-hidden="true" className="bg-ember motion-safe:animate-gem size-2 rotate-45" />
-      <span className="font-mono text-[0.72rem] tracking-[0.12em] uppercase">Último hechizo lanzado</span>
+      <span aria-hidden="true" className="bg-ember size-2 rotate-45" />
+      <span className="font-mono text-[0.72rem] tracking-[0.12em] uppercase">Última actividad en GitHub</span>
       <a
         href={`https://github.com/jefer02/${latest.repo}`}
         target="_blank"
