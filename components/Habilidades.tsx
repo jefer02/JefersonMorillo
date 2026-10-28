@@ -17,18 +17,18 @@ export default function Habilidades() {
   );
   return (
     <section id="habilidades" aria-labelledby="habilidades-titulo" className="border-rule border-t">
-      <div className="mx-auto max-w-[1440px] px-4 py-20 sm:px-6 md:py-28 lg:px-10">
+      <div className="mx-auto max-w-[1440px] px-4 py-14 sm:px-6 md:py-20 lg:px-10">
         <ChapterOpener
           chapter={chapter}
           headingId="habilidades-titulo"
-          lede="No mido mis habilidades en porcentajes: las muestro en lo que he construido. Cada hechizo enlaza al volumen donde lo usé."
+          lede="No mido mis habilidades en porcentajes: las muestro en lo que he construido. Cada herramienta enlaza al proyecto donde la usé."
         />
-        <div className="mt-6">
+        <div className="mt-4">
           <Suspense fallback={null}>
             <LatestSpell />
           </Suspense>
         </div>
-        <div className="mt-12 md:mt-16">
+        <div className="mt-8 md:mt-10">
           <Island>
             <Grimoire schools={schools} panels={panels} />
           </Island>
