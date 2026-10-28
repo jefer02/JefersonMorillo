@@ -44,11 +44,11 @@ export function Grimoire({ schools, panels }: Props) {
         ref={tabsRef}
         role="tablist"
         aria-orientation="vertical"
-        aria-label="Escuelas"
+        aria-label="Categorías"
         onKeyDown={onKeyDown}
         className="js:lg:block hidden p-8 pr-10"
       >
-        <p className="text-folio text-ink-soft mb-4 font-mono tracking-[0.2em] uppercase">Escuelas</p>
+        <p className="text-folio text-ink-soft mb-4 font-mono tracking-[0.2em] uppercase">Categorías</p>
         {schools.map((s) => {
           const selected = s.id === active;
           return (
@@ -84,12 +84,7 @@ export function Grimoire({ schools, panels }: Props) {
             className="js:lg:data-[active=false]:hidden focus-visible:outline-offset-[-4px]"
           >
             <h3 id={`escuela-${s.id}`} className="font-display js:lg:mb-4 js:lg:text-[1.6rem] text-[1.35rem] font-bold">
-              <ruby>
-                {s.name}
-                <rp> (</rp>
-                <rt>{s.rune}</rt>
-                <rp>)</rp>
-              </ruby>
+              {s.name}
             </h3>
             <div className="js:lg:mt-0 mt-3">{panels[s.id]}</div>
           </section>
