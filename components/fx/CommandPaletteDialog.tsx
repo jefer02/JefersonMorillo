@@ -8,7 +8,7 @@ import { profile } from "@/content/profile";
 import { socials } from "@/content/socials";
 import { orderedProjects } from "@/lib/projects";
 import { scrollToId } from "@/lib/scroll";
-import { Sigil } from "./Sigil";
+import { IconSearch } from "@/components/ui/Icons";
 
 type Props = {
   open: boolean;
@@ -42,25 +42,25 @@ export default function CommandPaletteDialog({ open, setOpen, setNotice }: Props
     <Command.Dialog
       open={open}
       onOpenChange={setOpen}
-      label="Lanzar hechizo"
+      label="Buscar"
       loop
       overlayClassName="fixed inset-0 z-[70] bg-ink/40 backdrop-blur-[2px]"
       contentClassName="fixed top-[12vh] left-1/2 z-[71] w-[min(36rem,calc(100vw-2rem))] -translate-x-1/2 overflow-hidden rounded-[4px] border border-rule bg-paper text-ink shadow-[0_30px_80px_-30px_oklch(0.15_0.02_50/0.6)]"
     >
       <div className="border-rule flex items-center gap-3 border-b px-4">
-        <Sigil name="Lanzar hechizo" className="text-vermilion size-6 shrink-0" />
+        <IconSearch width={20} height={20} className="text-ink-soft shrink-0" />
         <Command.Input
-          placeholder="Lanzar hechizo: ir a un capítulo, abrir un volumen…"
+          placeholder="Buscar o ir a una sección o proyecto…"
           className="placeholder:text-ink-soft h-14 w-full bg-transparent text-[1rem] outline-none"
         />
         <kbd className="border-rule text-ink-soft shrink-0 rounded-sm border px-1.5 font-mono text-[0.7rem]">Esc</kbd>
       </div>
       <Command.List className="max-h-[min(60vh,28rem)] overflow-y-auto overscroll-contain p-1" data-lenis-prevent>
-        <Command.Empty className="text-ink-soft px-4 py-6 text-center">Ningún hechizo coincide.</Command.Empty>
+        <Command.Empty className="text-ink-soft px-4 py-6 text-center">Sin resultados.</Command.Empty>
 
-        <Command.Group heading="Capítulos" className={group}>
-          <Command.Item className={item} onSelect={goTo("top")} value="portada inicio regresar al punto de guardado">
-            Regresar al punto de guardado (portada)
+        <Command.Group heading="Secciones" className={group}>
+          <Command.Item className={item} onSelect={goTo("top")} value="inicio portada">
+            Ir al inicio
           </Command.Item>
           {navChapters.map((c) => (
             <Command.Item key={c.id} className={item} onSelect={goTo(c.id)} value={`${c.name} ${c.ruby}`}>
@@ -71,7 +71,7 @@ export default function CommandPaletteDialog({ open, setOpen, setNotice }: Props
           ))}
         </Command.Group>
 
-        <Command.Group heading="Volúmenes" className={group}>
+        <Command.Group heading="Proyectos" className={group}>
           {orderedProjects.map((p) => (
             <Command.Item
               key={p.slug}
