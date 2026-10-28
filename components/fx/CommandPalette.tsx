@@ -3,15 +3,14 @@
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { IconCommand } from "@/components/ui/Icons";
-import { Sigil } from "./Sigil";
+import { IconSearch } from "@/components/ui/Icons";
 
 const CommandPaletteDialog = dynamic(() => import("./CommandPaletteDialog"), {
   ssr: false,
 });
 
 /**
- * "Lanzar hechizo": a command palette (Ctrl/⌘ + K, or the floating sigil on mobile)
+ * "Buscar": a command palette (Ctrl/⌘ + K, or the floating sigil on mobile)
  * to jump to chapters, open volumes, download the CV, copy the email and switch theme.
  */
 export function CommandPalette() {
@@ -54,9 +53,10 @@ export function CommandPalette() {
         type="button"
         onClick={() => openPalette(true)}
         className="border-rule text-ink-soft hover:border-vermilion hover:text-vermilion hidden min-h-11 items-center gap-2 rounded-[3px] border px-3 text-[0.82rem] transition-colors duration-200 xl:inline-flex"
-        aria-label="Ctrl K: abrir la paleta de comandos"
+        aria-label="Buscar (Ctrl K): ir a una sección o proyecto"
       >
-        <IconCommand width={16} height={16} />
+        <IconSearch width={16} height={16} />
+        <span>Buscar</span>
         <kbd className="font-mono text-[0.75rem]">Ctrl K</kbd>
       </button>
       {mounted &&
@@ -69,9 +69,9 @@ export function CommandPalette() {
             className={`bg-ink text-paper ease-book fixed right-4 bottom-4 z-40 inline-flex size-14 items-center justify-center rounded-full shadow-[0_10px_30px_-10px_oklch(0.2_0.02_50/0.6)] transition-[opacity,transform] duration-300 xl:hidden ${
               pastCover ? "opacity-100" : "pointer-events-none translate-y-4 opacity-0"
             }`}
-            aria-label="Lanzar hechizo: abrir la paleta de comandos"
+            aria-label="Buscar: ir a una sección o proyecto"
           >
-            <Sigil name="Lanzar hechizo" className="size-8" />
+            <IconSearch width={24} height={24} />
           </button>,
           document.body,
         )}
