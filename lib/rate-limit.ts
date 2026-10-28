@@ -1,14 +1,14 @@
 // Rate limit for the contact form: 3 messages per 10 minutes per IP.
-// Uses Upstash Redis (REST) automatically when its env vars exist; otherwise an
-// in-memory window (fine for a single serverless instance, best effort on Vercel).
+// Uses Upstash Redis (REST) when its credentials are passed; otherwise an in-memory
+// window (best effort: each Worker isolate keeps its own).
 
 const LIMIT = 3;
 const WINDOW_SECONDS = 600;
 const memory = new Map<string, number[]>();
 
-async function upstash(key: string): Promise<boolean | null> {
-  const url = process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+type Upstash = { url?: string; token?: string };
+
+async function upstash(key: string, { url, token }: Upstash): Promise<boolean | null> {
   if (!url || !token) return null;
   try {
     const res = await fetch(`${url}/pipeline`, {
@@ -18,7 +18,6 @@ async function upstash(key: string): Promise<boolean | null> {
         ["INCR", key],
         ["EXPIRE", key, String(WINDOW_SECONDS), "NX"],
       ]),
-      cache: "no-store",
     });
     if (!res.ok) return null;
     const [[, count]] = (await res.json()).map((r: { result: number }) => [null, r.result]);
@@ -28,9 +27,9 @@ async function upstash(key: string): Promise<boolean | null> {
   }
 }
 
-export async function allowRequest(ip: string): Promise<boolean> {
+export async function allowRequest(ip: string, redis: Upstash = {}): Promise<boolean> {
   const key = `contact:${ip}`;
-  const remote = await upstash(key);
+  const remote = await upstash(key, redis);
   if (remote !== null) return remote;
 
   const now = Date.now();

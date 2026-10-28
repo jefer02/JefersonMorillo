@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState, useEffect, useRef, useState } from "react";
-import { sendContact, type ContactState } from "@/app/actions/contact";
+import type { ContactState } from "@/lib/contact";
 import { REASONS, validateField, type Field } from "@/lib/validation/patterns";
 import { runePath } from "@/lib/runes";
 import { buttonClass } from "@/components/ui/Button";
@@ -10,6 +10,18 @@ import { TalcBurst } from "./TalcBurst";
 
 const FIELDS: Field[] = ["name", "email", "reason", "message"];
 const INITIAL: ContactState = { status: "idle", message: "" };
+const UNAVAILABLE: ContactState = { status: "fallback", message: "No pude enviar el mensaje. Escríbeme directamente por correo." };
+
+/** Posts the form to the Pages Function (functions/api/contact.ts); the site itself is static. */
+async function sendContact(_prev: ContactState, formData: FormData): Promise<ContactState> {
+  try {
+    const res = await fetch("/api/contact", { method: "POST", body: formData });
+    if (!res.headers.get("content-type")?.includes("application/json")) return UNAVAILABLE;
+    return (await res.json()) as ContactState;
+  } catch {
+    return UNAVAILABLE;
+  }
+}
 
 /** The validation circle: one rune per field ignites when its regex passes; the ring closes when all do. */
 function ValidationCircle({ valid }: { valid: Record<Field, boolean> }) {
