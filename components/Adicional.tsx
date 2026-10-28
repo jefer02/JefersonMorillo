@@ -25,16 +25,16 @@ export default function Adicional() {
 
   return (
     <section id="extras" aria-labelledby="extras-titulo" className="border-rule border-t">
-      <div className="mx-auto max-w-[1440px] px-4 py-20 sm:px-6 md:py-28 lg:px-10">
+      <div className="mx-auto max-w-[1440px] px-4 py-14 sm:px-6 md:py-20 lg:px-10">
         <ChapterOpener chapter={chapter} headingId="extras-titulo" />
 
         {/* The afterword page: ruled paper, a narrower measure, a handwritten voice. */}
-        <div className="bg-paper-2 relative mx-auto mt-14 max-w-3xl px-6 py-10 shadow-[0_30px_60px_-40px_oklch(0.2_0.02_50/0.5)] sm:px-12 sm:py-14 md:mt-20">
+        <div className="bg-paper-2 relative mx-auto mt-8 max-w-3xl px-6 py-8 shadow-[0_30px_60px_-40px_oklch(0.2_0.02_50/0.5)] sm:px-10 sm:py-10 md:mt-12">
           <p className="font-hand text-[clamp(1.2rem,1.05rem+0.6vw,1.5rem)] leading-[1.75] font-semibold">
-            Gracias por llegar hasta aquí. Antes de cerrar este volumen, unas notas que no cabían en ningún otro capítulo.
+            Gracias por llegar hasta aquí. Estas son algunas notas que no encajaban en otra sección.
           </p>
 
-          <div className="mt-10 grid gap-8 sm:grid-cols-2 sm:gap-x-10">
+          <div className="mt-8 grid gap-7 sm:grid-cols-2 sm:gap-x-10">
             <Note title="Idiomas">
               <dl className="grid gap-2">
                 {languages.map((l) =>
@@ -83,8 +83,8 @@ export default function Adicional() {
             </Note>
           </div>
 
-          <section className="border-ink/30 mt-10 border-t border-dashed pt-5">
-            <h3 className="font-hand text-vermilion text-[1.3rem] font-semibold">Lo que me apasiona, hacia dónde voy</h3>
+          <section className="border-ink/30 mt-8 border-t border-dashed pt-5">
+            <h3 className="font-hand text-vermilion text-[1.3rem] font-semibold">Intereses y hacia dónde voy</h3>
             <ul className="mt-4 grid gap-5 sm:grid-cols-3 sm:gap-6">
               {passions.map((p) => (
                 <li key={p.id}>
@@ -101,17 +101,12 @@ export default function Adicional() {
             </ul>
           </section>
 
-          <p className="font-hand mt-12 text-[clamp(1.2rem,1.05rem+0.6vw,1.5rem)] leading-[1.7] font-semibold text-balance">
-            {closingLine}
-          </p>
+          <p className="font-hand mt-8 text-[clamp(1.2rem,1.05rem+0.6vw,1.5rem)] leading-[1.7] font-semibold text-balance">{closingLine}</p>
 
-          <div className="mt-10 flex flex-col items-end text-right">
+          <div className="mt-6 flex flex-col items-end text-right">
             <p className="font-hand -rotate-2 text-[2.2rem] leading-none font-semibold">{profile.displayName}</p>
             <span aria-hidden="true" className="bg-ink/40 mt-2 h-px w-40" />
-            <p className="text-ink-soft mt-3 text-[0.9rem]">Gracias por leer este volumen.</p>
-            <p aria-hidden="true" className="font-cjk text-vermilion mt-4 text-xl">
-              あとがき
-            </p>
+            <p className="text-ink-soft mt-3 text-[0.9rem]">Gracias por tu tiempo.</p>
           </div>
         </div>
       </div>
