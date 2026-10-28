@@ -119,6 +119,8 @@ export type SideStory = {
 
 export type ShelfBook = {
   title: string;
+  /** Plain genre label shown on the open page. */
+  genre: string;
   take: Text;
   color: Accent;
 };
