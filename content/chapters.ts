@@ -6,13 +6,13 @@ import { testimonialsReady } from "./testimonials";
 const allChapters: Chapter[] = [
   { id: "inicio", numeral: "", name: "Bienvenida", ruby: "Portada", kanji: "表紙", folio: 1 },
   { id: "origen", numeral: "I", name: "Origen", ruby: "Del campo al valle", kanji: "起源", folio: 3 },
-  { id: "acerca-de-mi", numeral: "II", name: "Acerca de mí", ruby: "Historias paralelas", kanji: "外伝", folio: 9 },
-  { id: "habilidades", numeral: "III", name: "Habilidades", ruby: "Grimorio", kanji: "魔導書", folio: 17 },
-  { id: "proyectos", numeral: "IV", name: "Mis proyectos", ruby: "Volúmenes publicados", kanji: "巻", folio: 25 },
-  { id: "testimonios", numeral: "V", name: "Testimonios", ruby: "Cartas del gremio", kanji: "手紙", folio: 49 },
-  { id: "experiencia", numeral: "VI", name: "Experiencia académica y laboral", ruby: "Re:Crónica", kanji: "記録", folio: 57 },
-  { id: "extras", numeral: "VII", name: "Adicional", ruby: "Epílogo del autor", kanji: "あとがき", folio: 67 },
-  { id: "contacto", numeral: "VIII", name: "Contacto", ruby: "Continuará…", kanji: "続く", folio: 73 },
+  { id: "acerca-de-mi", numeral: "II", name: "Acerca de mí", ruby: "Fuera del código", kanji: "外伝", folio: 9 },
+  { id: "habilidades", numeral: "III", name: "Habilidades", ruby: "Herramientas", kanji: "魔導書", folio: 17 },
+  { id: "proyectos", numeral: "IV", name: "Proyectos", ruby: "Lo que he construido", kanji: "巻", folio: 25 },
+  { id: "testimonios", numeral: "V", name: "Testimonios", ruby: "Con quienes he trabajado", kanji: "手紙", folio: 49 },
+  { id: "experiencia", numeral: "VI", name: "Experiencia", ruby: "Académica y laboral", kanji: "記録", folio: 57 },
+  { id: "extras", numeral: "VII", name: "Adicional", ruby: "Notas del autor", kanji: "あとがき", folio: 67 },
+  { id: "contacto", numeral: "VIII", name: "Contacto", ruby: "Hablemos", kanji: "続く", folio: 73 },
 ];
 
 // Testimonials stay out of the menu in production until 3 real ones are verified.
