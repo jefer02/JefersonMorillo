@@ -1,6 +1,10 @@
+import { cacheLife } from "next/cache";
+
 type PushEvent = { type: string; repo: { name: string }; created_at: string };
 
 async function getLatestPush(): Promise<{ repo: string; date: string } | null> {
+  "use cache";
+  cacheLife("hours");
   try {
     const res = await fetch("https://api.github.com/users/jefer02/events/public?per_page=30", {
       headers: { Accept: "application/vnd.github+json" },
@@ -15,7 +19,7 @@ async function getLatestPush(): Promise<{ repo: string; date: string } | null> {
   }
 }
 
-/** "Última actividad en GitHub": his latest public push, read at build time. Fails silently. */
+/** "Última actividad en GitHub": his latest public push. Fails silently. */
 export async function LatestSpell() {
   const latest = await getLatestPush();
   if (!latest) return null;

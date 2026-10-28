@@ -13,8 +13,7 @@
     "test": "vitest run",
     "test:e2e": "playwright test",
     "cv": "tsx scripts/generate-cv.ts",
-    "format": "prettier --write .",
-    "preview": "wrangler pages dev out"
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
@@ -28,6 +27,7 @@
     "next-themes": "^0.4.6",
     "react": "19.3.0",
     "react-dom": "19.3.0",
+    "resend": "^6.34.1",
     "three": "^0.186.1",
     "zod": "^4.6.7"
   },
@@ -46,7 +46,6 @@
     "tailwindcss": "^4",
     "tsx": "^4.23.15",
     "typescript": "^5",
-    "vitest": "^5.0.5",
-    "wrangler": "^4.154.0"
+    "vitest": "^5.0.5"
   }
 }

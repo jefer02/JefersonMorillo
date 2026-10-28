@@ -4,8 +4,6 @@ import { profile } from "@/content/profile";
 export const alt = `${profile.displayName} — ${profile.seriesTitle}, ${profile.volume}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
-// Static export: generated once at build time.
-export const dynamic = "force-static";
 
 /** Open Graph image in the light-novel cover style: obi, volume number and the long title. */
 export default function OpengraphImage() {
