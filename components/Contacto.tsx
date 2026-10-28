@@ -9,15 +9,19 @@ import { IconGitHub, IconLinkedIn } from "@/components/ui/Icons";
 
 const ICONS = { github: IconGitHub, linkedin: IconLinkedIn } as const;
 
-/** Chapter VIII, "Continuará…": the cliffhanger. Email in full, tech networks, and the form. */
+/** Chapter VIII: email in full, tech networks, and the form. */
 export default function Contacto() {
   const chapter = chapterById["contacto"];
   return (
     <section id="contacto" aria-labelledby="contacto-titulo" className="border-ink border-t">
-      <div className="mx-auto max-w-[1440px] px-4 py-20 sm:px-6 md:py-28 lg:px-10">
-        <ChapterOpener chapter={chapter} headingId="contacto-titulo" lede="¿Escribimos juntos el próximo volumen?" />
+      <div className="mx-auto max-w-[1440px] px-4 py-14 sm:px-6 md:py-20 lg:px-10">
+        <ChapterOpener
+          chapter={chapter}
+          headingId="contacto-titulo"
+          lede="¿Tienes una oportunidad, un proyecto o una pregunta? Escríbeme y te respondo."
+        />
 
-        <div className="mt-14 grid gap-14 md:mt-20 lg:grid-cols-12 lg:gap-10">
+        <div className="mt-8 grid gap-10 md:mt-12 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-4">
             <h3 className="text-folio text-ink-soft font-mono tracking-[0.2em] uppercase">Correo electrónico</h3>
             <p className="mt-3">
@@ -34,7 +38,7 @@ export default function Contacto() {
               </Island>
             </div>
 
-            <h3 className="text-folio text-ink-soft mt-10 font-mono tracking-[0.2em] uppercase">En la red</h3>
+            <h3 className="text-folio text-ink-soft mt-8 font-mono tracking-[0.2em] uppercase">Redes</h3>
             <ul className="mt-3 grid gap-1">
               {socials.map((s) => {
                 const Icon = ICONS[s.id];
@@ -55,7 +59,7 @@ export default function Contacto() {
                 );
               })}
             </ul>
-            <p className="text-ink-soft mt-10 max-w-[34ch] text-[0.92rem] leading-relaxed">
+            <p className="text-ink-soft mt-8 max-w-[34ch] text-[0.92rem] leading-relaxed">
               Desde {profile.city}, {profile.region}. Respondo a oportunidades laborales, proyectos y colaboraciones.
             </p>
           </div>
