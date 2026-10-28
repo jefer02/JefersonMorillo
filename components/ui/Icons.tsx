@@ -92,6 +92,12 @@ export const IconMoon = (p: P) => (
   </Base>
 );
 
+export const IconSearch = (p: P) => (
+  <Base {...p}>
+    <path d="M10.5 17a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13ZM15.25 15.25 20 20" />
+  </Base>
+);
+
 export const IconCommand = (p: P) => (
   <Base {...p}>
     <path d="M9 6.5A2.5 2.5 0 1 0 6.5 9H9V6.5Zm0 0v11m0-11h6m-6 11A2.5 2.5 0 1 1 6.5 15H9v2.5Zm0 0h6m0-11A2.5 2.5 0 1 1 17.5 9H15V6.5Zm0 0v11m0 0A2.5 2.5 0 1 0 17.5 15H15v2.5Z" />
