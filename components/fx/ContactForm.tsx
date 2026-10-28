@@ -117,9 +117,8 @@ export function ContactForm({ email }: Props) {
         {sent ? (
           <div className="bg-paper-2 relative overflow-hidden p-8 text-center motion-safe:animate-[letter-in_700ms_var(--ease-book)]">
             <TalcBurst />
-            <p className="font-display text-[1.6rem] font-bold">Carta enviada</p>
+            <p className="font-display text-[1.6rem] font-bold">Mensaje enviado</p>
             <p className="text-ink-soft mt-2">{state.message}</p>
-            <p className="font-hand text-vermilion mt-6 text-[1.2rem]">Continuará…</p>
           </div>
         ) : (
           <form
