@@ -1,24 +1,32 @@
+import type { Locale } from "@/lib/i18n/config";
 import type { Chapter } from "@/types";
 import { testimonialsReady } from "./testimonials";
 
 // Section order follows the course guide's map; extras sit where they serve the story.
-// Folios are the "page numbers" shown in section corners and in the Índice.
-const allChapters: Chapter[] = [
-  { id: "inicio", numeral: "", name: "Bienvenida", ruby: "Portada", kanji: "表紙", folio: 1 },
-  { id: "origen", numeral: "I", name: "Origen", ruby: "Del campo al valle", kanji: "起源", folio: 3 },
-  { id: "acerca-de-mi", numeral: "II", name: "Acerca de mí", ruby: "Fuera del código", kanji: "外伝", folio: 9 },
-  { id: "habilidades", numeral: "III", name: "Habilidades", ruby: "Herramientas", kanji: "魔導書", folio: 17 },
-  { id: "proyectos", numeral: "IV", name: "Proyectos", ruby: "Lo que he construido", kanji: "巻", folio: 25 },
-  { id: "testimonios", numeral: "V", name: "Testimonios", ruby: "Con quienes he trabajado", kanji: "手紙", folio: 49 },
-  { id: "experiencia", numeral: "VI", name: "Experiencia", ruby: "Académica y laboral", kanji: "記録", folio: 57 },
-  { id: "extras", numeral: "VII", name: "Adicional", ruby: "Notas del autor", kanji: "あとがき", folio: 67 },
-  { id: "contacto", numeral: "VIII", name: "Contacto", ruby: "Hablemos", kanji: "続く", folio: 73 },
+// The side rail's sigils spell these names in the rune alphabet (docs/runas.md).
+const allChapters: { id: string; name: Record<Locale, string> }[] = [
+  { id: "inicio", name: { es: "Inicio", en: "Home" } },
+  { id: "presentacion", name: { es: "Presentación", en: "Introduction" } },
+  { id: "acerca-de-mi", name: { es: "Acerca de mí", en: "About me" } },
+  { id: "habilidades", name: { es: "Habilidades", en: "Skills" } },
+  { id: "proyectos", name: { es: "Proyectos", en: "Projects" } },
+  { id: "testimonios", name: { es: "Testimonios", en: "Testimonials" } },
+  { id: "experiencia", name: { es: "Experiencia", en: "Experience" } },
+  { id: "extras", name: { es: "Adicional", en: "Extras" } },
+  { id: "contacto", name: { es: "Contacto", en: "Contact" } },
 ];
 
 // Testimonials stay out of the menu in production until 3 real ones are verified.
-export const chapters = allChapters.filter((c) => c.id !== "testimonios" || testimonialsReady || process.env.NODE_ENV !== "production");
+const published = allChapters.filter((c) => c.id !== "testimonios" || testimonialsReady || process.env.NODE_ENV !== "production");
 
-export const chapterById = Object.fromEntries(allChapters.map((c) => [c.id, c])) as Record<string, Chapter>;
-
-/** Chapters shown as links in the menu (the cover is reached through the logo). */
-export const navChapters = chapters.filter((c) => c.id !== "inicio");
+/**
+ * Section names in one language. The menu, the side rail, the search and the footer use
+ * `navChapters`: "Inicio" goes to the top of the page, and the Presentación section right
+ * below the hero has no menu entry of its own.
+ */
+export function getChapters(locale: Locale) {
+  const localize = (c: (typeof allChapters)[number]): Chapter => ({ id: c.id, name: c.name[locale] });
+  const chapterById = Object.fromEntries(allChapters.map((c) => [c.id, localize(c)])) as Record<string, Chapter>;
+  const navChapters = published.filter((c) => c.id !== "presentacion").map(localize);
+  return { chapterById, navChapters };
+}
