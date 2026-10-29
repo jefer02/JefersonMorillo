@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useMessages } from "@/lib/i18n/client";
 import { Monogram } from "./Monogram";
 
 // An irregular wax edge: a circle whose radius wobbles, generated once (deterministic).
@@ -43,6 +44,7 @@ function Seal({ broken }: { broken: boolean }) {
  * is sealed and opens when it enters the viewport, or on click/Enter.
  */
 export function WaxSealLetter({ children, index = 0 }: { children: ReactNode; index?: number }) {
+  const openLabel = useMessages().testimonials.openLetter;
   const ref = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(true);
 
@@ -79,12 +81,7 @@ export function WaxSealLetter({ children, index = 0 }: { children: ReactNode; in
           className="absolute inset-x-0 top-0 h-10 bg-[linear-gradient(170deg,transparent_48%,var(--rule)_49%,transparent_51%),linear-gradient(190deg,transparent_48%,var(--rule)_49%,transparent_51%)]"
         />
         {!open && (
-          <button
-            type="button"
-            onClick={() => setOpen(true)}
-            className="absolute inset-0 z-10 cursor-pointer"
-            aria-label="Abrir la carta"
-          />
+          <button type="button" onClick={() => setOpen(true)} className="absolute inset-0 z-10 cursor-pointer" aria-label={openLabel} />
         )}
         <div className={`transition-opacity duration-700 ${open ? "opacity-100" : "opacity-0"}`}>{children}</div>
       </div>
