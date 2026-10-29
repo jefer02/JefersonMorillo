@@ -1,16 +1,15 @@
-import { todo } from "@/lib/todo";
 import type { ShelfBook, SideStory } from "@/types";
 
 // "Acerca de mí": only life outside software engineering.
 // Draft written from Jeferson's own notes (25 oct 2026); pending his approval.
 export const presentation =
-  "Nací en El Contadero y vivo en Pasto, donde estudio. Fuera del código paso el tiempo con videojuegos y anime, y siempre me ha interesado saber cómo se hacen los juegos. Cuando necesito despejarme salgo a caminar, y en vacaciones vuelvo al campo a ayudar a mi familia con el ganado.";
+  "Fuera del código paso el tiempo con videojuegos y anime, y siempre me ha interesado saber cómo se hacen los juegos. Cuando necesito despejarme salgo a caminar, y en vacaciones vuelvo al campo a ayudar a mi familia con el ganado.";
 
 export const quickFacts = [
   { label: "Nací en", value: "El Contadero, Nariño" },
   { label: "Vivo en", value: "San Juan de Pasto, Nariño" },
   { label: "Estudio", value: "Ingeniería de Software · UCC" },
-  { label: "Semestre", value: todo("semestre actual") },
+  { label: "Semestre", value: "5.º (empecé en 2024)" },
   { label: "Tiempo libre", value: "Videojuegos, anime y caminar" },
 ];
 
