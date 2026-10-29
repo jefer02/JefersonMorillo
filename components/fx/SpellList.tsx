@@ -1,11 +1,13 @@
 import Link from "next/link";
+import { href, type Locale } from "@/lib/i18n/config";
+import { messages } from "@/lib/i18n/messages";
 import type { Project, Skill } from "@/types";
 import { Sigil } from "./Sigil";
 
-type Props = { skills: Skill[]; projects: Pick<Project, "slug" | "title">[] };
+type Props = { skills: Skill[]; projects: Pick<Project, "slug" | "title">[]; locale: Locale };
 
-/** The spells of one school. Server-rendered: sigils are computed once, never on the client. */
-export function SpellList({ skills, projects }: Props) {
+/** The skills of one category. Server-rendered: sigils are computed once, never on the client. */
+export function SpellList({ skills, projects, locale }: Props) {
   const titleOf = (slug: string) => projects.find((p) => p.slug === slug)?.title ?? slug;
   return (
     <ul className="grid gap-x-8 sm:grid-cols-2">
@@ -20,11 +22,11 @@ export function SpellList({ skills, projects }: Props) {
             <h4 className="font-display text-[1.1rem] leading-tight font-bold">{skill.name}</h4>
             <p className="text-ink-soft mt-1.5 text-[0.92rem] leading-relaxed">{skill.use}</p>
             <p className="mt-3 flex flex-wrap items-center gap-1.5 text-[0.8rem]">
-              <span className="text-ink-soft font-mono text-[0.72rem] tracking-[0.08em] uppercase">Usado en:</span>
+              <span className="text-ink-soft font-mono text-[0.72rem] tracking-[0.08em] uppercase">{messages[locale].skills.usedIn}</span>
               {skill.usedIn.map((slug) => (
                 <Link
                   key={slug}
-                  href={`/volumenes/${slug}`}
+                  href={href(locale, `/proyectos/${slug}`)}
                   className="border-rule hover:border-vermilion hover:text-vermilion inline-flex min-h-7 items-center rounded-full border px-2.5 transition-colors duration-200"
                 >
                   {titleOf(slug)}
