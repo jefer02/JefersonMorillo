@@ -7,7 +7,7 @@ related_targets: ["components/Hero.tsx"]
 
 ## Scope
 
-Home page `/` (one long page of chapters) plus `/volumenes/[slug]` case studies. Visitor mode: Experience (portfolio) with a Persuade duty: CV, projects and contact must be obvious within 5 seconds.
+Home page `/` (one long page of chapters) plus `/proyectos/[slug]` case studies. Visitor mode: Experience (portfolio) with a Persuade duty: CV, projects and contact must be obvious within 5 seconds.
 
 ## Direction contract
 
