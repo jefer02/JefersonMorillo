@@ -10,6 +10,8 @@ import { testimonials, MIN_TESTIMONIALS } from "../content/testimonials";
 import * as about from "../content/about";
 import * as extras from "../content/extras";
 import { profile } from "../content/profile";
+import * as en from "../content/en";
+import { locales } from "../lib/i18n/config";
 import { projectSchema, skillSchema, experienceSchema, testimonialSchema } from "../content/schema";
 
 const errors: string[] = [];
@@ -57,10 +59,29 @@ if (verified.length < MIN_TESTIMONIALS) {
   );
 }
 
-const cv = join(process.cwd(), "public", profile.cvPath);
-if (!existsSync(cv)) {
-  errors.push(`Falta el CV en public${profile.cvPath}. Genéralo con \`npm run cv\` (el botón «Descargar CV» es obligatorio).`);
+for (const locale of locales) {
+  const cv = join(process.cwd(), "public", profile.cvPaths[locale]);
+  if (!existsSync(cv)) {
+    errors.push(
+      `Falta el CV (${locale}) en public${profile.cvPaths[locale]}. Genéralo con \`npm run cv\` (el botón «Descargar CV» es obligatorio).`,
+    );
+  }
 }
+
+// English translations: every item of the Spanish content needs its English text.
+for (const p of projects) {
+  const t = en.projects[p.slug];
+  if (!t) errors.push(`en.projects: falta la traducción de ${p.slug}`);
+  else if ((p.extraLinks?.length ?? 0) !== (t.extraLinkLabels?.length ?? 0))
+    errors.push(`en.projects[${p.slug}]: extraLinkLabels no coincide con extraLinks`);
+}
+for (const s of skills) if (!en.skills[s.id]) errors.push(`en.skills: falta la traducción de ${s.id}`);
+for (const s of schools) if (!en.schools[s.id]) errors.push(`en.schools: falta la traducción de ${s.id}`);
+for (const e of experience) if (!en.experience[e.id]) errors.push(`en.experience: falta la traducción de ${e.id}`);
+for (const b of about.shelf) if (!en.shelf[b.title]) errors.push(`en.shelf: falta la traducción de ${b.title}`);
+for (const p of extras.passions) if (!en.passions[p.id]) errors.push(`en.passions: falta la traducción de ${p.id}`);
+if (en.sideStories.length !== about.sideStories.length) errors.push("en.sideStories: no coincide con about.sideStories");
+if (en.quickFacts.length !== about.quickFacts.length) errors.push("en.quickFacts: no coincide con about.quickFacts");
 
 // Remaining placeholders.
 function collectTodos(value: unknown, path: string, out: string[]) {
