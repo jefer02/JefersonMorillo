@@ -3,8 +3,10 @@
 import { useState } from "react";
 import { buttonClass } from "@/components/ui/Button";
 import { IconCheck, IconCopy } from "@/components/ui/Icons";
+import { useMessages } from "@/lib/i18n/client";
 
 export function CopyEmail({ email }: { email: string }) {
+  const t = useMessages().contact;
   const [copied, setCopied] = useState(false);
   return (
     <button
@@ -21,7 +23,7 @@ export function CopyEmail({ email }: { email: string }) {
       }}
     >
       {copied ? <IconCheck /> : <IconCopy />}
-      <span aria-live="polite">{copied ? "Correo copiado" : "Copiar correo"}</span>
+      <span aria-live="polite">{copied ? t.copied : t.copy}</span>
     </button>
   );
 }
