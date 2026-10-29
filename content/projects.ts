@@ -5,24 +5,26 @@ import type { Project } from "@/types";
 // Dates come from GitHub; Jeferson should confirm them before publishing.
 export const projects: Project[] = [
   {
-    slug: "cronica-de-atriz",
+    slug: "jeferson-morillo",
     volume: 0,
-    title: "Crónica de Atriz",
-    tagline: "Este portafolio, diseñado como el primer volumen de una novela ligera.",
+    title: "Portafolio personal",
+    titleEn: "Personal portfolio",
+    tagline: "Este sitio: mi portafolio, con un diseño inspirado en las novelas ligeras.",
     platforms: ["Web"],
     status: "en-desarrollo",
     accent: "wood",
     synopsis:
-      "Mi portafolio personal para el curso de Diseño de Interfaces. Cada sección es un capítulo: la portada, el índice, las historias paralelas, el epílogo del autor y el colofón.",
+      "Mi portafolio personal para el curso de Diseño de Interfaces, con la tipografía y los detalles de una novela ligera y los colores del barniz de Pasto.",
     problem:
       "Un portafolio tiene que explicar quién soy en cinco segundos sin parecer una plantilla más. Quise que la forma contara algo de mí: que vengo de Pasto y que me gustan las novelas ligeras.",
     built: [
       "Escena 3D del círculo mágico con React Three Fiber y una versión estática para movimiento reducido.",
       "Formulario de contacto validado con expresiones regulares en el cliente y en el servidor.",
       "Contenido tipado y validado con zod: cada habilidad enlaza al proyecto donde la usé.",
+      "Versiones en español e inglés, con rutas por idioma y la hoja de vida en ambos idiomas.",
     ],
     challenges: [
-      "Mantener el concepto sin sacrificar claridad: cada nombre temático va acompañado de su nombre simple.",
+      "Mantener el estilo visual sin sacrificar claridad: secciones y botones usan nombres simples.",
       "Que todo el contenido se vea sin JavaScript y con movimiento reducido.",
     ],
     learned: [todo("qué aprendiste construyendo el portafolio (lo completas al terminar)")],
