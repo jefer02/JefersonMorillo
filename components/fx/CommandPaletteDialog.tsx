@@ -131,7 +131,7 @@ export default function CommandPaletteDialog({ open, setOpen, setNotice }: Props
           ))}
           <Command.Item
             className={item}
-            value={`${t.keywords.theme} dia de blancos negros`}
+            value={t.keywords.theme}
             onSelect={run(() => setTheme(resolvedTheme === "dark" ? "light" : "dark"))}
           >
             {resolvedTheme === "dark" ? t.toLight : t.toDark}

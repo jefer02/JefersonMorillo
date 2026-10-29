@@ -83,10 +83,8 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
 }
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f8f4ec" },
-    { media: "(prefers-color-scheme: dark)", color: "#14161f" },
-  ],
+  // Dark is the default theme.
+  themeColor: "#14161f",
 };
 
 function personJsonLd(locale: Locale) {

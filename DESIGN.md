@@ -4,9 +4,9 @@ A professional developer portfolio with a light-novel touch in the visuals only.
 
 ## Color
 
-Tokens live in `app/globals.css` (`:root`, `[data-theme="dark"]`), exposed to Tailwind through `@theme inline`. Pairs are tuned to WCAG AA on `--paper`.
+Tokens live in `app/globals.css` (`:root`, `[data-theme="dark"]`), exposed to Tailwind through `@theme inline`. Pairs are tuned to WCAG AA on `--paper`. Dark is the default theme, also without JavaScript (`:root:not([data-theme])`); the toggle saves the visitor's choice.
 
-| Token | Día de Blancos (light) | Día de Negros (dark) | Role |
+| Token | Light | Dark | Role |
 |---|---|---|---|
 | `--paper` | `oklch(0.97 0.012 85)` | `oklch(0.17 0.02 265)` | Page ground |
 | `--paper-2` | `oklch(0.935 0.02 80)` | `oklch(0.21 0.025 265)` | Inset pages (letters, side stories, grimoire) |

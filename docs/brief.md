@@ -182,7 +182,7 @@ The words are those of a professional developer portfolio: plain section names, 
 
 The palette comes from barniz de Pasto craftwork (saturated vermilion, jade, gold and turquoise on dark wood) and from the Galeras at night. Starting points in OKLCH — tune all pairs to WCAG AA (body text ≥ 4.5:1).
 
-| Token | "Día de Blancos" (light) | "Día de Negros" (dark) | Use |
+| Token | Light | Dark | Use |
 |---|---|---|---|
 | `--paper` | `oklch(0.97 0.012 85)` warm washi cream | `oklch(0.17 0.02 265)` volcanic night | Background |
 | `--ink` | `oklch(0.2 0.015 50)` | `oklch(0.93 0.015 85)` | Text |
@@ -406,7 +406,7 @@ Plus a plain, always-visible line **"© <current year> Jeferson Morillo"** (requ
 2. **Header:** solid background (paper in light mode, the dark tone in dark mode) with a thin bottom rule. Under the name, the plain role "Desarrollador de software". The right side holds the search trigger and the theme toggle.
 3. **Side sigil rail:** desktop only (`xl` and up), right edge, hidden over the hero, always visible otherwise. One original sigil per section; visited sections stay lit for the session (sessionStorage); the current one is highlighted; hover/focus shows the section name. Clicking jumps straight to the section, with no overlay. Accessible as a `<nav aria-label="Secciones">` list of links.
 4. **Search / command palette ("Buscar"):** `Ctrl/⌘ + K` (and a floating search button on mobile). Commands: go to any section, open any project, download CV, copy email, open GitHub/LinkedIn, switch theme, go to the top. Built with `cmdk`, fully keyboard accessible.
-5. **Theme toggle "Día de Blancos / Día de Negros":** light and dark modes named after the Carnaval days. Defaults to the system preference; persisted. The switch plays a soft talc puff (to light) or ink bloom (to dark). Tooltip: "Inspirado en el Carnaval de Negros y Blancos de Pasto, Patrimonio de la Humanidad (UNESCO, 2009): negros en el cinco, blancos en el seis." No flash of incorrect theme on load.
+5. **Theme toggle:** a plain sun/moon button labelled "Cambiar a tema claro / oscuro", with no tooltip (revised 28 Oct 2026: the Carnaval day names and their explanation were removed because they confused visitors without context). Defaults to dark, also without JavaScript; the visitor's choice is persisted. The switch plays a soft talc puff (to light) or ink bloom (to dark). No flash of incorrect theme on load.
 6. **Smooth scroll:** Lenis (`lenis/react`, `ReactLenis root`), driven from GSAP's ticker (`autoRaf: false`, `lenis.on('scroll', ScrollTrigger.update)`, `gsap.ticker.add(t => lenis.raf(t * 1000))`, `gsap.ticker.lagSmoothing(0)`). Disabled under reduced motion. Anchor links and the palette must work with it.
 7. **404 "Página no encontrada":** one small playful line ("Este camino no existe en esta línea temporal. Vuelve al inicio y sigue explorando."). A decorative clock rewinds; clear buttons "Volver al inicio" and "Ver proyectos". No forced auto-redirect.
 8. **Optional (off by default):** a sound toggle for page turns and seal cracks. Ship only if assets are original or properly licensed.

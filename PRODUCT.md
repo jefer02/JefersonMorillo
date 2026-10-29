@@ -44,7 +44,7 @@ Visitors arrive from LinkedIn, GitHub, the course platform or a shared link, mos
 
 - Name: "Jeferson Morillo — Desarrollador de software". No series title, volume number or long title.
 - Welcome line (chosen): «Construyo software que se usa con la muñeca, con un control en la mano o frente a un público: Wear OS, Android, Flutter y web.»
-- Themes named "Día de Blancos" (light) / "Día de Negros" (dark) after the Carnaval days. Cultural respect: abstract talc, ink and serpentines only; never painted faces.
+- Light and dark themes with plain names (dark by default). Cultural respect: abstract talc, ink and serpentines only; never painted faces.
 - Copy stays professional: plain section names, plain-verb buttons, no themed labels. The 404 page may keep a small playful line.
 - Voice: natural, warm, confident; no clichés ("apasionado por la tecnología").
 

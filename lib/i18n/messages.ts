@@ -40,17 +40,13 @@ const es = {
     copyEmail: "Copiar correo",
     emailCopied: "Correo copiado al portapapeles.",
     open: "Abrir",
-    toLight: "Cambiar a Día de Blancos (claro)",
-    toDark: "Cambiar a Día de Negros (oscuro)",
+    toLight: "Cambiar a tema claro",
+    toDark: "Cambiar a tema oscuro",
     keywords: { top: "inicio arriba", cv: "descargar cv hoja de vida", email: "copiar correo email", theme: "cambiar tema claro oscuro" },
   },
   theme: {
-    toLight: "Cambiar a Día de Blancos (tema claro)",
-    toDark: "Cambiar a Día de Negros (tema oscuro)",
-    light: "Día de Blancos",
-    dark: "Día de Negros",
-    tooltip:
-      "Inspirado en el Carnaval de Negros y Blancos de Pasto, Patrimonio de la Humanidad (UNESCO, 2009): negros en el cinco, blancos en el seis.",
+    toLight: "Cambiar a tema claro",
+    toDark: "Cambiar a tema oscuro",
   },
   hero: {
     studying: "Actualmente estudiando",
@@ -238,17 +234,13 @@ const en: Messages = {
     copyEmail: "Copy email",
     emailCopied: "Email copied to the clipboard.",
     open: "Open",
-    toLight: "Switch to Día de Blancos (light)",
-    toDark: "Switch to Día de Negros (dark)",
+    toLight: "Switch to light theme",
+    toDark: "Switch to dark theme",
     keywords: { top: "home top start", cv: "download cv resume", email: "copy email address", theme: "switch theme light dark" },
   },
   theme: {
-    toLight: "Switch to Día de Blancos (light theme)",
-    toDark: "Switch to Día de Negros (dark theme)",
-    light: "Día de Blancos",
-    dark: "Día de Negros",
-    tooltip:
-      "Named after Pasto's Carnaval de Negros y Blancos, UNESCO Intangible Cultural Heritage of Humanity (2009): the Day of Blacks on January 5, the Day of Whites on January 6.",
+    toLight: "Switch to light theme",
+    toDark: "Switch to dark theme",
   },
   hero: {
     studying: "Currently studying",

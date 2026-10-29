@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
-/* Dark mode follows next-themes' data-theme attribute ("Día de Negros"). */
+/* Dark mode follows next-themes' data-theme attribute. */
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 /* Progressive enhancement: `.js` is set on <html> by an inline script before paint. */
 @custom-variant js (&:where(.js, .js *));
 
 /* ------------------------------------------------------------------
-   Palette: barniz de Pasto by day ("Día de Blancos") and the Galeras
-   at night ("Día de Negros"). Pairs tuned to WCAG AA on --paper.
+   Palette: barniz de Pasto in the light theme and the Galeras at night in
+   the dark one. Pairs tuned to WCAG AA on --paper.
    ------------------------------------------------------------------ */
 :root {
   --paper: oklch(0.97 0.012 85);
@@ -47,23 +47,21 @@
   color-scheme: dark;
 }
 
-/* Without JavaScript next-themes can't set the attribute: honor the OS. */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) {
-    --paper: oklch(0.17 0.02 265);
-    --paper-2: oklch(0.21 0.025 265);
-    --ink: oklch(0.93 0.015 85);
-    --ink-soft: oklch(0.75 0.02 85);
-    --rule: oklch(0.93 0.015 85 / 0.16);
-    --vermilion: oklch(0.68 0.19 32);
-    --jade: oklch(0.72 0.11 165);
-    --gold: oklch(0.82 0.14 82);
-    --gold-ink: oklch(0.82 0.14 82);
-    --turquoise: oklch(0.74 0.09 205);
-    --ember: oklch(0.74 0.19 48);
-    --wood: oklch(0.22 0.04 45);
-    color-scheme: dark;
-  }
+/* Without JavaScript next-themes can't set the attribute: dark is still the default. */
+:root:not([data-theme]) {
+  --paper: oklch(0.17 0.02 265);
+  --paper-2: oklch(0.21 0.025 265);
+  --ink: oklch(0.93 0.015 85);
+  --ink-soft: oklch(0.75 0.02 85);
+  --rule: oklch(0.93 0.015 85 / 0.16);
+  --vermilion: oklch(0.68 0.19 32);
+  --jade: oklch(0.72 0.11 165);
+  --gold: oklch(0.82 0.14 82);
+  --gold-ink: oklch(0.82 0.14 82);
+  --turquoise: oklch(0.74 0.09 205);
+  --ember: oklch(0.74 0.19 48);
+  --wood: oklch(0.22 0.04 45);
+  color-scheme: dark;
 }
 
 @theme inline {
