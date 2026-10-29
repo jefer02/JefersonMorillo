@@ -1,15 +1,18 @@
-import { chapterById } from "@/content/chapters";
+import { getContent } from "@/content";
 import { Island } from "@/components/system/Island";
-import { presentation, quickFacts, shelf, sideStories } from "@/content/about";
 import { ChapterOpener } from "@/components/fx/ChapterOpener";
 import { Reveal } from "@/components/fx/Reveal";
 import { Shelf } from "@/components/fx/Shelf";
 import { StoryGlyph } from "@/components/fx/StoryGlyph";
 import { Text } from "@/components/ui/Todo";
+import type { Locale } from "@/lib/i18n/config";
+import { messages } from "@/lib/i18n/messages";
 import { isProd, isTodo } from "@/lib/todo";
 
-/** Chapter II: life outside software engineering only. */
-export default function AcercaDeMi() {
+/** Life outside software engineering only. */
+export default function AcercaDeMi({ locale }: { locale: Locale }) {
+  const { chapterById, presentation, quickFacts, shelf, sideStories } = getContent(locale);
+  const t = messages[locale].about;
   const chapter = chapterById["acerca-de-mi"];
   const stories = sideStories.filter((s) => !(isProd && (isTodo(s.title) || isTodo(s.body))));
   const facts = quickFacts.filter((f) => !(isProd && isTodo(f.value)));
@@ -40,8 +43,8 @@ export default function AcercaDeMi() {
 
           {/* The shelf */}
           <div className="lg:col-span-6">
-            <h3 className="font-display text-[1.25rem] font-bold">Mi estante</h3>
-            <p className="text-ink-soft mt-1 text-[0.95rem]">Las historias que me acompañan.</p>
+            <h3 className="font-display text-[1.25rem] font-bold">{t.shelfTitle}</h3>
+            <p className="text-ink-soft mt-1 text-[0.95rem]">{t.shelfLede}</p>
             <div className="mt-4">
               <Island>
                 <Shelf books={shelf} />
