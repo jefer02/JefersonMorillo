@@ -22,7 +22,7 @@ Personal portfolio of Jeferson Manuel Morillo Vallejo ("Jeferson Morillo"), Inge
 
 ## Positioning
 
-"Crónica de Atriz — Vol. 1": the portfolio is told as the first volume of a light novel whose protagonist is a developer from San Juan de Pasto, Nariño (Valle de Atriz, at the foot of the Galeras volcano). Light-novel conventions map 1:1 to sections (cover → hero, 目次 → menu, side stories → about, afterword → extra, colophon → footer). Pride of origin is factual and specific: Galeras/Urcunina, Carnaval de Negros y Blancos (UNESCO 2009), Barniz de Pasto Mopa-Mopa (UNESCO 2020).
+A professional portfolio of a developer from San Juan de Pasto, Nariño, with a light-novel touch in the visuals only: the magic circle around the portrait, the red band under the hero, serif display type, generated sigils, the bookshelf and the Experiencia clock. Copy is professional and section names are plain Spanish (Presentación, Acerca de mí, Habilidades, Proyectos, Testimonios, Experiencia, Adicional, Contacto); no chapters, kanji, themed subtitles or story branding. Origin is stated plainly (born in El Contadero, lives in Pasto), and the palette draws on the Barniz de Pasto and the Galeras volcano.
 
 ## Operating Context
 
@@ -42,10 +42,10 @@ Visitors arrive from LinkedIn, GitHub, the course platform or a shared link, mos
 
 ## Brand Commitments
 
-- Name: "Crónica de Atriz — Vol. 1". Long title: «Renací en el Valle de Atriz y ahora mis hechizos corren en relojes, consolas y escritorios» (cover/loader/OG only).
+- Name: "Jeferson Morillo — Desarrollador de software". No series title, volume number or long title.
 - Welcome line (chosen): «Construyo software que se usa con la muñeca, con un control en la mano o frente a un público: Wear OS, Android, Flutter y web.»
 - Themes named "Día de Blancos" (light) / "Día de Negros" (dark) after the Carnaval days. Cultural respect: abstract talc, ink and serpentines only; never painted faces.
-- Every themed name pairs with its plain Spanish name; buttons use plain verbs.
+- Copy stays professional: plain section names, plain-verb buttons, no themed labels. The 404 page may keep a small playful line.
 - Voice: natural, warm, confident; no clichés ("apasionado por la tecnología").
 
 ## Evidence on Hand
@@ -56,7 +56,7 @@ Visitors arrive from LinkedIn, GitHub, the course platform or a shared link, mos
 
 ## Product Principles
 
-1. Clarity first: the plain answer is always visible; the lore is a second reading.
+1. Clarity first: plain, professional words; the light-novel flavor is visual only.
 2. Proof over claims: every skill links to the project where it was used.
 3. Honest by construction: placeholders are loud, ordering and filtering are enforced in code.
 4. Respectful pride: Pasto and Nariño are presented accurately and with care.
