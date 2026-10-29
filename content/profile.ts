@@ -6,12 +6,15 @@ export const profile = {
   displayName: "Jeferson Morillo",
   initials: "JM",
   role: "Desarrollador de software",
+  /** The role in each language (the header needs both on the client). */
+  roles: { es: "Desarrollador de software", en: "Software developer" },
   /** Chosen by Jeferson (option c). ≤ 25 words. */
   welcome: "Construyo software que se usa con la muñeca, con un control en la mano o frente a un público: Wear OS, Android, Flutter y web.",
-  volume: "Vol. 1",
-  seriesTitle: "Crónica de Atriz",
-  /** Light-novel long title: loader and Open Graph image only, never the hero's main text. */
-  longTitle: "Renací en el Valle de Atriz y ahora mis hechizos corren en relojes, consolas y escritorios",
+  /**
+   * What the hero's magic circle says, written in the site's rune alphabet (docs/runas.md).
+   * 2024 is the year he started the degree.
+   */
+  inscription: { outer: "JEFERSON MORILLO · EL CONTADERO · NARIÑO · 2024", inner: "CONSTRUYO SOFTWARE" },
   /** Where he lives and studies. */
   city: "San Juan de Pasto",
   region: "Nariño",
@@ -23,12 +26,14 @@ export const profile = {
     university: "Universidad Cooperativa de Colombia",
     universityShort: "UCC",
     campus: "Pasto",
-    startYear: todo("año en que empezaste la carrera"),
-    semester: todo("semestre actual"),
+    startYear: "2024",
+    semester: 5,
   },
   email: "jefersonmorillo5858@gmail.com",
   siteUrl: "https://jeferson-morillo.vercel.app",
+  /** Spanish CV; the English one is `cvPaths.en`. */
   cvPath: "/cv/CV-Jeferson-Morillo.pdf",
+  cvPaths: { es: "/cv/CV-Jeferson-Morillo.pdf", en: "/cv/CV-Jeferson-Morillo-EN.pdf" },
   photo: {
     src: "/mi_FOTO_PERFIL/mi_Foto.jpg",
     width: 959,
@@ -37,5 +42,3 @@ export const profile = {
   } as ImageAsset | undefined,
   photoTodo: todo("foto de perfil"),
 } as const;
-
-export const statusTag = `Actualmente estudiando · ${profile.studies.degree} · ${profile.studies.universityShort} ${profile.studies.campus}`;
