@@ -3,7 +3,7 @@
 import { useEffect, useRef, type ReactNode } from "react";
 
 /**
- * Client shell for the Valle de Atriz insert: pauses its CSS animations off-screen and
+ * Client shell for a wood insert: pauses its CSS animations off-screen and
  * adds the scrubbed parallax (layers marked with data-depth). The SVG itself is
  * server-rendered and passed in as children.
  */
