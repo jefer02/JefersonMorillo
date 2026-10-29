@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { navChapters } from "@/content/chapters";
+import { getChapters } from "@/content/chapters";
+import type { Locale } from "@/lib/i18n/config";
+import { messages } from "@/lib/i18n/messages";
 import { scrollToId } from "@/lib/scroll";
 import { Sigil } from "./Sigil";
 
@@ -16,11 +18,13 @@ function readVisited(): Set<string> {
 }
 
 /**
- * Save points (puntos de guardado): one sigil per chapter on the right edge (desktop).
- * Visited chapters stay lit for the session; the current one is marked. A click scrolls
- * straight to the chapter: no overlays between the reader and the content.
+ * Save points (puntos de guardado): one sigil per section on the right edge (desktop).
+ * Visited sections stay lit for the session; the current one is marked. A click scrolls
+ * straight to the section: no overlays between the reader and the content.
  */
-export function SavePointRail() {
+export function SavePointRail({ locale }: { locale: Locale }) {
+  const { navChapters } = getChapters(locale);
+  const t = messages[locale].rail;
   const [current, setCurrent] = useState<string | null>(null);
   const [visited, setVisited] = useState<Set<string>>(new Set());
   const [shown, setShown] = useState(false);
@@ -55,17 +59,18 @@ export function SavePointRail() {
       io.disconnect();
       heroIo?.disconnect();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- sections are fixed for the page
   }, []);
 
   function jump(e: React.MouseEvent, id: string) {
     e.preventDefault();
-    scrollToId(id);
+    scrollToId(id === "inicio" ? "top" : id);
   }
 
   return (
     <>
       <nav
-        aria-label="Capítulos"
+        aria-label={t.label}
         className={`fixed top-1/2 right-3 z-40 hidden -translate-y-1/2 transition-opacity duration-500 xl:block ${shown ? "opacity-100" : "pointer-events-none opacity-0"}`}
       >
         <ol className="flex flex-col items-center gap-1.5">
@@ -82,14 +87,14 @@ export function SavePointRail() {
                   className="flex size-9 items-center justify-center rounded-full"
                 >
                   <Sigil
-                    name={c.ruby}
+                    name={c.name}
                     className={`size-7 transition-[color,transform] duration-200 ease-out ${
                       active ? "text-vermilion scale-110" : lit ? "text-gold-ink" : "text-ink-soft/45"
                     } group-hover:text-vermilion`}
                   />
                   <span className="sr-only">
                     {c.name}
-                    {lit ? " (visitado)" : ""}
+                    {lit ? t.visited : ""}
                   </span>
                 </a>
                 <span
