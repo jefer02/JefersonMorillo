@@ -30,52 +30,15 @@ export const passions = [
     id: "emulacion",
     title: "Emulación de juegos en Android",
     body: "Elyndra, mi launcher, reúne juegos de Android y ROMs de emuladores en una sola biblioteca que se maneja con control.",
-    link: { label: "Ver Elyndra", href: "/volumenes/elyndra" },
+    link: { label: "Ver Elyndra", href: "/proyectos/elyndra" },
   },
   {
     id: "videojuegos",
     title: "Desarrollo de videojuegos",
     body: "LAAF, un survival horror en Godot, y Elyndra son los proyectos donde más me he acercado a ese mundo.",
-    link: { label: "Ver LAAF", href: "/volumenes/laaf" },
+    link: { label: "Ver LAAF", href: "/proyectos/laaf" },
   },
 ];
 
 /** Closing line of the afterword: his goal. */
 export const closingLine = "Mi meta es trabajar en el desarrollo de videojuegos. Este portafolio es apenas el comienzo.";
-
-// Chapter I is a two-place story: El Contadero (the emotional center) → San Juan de Pasto.
-// Draft written from Jeferson's notes (25 oct 2026), pending his approval.
-// Public facts about El Contadero are NOT added until he approves them.
-export const origin = {
-  home: {
-    place: "El Contadero, Nariño",
-    label: "Donde nací",
-    copy: [
-      "Nací en El Contadero, un pueblo pequeño de Nariño donde la vida es tranquila. Mi mamá trabaja en la ganadería, y en vacaciones vuelvo a ayudar en la finca y a pasar tiempo con mi familia.",
-    ],
-  },
-  city: {
-    place: "San Juan de Pasto, Nariño",
-    label: "Donde estudio",
-    copy: [
-      "Hoy vivo en San Juan de Pasto, donde estudio Ingeniería de Software en la UCC. La ciudad está a los pies del Galeras, un volcán activo a unos 9 km.",
-    ],
-  },
-  facts: [
-    {
-      id: "carnaval",
-      title: "Carnaval de Negros y Blancos",
-      detail: "Patrimonio de la Humanidad, UNESCO 2009.",
-    },
-    {
-      id: "barniz",
-      title: "Barniz de Pasto Mopa-Mopa",
-      detail: "Patrimonio con salvaguardia urgente, UNESCO 2020.",
-    },
-    {
-      id: "galeras",
-      title: "Volcán Galeras",
-      detail: "Urcunina, «montaña de fuego»: más de 4.200 m.",
-    },
-  ],
-};
