@@ -31,6 +31,8 @@ export type Project = {
   /** Volume number shown on the cover ("Vol. 03"). */
   volume: number;
   title: string;
+  /** English title, only when it differs from `title`. */
+  titleEn?: string;
   /** One line, plain Spanish: what it is. */
   tagline: string;
   platforms: string[];
@@ -61,8 +63,6 @@ export type Project = {
 export type SkillSchool = {
   id: string;
   name: string;
-  /** Themed name shown as ruby. */
-  rune: string;
 };
 
 export type Skill = {
@@ -127,12 +127,6 @@ export type ShelfBook = {
 
 export type Chapter = {
   id: string;
-  numeral: string;
-  /** Plain Spanish name, shown large. */
+  /** Plain Spanish name: the section heading and the menu label. */
   name: string;
-  /** Themed name, shown as ruby. */
-  ruby: string;
-  /** Decorative CJK label. */
-  kanji?: string;
-  folio: number;
 };
