@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, type ReactNode } from "react";
+import { useMessages } from "@/lib/i18n/client";
 import type { SkillSchool } from "@/types";
 import { Sigil } from "./Sigil";
 
@@ -17,6 +18,7 @@ type Props = {
  * school stacked with its spells; on `lg` with JS (the `js:` variant) it becomes the book.
  */
 export function Grimoire({ schools, panels }: Props) {
+  const t = useMessages().skills;
   const [active, setActive] = useState(schools[0].id);
   const tabsRef = useRef<HTMLDivElement>(null);
   const index = schools.findIndex((s) => s.id === active);
@@ -44,11 +46,11 @@ export function Grimoire({ schools, panels }: Props) {
         ref={tabsRef}
         role="tablist"
         aria-orientation="vertical"
-        aria-label="Categorías"
+        aria-label={t.categories}
         onKeyDown={onKeyDown}
         className="js:lg:block hidden p-8 pr-10"
       >
-        <p className="text-folio text-ink-soft mb-4 font-mono tracking-[0.2em] uppercase">Categorías</p>
+        <p className="text-folio text-ink-soft mb-4 font-mono tracking-[0.2em] uppercase">{t.categories}</p>
         {schools.map((s) => {
           const selected = s.id === active;
           return (
@@ -65,7 +67,7 @@ export function Grimoire({ schools, panels }: Props) {
               }`}
             >
               <Sigil
-                name={s.rune}
+                name={s.name}
                 className={`ease-book size-6 shrink-0 self-center transition-transform duration-500 ${selected ? "rotate-45" : ""}`}
               />
               <span className="font-display text-[1.12rem] leading-snug font-bold">{s.name}</span>
