@@ -3,12 +3,17 @@
 import { Command } from "cmdk";
 import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
-import { navChapters } from "@/content/chapters";
+import { getChapters } from "@/content/chapters";
 import { profile } from "@/content/profile";
+import { projects } from "@/content/projects";
 import { socials } from "@/content/socials";
-import { orderedProjects } from "@/lib/projects";
+import { href } from "@/lib/i18n/config";
+import { useLocale, useMessages } from "@/lib/i18n/client";
 import { scrollToId } from "@/lib/scroll";
 import { IconSearch } from "@/components/ui/Icons";
+
+// Same order as the home page: strongest projects first, this portfolio (number 0) last.
+const orderedProjects = [...projects].sort((a, b) => (a.volume === 0 ? 1 : b.volume === 0 ? -1 : a.volume - b.volume));
 
 type Props = {
   open: boolean;
@@ -20,6 +25,9 @@ type Props = {
 export default function CommandPaletteDialog({ open, setOpen, setNotice }: Props) {
   const router = useRouter();
   const { resolvedTheme, setTheme } = useTheme();
+  const locale = useLocale();
+  const t = useMessages().search;
+  const { navChapters } = getChapters(locale);
 
   const run = (fn: () => void) => () => {
     setOpen(false);
@@ -29,8 +37,8 @@ export default function CommandPaletteDialog({ open, setOpen, setNotice }: Props
 
   const goTo = (id: string) =>
     run(() => {
-      if (window.location.pathname === "/") scrollToId(id);
-      else router.push(id === "top" ? "/" : `/#${id}`);
+      if (window.location.pathname === `/${locale}`) scrollToId(id);
+      else router.push(id === "top" ? href(locale) : href(locale, `#${id}`));
     });
 
   const item =
@@ -42,7 +50,7 @@ export default function CommandPaletteDialog({ open, setOpen, setNotice }: Props
     <Command.Dialog
       open={open}
       onOpenChange={setOpen}
-      label="Buscar"
+      label={t.button}
       loop
       overlayClassName="fixed inset-0 z-[70] bg-ink/40 backdrop-blur-[2px]"
       contentClassName="fixed top-[12vh] left-1/2 z-[71] w-[min(36rem,calc(100vw-2rem))] -translate-x-1/2 overflow-hidden rounded-[4px] border border-rule bg-paper text-ink shadow-[0_30px_80px_-30px_oklch(0.15_0.02_50/0.6)]"
@@ -50,84 +58,83 @@ export default function CommandPaletteDialog({ open, setOpen, setNotice }: Props
       <div className="border-rule flex items-center gap-3 border-b px-4">
         <IconSearch width={20} height={20} className="text-ink-soft shrink-0" />
         <Command.Input
-          placeholder="Buscar o ir a una sección o proyecto…"
+          placeholder={t.placeholder}
           className="placeholder:text-ink-soft h-14 w-full bg-transparent text-[1rem] outline-none"
         />
         <kbd className="border-rule text-ink-soft shrink-0 rounded-sm border px-1.5 font-mono text-[0.7rem]">Esc</kbd>
       </div>
       <Command.List className="max-h-[min(60vh,28rem)] overflow-y-auto overscroll-contain p-1" data-lenis-prevent>
-        <Command.Empty className="text-ink-soft px-4 py-6 text-center">Sin resultados.</Command.Empty>
+        <Command.Empty className="text-ink-soft px-4 py-6 text-center">{t.empty}</Command.Empty>
 
-        <Command.Group heading="Secciones" className={group}>
-          <Command.Item className={item} onSelect={goTo("top")} value="inicio portada">
-            Ir al inicio
+        <Command.Group heading={t.sections} className={group}>
+          <Command.Item className={item} onSelect={goTo("top")} value={t.keywords.top}>
+            {t.goTop}
           </Command.Item>
-          {navChapters.map((c) => (
-            <Command.Item key={c.id} className={item} onSelect={goTo(c.id)} value={`${c.name} ${c.ruby}`}>
-              <span className="w-10 font-mono text-[0.75rem] opacity-70">{c.numeral}</span>
-              {c.name}
-              <span className="ml-auto text-[0.8rem] opacity-60">{c.ruby}</span>
-            </Command.Item>
-          ))}
+          {navChapters
+            .filter((c) => c.id !== "inicio")
+            .map((c) => (
+              <Command.Item key={c.id} className={item} onSelect={goTo(c.id)} value={c.name}>
+                {c.name}
+              </Command.Item>
+            ))}
         </Command.Group>
 
-        <Command.Group heading="Proyectos" className={group}>
+        <Command.Group heading={t.projects} className={group}>
           {orderedProjects.map((p) => (
             <Command.Item
               key={p.slug}
               className={item}
-              onSelect={run(() => router.push(`/volumenes/${p.slug}`))}
-              value={`${p.title} proyecto volumen`}
+              onSelect={run(() => router.push(href(locale, `/proyectos/${p.slug}`)))}
+              value={`${p.title} ${p.titleEn ?? ""} ${t.projects}`}
             >
-              <span className="w-10 font-mono text-[0.75rem] opacity-70">{String(p.volume).padStart(2, "0")}</span>
-              {p.title}
+              {locale === "en" ? (p.titleEn ?? p.title) : p.title}
             </Command.Item>
           ))}
         </Command.Group>
 
-        <Command.Group heading="Acciones" className={group}>
+        <Command.Group heading={t.actions} className={group}>
           <Command.Item
             className={item}
-            value="descargar cv hoja de vida"
+            value={t.keywords.cv}
             onSelect={run(() => {
               const a = document.createElement("a");
-              a.href = profile.cvPath;
+              a.href = profile.cvPaths[locale];
               a.download = "";
               a.click();
             })}
           >
-            Descargar CV
+            {t.downloadCv}
           </Command.Item>
           <Command.Item
             className={item}
-            value="copiar correo email"
+            value={t.keywords.email}
             onSelect={run(async () => {
               try {
                 await navigator.clipboard.writeText(profile.email);
-                setNotice("Correo copiado al portapapeles.");
+                setNotice(t.emailCopied);
               } catch {
                 window.location.assign(`mailto:${profile.email}`);
               }
             })}
           >
-            Copiar correo
+            {t.copyEmail}
           </Command.Item>
           {socials.map((s) => (
             <Command.Item
               key={s.id}
               className={item}
-              value={`abrir ${s.label}`}
+              value={`${t.open} ${s.label}`}
               onSelect={run(() => window.open(s.href, "_blank", "noopener"))}
             >
-              Abrir {s.label}
+              {t.open} {s.label}
             </Command.Item>
           ))}
           <Command.Item
             className={item}
-            value="cambiar tema claro oscuro dia de blancos negros"
+            value={`${t.keywords.theme} dia de blancos negros`}
             onSelect={run(() => setTheme(resolvedTheme === "dark" ? "light" : "dark"))}
           >
-            Cambiar a {resolvedTheme === "dark" ? "Día de Blancos (claro)" : "Día de Negros (oscuro)"}
+            {resolvedTheme === "dark" ? t.toLight : t.toDark}
           </Command.Item>
         </Command.Group>
       </Command.List>
