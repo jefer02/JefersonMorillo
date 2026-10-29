@@ -5,7 +5,8 @@ import { useTheme } from "next-themes";
 import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { mulberry32 } from "@/lib/rng";
-import { runePath } from "@/lib/runes";
+import { profile } from "@/content/profile";
+import { encircle } from "@/lib/runes";
 import type { CircleLayout } from "./HeroAtmosphere";
 
 type Palette = { line: string; ember: string; opacity: number; additive: boolean };
@@ -16,10 +17,14 @@ const PALETTES: Record<"light" | "dark", Palette> = {
   dark: { line: "#f2c55c", ember: "#f08a3c", opacity: 0.32, additive: true },
 };
 
-/** A strip of original runes drawn into a canvas, sampled in polar space by the shader. */
+/**
+ * The outer inscription (docs/runas.md) drawn into a canvas strip, sampled in polar space by
+ * the shader. The strip is read mirrored so the runes run clockwise with their tops outward.
+ */
 function useRuneTexture() {
   const texture = useMemo(() => {
-    const count = 48;
+    const slots = encircle(profile.inscription.outer);
+    const count = slots.length;
     const canvas = document.createElement("canvas");
     canvas.width = 2048;
     canvas.height = 64;
@@ -29,14 +34,15 @@ function useRuneTexture() {
     ctx.lineJoin = "round";
     ctx.lineWidth = 0.42;
     const cell = canvas.width / count;
-    for (let i = 0; i < count; i++) {
+    slots.forEach((d, i) => {
+      if (!d) return;
       ctx.save();
       ctx.translate(i * cell + cell / 2, canvas.height / 2);
       ctx.scale(3.3, 3.3);
       ctx.translate(-5, -7);
-      ctx.stroke(new Path2D(runePath(5120 + i * 7919)));
+      ctx.stroke(new Path2D(d));
       ctx.restore();
-    }
+    });
     const tex = new THREE.CanvasTexture(canvas);
     tex.wrapS = THREE.RepeatWrapping;
     tex.anisotropy = 4;
@@ -81,7 +87,7 @@ const circleFragment = /* glsl */ `
     m += ring(r, 0.94, aa * 1.6);
     if (r > 0.79 && r < 0.925) {
       float v = (r - 0.79) / 0.135;
-      m += texture2D(uRunes, vec2(uo, v)).a;
+      m += texture2D(uRunes, vec2(1.0 - uo, v)).a;
     }
     m += ring(r, 0.77, aa * 1.6);
     float dots = step(0.55, fract(uo * 220.0));
