@@ -1,36 +1,34 @@
 import Image from "next/image";
 import { Island } from "@/components/system/Island";
-import { chapterById } from "@/content/chapters";
+import { getContent } from "@/content";
 import { MIN_TESTIMONIALS, publishableTestimonials, testimonials, testimonialsReady } from "@/content/testimonials";
 import { ChapterOpener } from "@/components/fx/ChapterOpener";
 import { WaxSealLetter } from "@/components/fx/WaxSealLetter";
 import { PlaceholderStamp, Text } from "@/components/ui/Todo";
 import { IconArrowUpRight } from "@/components/ui/Icons";
+import type { Locale } from "@/lib/i18n/config";
+import { messages } from "@/lib/i18n/messages";
 import { isProd } from "@/lib/todo";
 
 /**
- * Chapter V: letters from the guild. Production renders only real, consented and
+ * Testimonials, shown as sealed letters. Production renders only real, consented and
  * verified testimonials, and only once the course minimum is met. Development shows
- * the placeholders stamped "NO PUBLICAR".
+ * the placeholders stamped "NO PUBLICAR". Quotes stay in the language they were written in.
  */
-export default function Testimonios() {
+export default function Testimonios({ locale }: { locale: Locale }) {
   if (isProd && !testimonialsReady) return null;
-  const chapter = chapterById["testimonios"];
+  const chapter = getContent(locale).chapterById["testimonios"];
+  const copy = messages[locale].testimonials;
   const letters = isProd ? publishableTestimonials : testimonials;
 
   return (
     <section id="testimonios" aria-labelledby="testimonios-titulo" className="border-rule border-t">
       <div className="mx-auto max-w-[1440px] px-4 py-14 sm:px-6 md:py-20 lg:px-10">
-        <ChapterOpener
-          chapter={chapter}
-          headingId="testimonios-titulo"
-          lede="Cartas de personas con las que he estudiado y construido. Cada una está publicada con su permiso."
-        />
+        <ChapterOpener chapter={chapter} headingId="testimonios-titulo" lede={copy.lede} />
         {!isProd && !testimonialsReady && (
           <p className="text-vermilion mt-6 inline-flex flex-wrap items-center gap-3 text-[0.9rem]">
             <PlaceholderStamp />
-            Solo {publishableTestimonials.length} de {MIN_TESTIMONIALS} testimonios verificados. Esta sección no se publica hasta tener 3
-            reales (ver docs/pedir-testimonios.md).
+            {copy.pending(publishableTestimonials.length, MIN_TESTIMONIALS)}
           </p>
         )}
 
@@ -70,8 +68,8 @@ export default function Testimonios() {
                             rel="noopener noreferrer"
                             className="decoration-rule hover:text-vermilion mt-1 inline-flex min-h-9 items-center gap-1 underline"
                           >
-                            Ver en LinkedIn <IconArrowUpRight width={14} height={14} />
-                            <span className="sr-only"> (se abre en otra pestaña)</span>
+                            {copy.linkedin} <IconArrowUpRight width={14} height={14} />
+                            <span className="sr-only"> {messages[locale].newTab}</span>
                           </a>
                         )}
                       </div>
