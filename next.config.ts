@@ -13,6 +13,14 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
   },
+  // Case studies used to live under /volumenes, and the portfolio's own slug was renamed.
+  // Other paths without a locale are redirected by proxy.ts.
+  async redirects() {
+    return [
+      { source: "/volumenes/cronica-de-atriz", destination: "/es/proyectos/jeferson-morillo", permanent: true },
+      { source: "/volumenes/:slug", destination: "/es/proyectos/:slug", permanent: true },
+    ];
+  },
   turbopack: {
     rules: {
       "*.css": {
