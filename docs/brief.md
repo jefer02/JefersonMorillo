@@ -1,10 +1,12 @@
-# Portfolio Build Brief — "Crónica de Atriz"
+# Portfolio Build Brief — Jeferson Morillo
 
-**A light-novel-inspired personal portfolio for Jeferson Morillo**
+**A professional personal portfolio for Jeferson Morillo, with a light-novel touch in the visuals**
 Stack: Next.js (App Router) · TypeScript · Tailwind CSS · deployed on Vercel
 Course: Diseño de Interfaces — "Entrega Proyecto"
 
 > Read this entire document before writing any code. It is the single source of truth for this project, together with the official course guide at **https://structure-portfolio.vercel.app** (see §2.1). When something here conflicts with your defaults, this document wins. When something here conflicts with the course guide, **the course guide wins** and you adapt the creative concept to it.
+
+> **Revision, 28 Oct 2026 (Jeferson's decision):** the copy is professional. Section headings and menu labels are plain Spanish names; there are no chapter numbers, kanji marks, themed subtitles, ruby annotations, "Crónica de Atriz", "Vol. 1" or long light-novel title. The light-novel touch lives in the visuals only: the magic circle around the photo, the red band (obi), serif display type, sigils, the bookshelf and the Experiencia clock. "Origen" was replaced by "Presentación". Project case studies live at `/proyectos/[slug]`. This brief has been updated to match; if an older idea survives anywhere below, this note wins.
 
 ---
 
@@ -13,7 +15,7 @@ Course: Diseño de Interfaces — "Entrega Proyecto"
 You are a senior creative developer and product designer working at Awwwards level. Build Jeferson's personal portfolio so that it is:
 
 1. **Unforgettable and original** — one strong concept executed with craft, not a template with effects sprinkled on top.
-2. **Instantly clear** — a recruiter must understand who he is, what he builds and how to contact him within 5 seconds, even if they never notice the lore.
+2. **Instantly clear** — a recruiter must understand who he is, what he builds and how to contact him within 5 seconds, at a glance.
 3. **Fast, accessible and honest** — real content only, great on a mid-range phone, usable with a keyboard and with reduced motion.
 
 Creativity is the point of this project, but never at the cost of clarity, performance or truthfulness.
@@ -28,7 +30,7 @@ Creativity is the point of this project, but never at the cost of clarity, perfo
 4. **Never invent facts.** No fake testimonials, employers, dates, metrics, certifications, links or quotes. When information is missing, use an obvious typed placeholder marked `TODO(jeferson): …` and list it in the final report. Testimonials must come from real people who agreed to be published.
 5. **Intellectual property.** The site is inspired by the isekai / light-novel *genre* (Jeferson loves *Mushoku Tensei*, *Re:Zero* and similar). Do **not** use characters, character names, logos, official artwork, screenshots, music, quotes or fan art from those works. Every visual, glyph and line of copy must be original. Mentioning his favorite anime as plain text in the About section is fine (titles only, no cover art).
 6. **Language.** All user-facing copy in Spanish (es-CO): natural, warm, confident, no clichés ("apasionado por la tecnología", "transformo ideas en realidad"). Code, comments and docs in English.
-7. **Clarity over flavor.** Every themed name is paired with its plain name. Section headings show the plain Spanish name large, with the themed name as a ruby annotation (`<ruby>Habilidades<rt>Grimorio</rt></ruby>`), like furigana in a light novel. Buttons always use plain verbs ("Ver proyectos", "Descargar CV", "Enviar mensaje").
+7. **Professional copy.** All visible text reads like a professional portfolio. Section headings and menu labels are plain Spanish names; no chapter numbers, kanji marks, themed subtitles or ruby annotations. Buttons always use plain verbs ("Ver proyectos", "Descargar CV", "Enviar mensaje"). The light-novel touch is visual only.
 8. **Skills:** no bars, no percentages, no star ratings, no "levels", no circular gauges, no years-of-experience counters. List **frameworks, libraries and tools only — never programming languages** (no "Kotlin", "Dart", "TypeScript", "Python" chips).
 9. **No bars or percentages anywhere** in content (skills, spoken languages, extras). Describe proficiency in words if needed.
 10. **Social links:** tech-related only (GitHub, LinkedIn, and similar dev platforms). No WhatsApp, no personal Instagram / Facebook / TikTok.
@@ -45,17 +47,17 @@ Two sources, both mandatory: the official course guide (§2.1, highest priority)
 |---|---|---|
 | R0 | **Every recommendation of the course guide** — every item of its final checklist, its 8 required sections in the map's order, and at least one extra section | §2.1 (checklist and map copied verbatim) |
 | R1 | Built with Next.js, TypeScript, Tailwind CSS; deployed on Vercel from GitHub | Whole project + §12 Phase 6 |
-| R2 | Hero has profile photo + welcome; technical but **very short** | §7.1 Portada |
+| R2 | Hero has profile photo + welcome; technical but **very short** | §7.1 Bienvenida |
 | R3 | «Descargar CV» button in the hero — **required by the course**, always present and downloading a real PDF | §7.1 "CV" + command palette + footer |
-| R4 | "Acerca de mí" = life **outside** software engineering (hobbies, interests) | §7.3 Historias paralelas |
-| R5 | Skills: no bars/percentages; frameworks, not languages (e.g., Tailwind, Django) | §7.4 Grimorio |
-| R6 | Proud of where he comes from | §7.2 Origen (an extra section) + theme toggle + colophon |
-| R7 | A tag that says "Actualmente estudiando" | Hero (primary), experience entry, colophon |
-| R8 | Testimonials: real people, minimum 3, with role or relationship to him | §7.6 Cartas del gremio |
-| R9 | Academic + work experience, **newest to oldest**, including project experience | §7.7 Re:Crónica (sorted in code) |
+| R4 | "Acerca de mí" = life **outside** software engineering (hobbies, interests) | §7.3 Acerca de mí |
+| R5 | Skills: no bars/percentages; frameworks, not languages (e.g., Tailwind, Django) | §7.4 Habilidades |
+| R6 | Proud of where he comes from | §7.2 Presentación (born in El Contadero, lives in Pasto) + hero origin chip + theme names + barniz palette |
+| R7 | A tag that says "Actualmente estudiando" | Hero (primary), experience entry, footer |
+| R8 | Testimonials: real people, minimum 3, with role or relationship to him | §7.6 Testimonios |
+| R9 | Academic + work experience, **newest to oldest**, including project experience | §7.7 Experiencia (sorted in code) |
 | R10 | Contact form validated with **regular expressions** | §7.9 + §10 |
 | R11 | Social networks only if tech-related; no WhatsApp | Contact + footer |
-| R12 | "Adicional" section: creative, no bars/percentages, placed deliberately (course: at least 1 extra section) | §7.8 Epílogo del autor (+ Origen and Habilidades as extras) |
+| R12 | "Adicional" section: creative, no bars/percentages, placed deliberately (course: at least 1 extra section) | §7.8 Adicional (+ Presentación and Habilidades as extras) |
 | R13 | Unique, super creative, 2D/3D allowed | Whole concept (§4) |
 | R14 | One component per section in `components/`; `app/page.tsx` imports them in the guide's order | §1 rule 3, §9.3 |
 | R15 | Responsive on phone, tablet and desktop (Tailwind `md:` / `lg:`) | Every section, verified at 375 / 768 / 1440 px |
@@ -79,7 +81,7 @@ Two sources, both mandatory: the official course guide (§2.1, highest priority)
 | 6. Experiencia académica y laboral | Experiencia académica 🎓 (universidad, cursos) · Experiencia laboral 💼 (empleos, prácticas, freelance) | §7.7 |
 | 7. Contactos | Correo electrónico | §7.9 — visible email address + form |
 | 8. Pie de página | Tu nombre y © año | §7.10 |
-| Sección adicional (tú eliges) | Al menos 1 sección extra | Three extras: Origen (§7.2), Habilidades (§7.4), Adicional / Epílogo (§7.8) |
+| Sección adicional (tú eliges) | Al menos 1 sección extra | Three extras: Presentación (§7.2), Habilidades (§7.4), Adicional (§7.8) |
 | Se ve bien en celular | diseño responsive | R15 — verified at 375 / 768 / 1440 px |
 | Código subido a GitHub | repositorio con commits | Phase 6 — Jeferson creates the repo, commits and pushes |
 | Publicado en Vercel | URL pública funcionando | Phase 6 — Jeferson imports the repo in Vercel |
@@ -91,13 +93,13 @@ Two sources, both mandatory: the official course guide (§2.1, highest priority)
 
 **Page order** (the checklist's numbered order, with the extra sections placed where they serve the story; required sections never change their relative order):
 
-Menú de navegación → Bienvenida/Hero → *Origen (extra)* → Acerca de mí → *Habilidades (extra)* → Mis proyectos → Testimonios → Experiencia académica y laboral → *Adicional (extra)* → Contactos → Pie de página.
+Menú de navegación → Bienvenida/Hero → *Presentación (extra)* → Acerca de mí → *Habilidades (extra)* → Mis proyectos → Testimonios → Experiencia académica y laboral → *Adicional (extra)* → Contactos → Pie de página.
 
 **Section map — confirmed from the guide (Paso 1, "Secciones obligatorias", 9 blocks):**
 
 1. Menú de navegación · 2. Bienvenida / Hero con CV · 3. Acerca de mí · 4. Mis proyectos · 5. Testimonios · 6. Experiencia académica y laboral · 7. Contactos · 8. Pie de página · ⭐ Sección adicional (tú eliges)
 
-The guide's "9" counts the 8 numbered sections plus the additional one. **Habilidades is not a required section**: it is one of this portfolio's extras, together with Origen and the Adicional/Epílogo. The map lists the additional section without a fixed position, so the extras sit between required sections where they serve the story, while the 8 required sections keep exactly the map's relative order.
+The guide's "9" counts the 8 numbered sections plus the additional one. **Habilidades is not a required section**: it is one of this portfolio's extras, together with Presentación and Adicional. The map lists the additional section without a fixed position, so the extras sit between required sections where they serve the story, while the 8 required sections keep exactly the map's relative order.
 
 **Optional refinement:** the guide also has one slide per section ("estructura", "qué debe incluir", code example) that is rendered with JavaScript. If you have a working browser (e.g., Playwright with Chromium from a throwaway script in a temp folder), step through the slides with "Siguiente" or the → key, save them verbatim to `docs/guia-curso.md`, and add anything new as rows R17, R18, … in the table above. Do not tick the checklist on the page. If no browser works, skip this step: the checklist and map above are the requirements.
 
@@ -137,38 +139,32 @@ Work experience: `TODO(jeferson)` (if none yet, the timeline works with academic
 
 ## 4. The concept
 
-### 4.1 Big idea: the portfolio is a light novel volume
+### 4.1 Big idea: a professional portfolio with a light-novel touch
 
-**"Crónica de Atriz — Vol. 1."** The Valle de Atriz is the valley where San Juan de Pasto sits, at the foot of the Galeras volcano. The site is designed as the first volume of a light novel whose protagonist is Jeferson: a story of starting a new life through study and building, told with the visual grammar of Japanese light novels and the color and pride of Nariño.
+The words are those of a professional developer portfolio: plain section names, concrete copy, plain-verb buttons. The visuals borrow the grammar of Japanese light novels and the color and pride of Nariño (San Juan de Pasto sits in the Valle de Atriz, at the foot of the Galeras volcano). There is no series title, volume number or long light-novel title.
 
-Light-novel conventions map 1:1 to portfolio sections, which keeps the concept meaningful instead of decorative:
-
-| Light-novel element | Portfolio element |
+| Visual element | Where |
 |---|---|
-| Cover (表紙) | Hero / Portada |
-| Table of contents (目次) | Main menu ("Índice") |
-| Chapters with chapter-opener pages | Sections |
-| Color insert illustration | Origin spread (Pasto, Galeras) |
-| Side stories (外伝) | About me — life outside code |
-| Afterword (あとがき) | "Adicional" — the author speaks |
-| "Continuará…" | Contact — the next volume is written together |
-| Colophon (奥付) | Footer |
-
-**Optional long light-novel title** (light novels are famous for absurdly long titles — use it on the cover/loader and in the Open Graph image, never as the hero's main text):
-"Renací en el Valle de Atriz y ahora mis hechizos corren en relojes, consolas y escritorios". Offer Jeferson two alternatives in the same spirit.
+| Magic circle around the portrait + 3D atmosphere | Bienvenida |
+| Red band (obi) carrying the welcome line and the CTAs | Bienvenida |
+| Serif display type (mincho) | Headings everywhere |
+| Generated sigils | Habilidades, side rail, project covers |
+| Bookshelf of favorite titles | Acerca de mí |
+| Clock that turns back as the timeline scrolls | Experiencia |
+| Sealed letters | Testimonios |
+| Handwritten notes | Adicional |
 
 ### 4.2 Motif sources (all executed with original designs)
 
 **Inspired by *Mushoku Tensei* — a second life, growth through study:**
 - Original **magic circles** (concentric rings, original runes) as the core graphic system.
-- A **grimoire** for skills: frameworks are "spells" grouped into schools.
+- An **open-book layout** for skills: frameworks grouped into categories, each with a generated sigil.
 - **Letters** sent across distances: testimonials arrive as sealed letters.
 
-**Inspired by *Re:Zero* — loops, save points, returning:**
-- **Save points ("puntos de guardado")**: a rail of sigils, one per chapter, that light up as the reader passes them.
-- **Rewind** transitions: navigating *backwards* through the page plays a short rewind effect; navigating forward plays a page turn.
-- **Reverse chronology**: experience is told from the latest save point backwards — which is exactly the required newest-to-oldest order, now with a narrative reason.
-- A **404 page** framed as reaching a dead end in this timeline and returning to the last save point.
+**Inspired by *Re:Zero* — looking back, returning:**
+- **Side sigil rail**: one sigil per section on the right edge (desktop), lit as the reader passes them.
+- **Reverse chronology**: experience is listed newest to oldest (the required order), with a clock that turns back as you scroll.
+- A **404 page** with one small playful line about this timeline and a clear way back home.
 
 **Pasto and Nariño — pride of origin (facts verified):**
 - **Galeras** — called *Urcunina*, "montaña de fuego"; an active volcano of more than 4,200 m, about 9 km from Pasto; locals see its silhouette as a sleeping lion guarding the city.
@@ -205,14 +201,14 @@ Use accents sparingly: the page is mostly paper and ink, with color arriving lik
 - **Body:** a calm humanist or gothic sans that is **not** Inter/Roboto/Arial — default *Zen Kaku Gothic New*; acceptable alternatives: *Hanken Grotesk*, *Instrument Sans*.
 - **Mono / metadata / tags:** *JetBrains Mono*.
 - Verify that á é í ó ú ñ ü ¿ ¡ render correctly in every font; swap fonts if any glyph falls back.
-- Decorative CJK glyphs (第, 章, 巻, 目次, あとがき, 奥付) are few: render them as inline SVG or load the display font with `preload: false`, and confirm only the needed unicode-range slices download at runtime.
+- No decorative CJK glyphs in the UI.
 - Use `next/font` for everything (self-hosted, no layout shift). Fluid type with `clamp()`.
 
 ### 5.3 Texture and layout
 
 - Subtle paper grain (SVG noise filter, very low opacity), print registration marks in corners of insert spreads, halftone dots on illustrations.
-- Book-like editorial grid: generous margins, a **running head** (current chapter name in small caps at the top, like a printed book) and **folios** (page numbers such as "— 12 —") in section corners. The Índice lists the same page numbers.
-- Vertical text (`writing-mode: vertical-rl`) for short decorative labels only (volume number, chapter numerals). Never for body copy.
+- Book-like editorial grid with generous margins and a short vermilion rule above each section heading. No running heads, folios or page numbers.
+- Vertical text (`writing-mode: vertical-rl`) for short decorative labels only (project cover titles, bookshelf spines). Never for body copy.
 - Mobile-first. Design the 375 px layout first, then enhance.
 
 ### 5.4 Motion principles
@@ -220,7 +216,7 @@ Use accents sparingly: the page is mostly paper and ink, with color arriving lik
 - Easing: one signature curve (e.g., `cubic-bezier(0.22, 1, 0.36, 1)`) plus a softer one for scrubbed scenes. UI micro-interactions 150–300 ms, reveals 400–800 ms.
 - Animate `transform` and `opacity` only (and SVG stroke properties). No layout thrashing.
 - Content is **visible by default** in the server-rendered HTML. Never ship content at `opacity: 0` waiting for JavaScript; enhance after hydration.
-- `prefers-reduced-motion: reduce` → no smooth scroll, no 3D, no particles, no scrubbed scenes, no page-turn or rewind effects; everything static and complete.
+- `prefers-reduced-motion: reduce` → no smooth scroll, no 3D, no particles, no scrubbed scenes, no rewind effects; everything static and complete.
 - No scroll-jacking that traps the user. Pinned scenes are short and only on desktop.
 
 ### 5.5 Anti-patterns (do not ship any of these)
@@ -231,44 +227,44 @@ Inter/Roboto/system font as brand font · purple-to-blue gradients · neon cyber
 
 ## 6. Page architecture
 
-- `/` — the volume: one long page made of chapters (order below).
-- `/volumenes/[slug]` — one case-study page per project, statically generated.
-- `not-found` — the "Re:Inicio" 404.
+- `/` — one long page made of sections (order below).
+- `/proyectos/[slug]` — one case-study page per project, statically generated (old `/volumenes/*` links redirect here).
+- `not-found` — the "Página no encontrada" 404.
 - `opengraph-image`, `sitemap.ts`, `robots.ts`.
 
-**Chapter order and rationale** (follows the guide, §2.1; "Guide" = the checklist item each chapter satisfies)
+**Section order and rationale** (follows the guide, §2.1; "Guide" = the checklist item each section satisfies)
 
-| # | id | Plain name (large) | Ruby (themed) | Guide | Why here |
-|---|---|---|---|---|---|
-| — | header | Menú | 目次 | 1. Menú de navegación | Always visible: name/initials + section links |
-| — | `inicio` | Bienvenida | Portada · 表紙 | 2. Bienvenida / Hero con CV | First impression: who, what, CV, contact |
-| I | `origen` | Origen | Valle de Atriz | Sección adicional | Pride of origin right after the cover, like a color insert. Short. |
-| II | `acerca-de-mi` | Acerca de mí | Historias paralelas | 3. Acerca de mí | The person before the résumé |
-| III | `habilidades` | Habilidades | Grimorio | Sección adicional | What he builds with, right before the proof |
-| IV | `proyectos` | Mis proyectos | Volúmenes publicados | 4. Mis proyectos | The proof |
-| V | `testimonios` | Testimonios | Cartas del gremio | 5. Testimonios | Others vouch for the work just shown |
-| VI | `experiencia` | Experiencia académica y laboral | Re:Crónica | 6. Experiencia académica y laboral | The path, newest → oldest |
-| VII | `extras` | Adicional | Epílogo del autor · あとがき | Sección adicional | In a light novel the author's afterword comes after the story; placing it before Contact keeps the final call to action last. |
-| VIII | `contacto` | Contacto | Continuará… | 7. Contactos | The cliffhanger: the next volume is written together |
-| — | footer | Pie de página | Colofón · 奥付 | 8. Pie de página | Name, © year, publication details, tech-only social links |
+| id | Name | Guide | Why here |
+|---|---|---|---|
+| header | Menú | 1. Menú de navegación | Always visible: name + role + section links |
+| `inicio` | Bienvenida | 2. Bienvenida / Hero con CV | First impression: who, what, CV, contact |
+| `presentacion` | Presentación | Sección adicional | The professional intro right after the hero: what he builds, where he studies, where he's from. Short. |
+| `acerca-de-mi` | Acerca de mí | 3. Acerca de mí | The person before the résumé |
+| `habilidades` | Habilidades | Sección adicional | What he builds with, right before the proof |
+| `proyectos` | Proyectos | 4. Mis proyectos | The proof |
+| `testimonios` | Testimonios | 5. Testimonios | Others vouch for the work just shown |
+| `experiencia` | Experiencia | 6. Experiencia académica y laboral | The path, newest → oldest |
+| `extras` | Adicional | Sección adicional | Personal notes, placed before Contact so the final call to action stays last |
+| `contacto` | Contacto | 7. Contactos | The call to action |
+| footer | Pie de página | 8. Pie de página | Name, © year, site details, tech-only social links |
 
 ---
 
 ## 7. Section specifications
 
-For every section: semantic `<section aria-labelledby>`, chapter opener (≤ 60vh desktop, ≤ 40vh mobile) with chapter numeral, ruby heading and folio; a full static fallback for reduced motion.
+For every section: semantic `<section aria-labelledby>`, a section heading (short vermilion rule, the plain Spanish name, optional lede); a full static fallback for reduced motion.
 
-### 7.1 Bienvenida / Hero (Portada) — R2, R3, R7
+### 7.1 Bienvenida / Hero — R2, R3, R7
 
 **Content (keep the welcome to ≤ 25 words, technical and concrete):**
-- Eyebrow (mono): `Vol. 1 · Pasto, Nariño`
+- No eyebrow above the name.
 - H1: **Jeferson Morillo**
 - Welcome line (draft — offer Jeferson 2 alternatives):
   "Desarrollador de software. Construyo apps para Android, Wear OS y escritorio con Jetpack Compose y Flutter, y aplicaciones web con React y Spring Boot."
 - **Status tag** (R7), a pill with a softly pulsing gem: `Actualmente estudiando · Ingeniería de Software · UCC Pasto`
-- Origin chip: `Hecho en Pasto, Nariño · Colombia`
+- Origin chip: `De El Contadero, Nariño`
 - CTAs: **Descargar CV** (required by the course — always visible, `download` attribute, points to `/cv/CV-Jeferson-Morillo.pdf`) · **Ver proyectos** · **Contactar**. Give the CV button the same visual weight as the primary CTA.
-- Scroll cue: "Pasa la página".
+- Scroll cue: "Ver más".
 
 **CV (required):** if Jeferson provides his own PDF, use it at `public/cv/CV-Jeferson-Morillo.pdf`. If he doesn't have one, generate it from the same content files so it never contradicts the site: a print-styled `/cv` route (one or two A4 pages, clean editorial version of the art direction, real facts only, no bars or percentages) and an `npm run cv` script that renders it with Playwright's `page.pdf()` into `public/cv/`. The script runs locally, not during the Vercel build; the generated PDF is committed by Jeferson. Add a build check that fails if the PDF is missing.
 
@@ -278,65 +274,65 @@ For every section: semantic `<section aria-labelledby>`, chapter opener (≤ 60v
 - A procedural **magic circle** rendered with a fragment shader on a plane: concentric rings, an outer ring of original runes (generated into a canvas texture), slow counter-rotation, gold emission in dark mode and ink/vermilion linework in light mode.
 - **Ember / mana particles** (instanced points; ~350 desktop, ~100 mobile) drifting upward, reacting gently to the pointer.
 - A stylized **low-poly volcano silhouette** on the horizon (procedurally displaced cone) with a faint ember glow at the crater — the Galeras.
-- On scroll, the circle tilts and shrinks as the page "turns" into Chapter I.
+- On scroll, the circle tilts and shrinks as the page moves on to the next section.
 - Performance: load with `next/dynamic` (`ssr: false`) after first paint (idle callback); clamp `dpr` to `[1, 1.75]`; pause rendering when the hero is off-screen (IntersectionObserver + `frameloop="demand"`); dispose geometries/materials on unmount.
 - Fallback: a static SVG of the same magic circle when `prefers-reduced-motion`, no WebGL, `navigator.connection.saveData`, or low-power hints (`hardwareConcurrency ≤ 4`).
 
-**Loader "Portada del volumen" (optional, first visit per session only):** a closed light-novel cover with the long title opens like a book in ≤ 1.6 s, skippable with click or `Esc`, disabled under reduced motion. The hero is server-rendered underneath; the loader is purely decorative and must not delay content.
+**Loader:** none. Content renders immediately.
 
-### 7.2 Capítulo I — Origen (Valle de Atriz) — R6
+### 7.2 Presentación — R6
 
-A cinematic "color insert" spread, about 1–1.5 viewports.
+The professional intro right after the hero. Text only, no images.
 
-- **Illustration:** original layered SVG landscape with scroll parallax (GSAP ScrollTrigger, scrubbed): the Galeras silhouette with a subtle sleeping-lion profile and a breathing ember glow at the crater; Pasto's city lights twinkling in the valley; páramo mist layers; La Cocha shimmering in the distance in dark mode.
-- **Mopa-mopa band:** an original geometric pattern inspired by barniz de Pasto (translucent colored cut shapes layered over a wood tone). On reveal, the layers are "laid down" one by one. Reuse it as the divider between chapters.
-- **Copy (draft — Jeferson must approve the voice):**
-  "Soy de San Juan de Pasto, una ciudad que vive a los pies del Galeras —Urcunina, la montaña de fuego—, un volcán activo a unos 9 km. Aquí el año empieza con el Carnaval de Negros y Blancos y los artesanos todavía cortan láminas de mopa-mopa para el barniz de Pasto. De esa paciencia y ese color aprendí a construir."
-- Three small "heritage" facts as illustrated captions (Carnaval — UNESCO 2009; Barniz de Pasto Mopa-Mopa — UNESCO 2020; Galeras — Urcunina). No bars, no numbers beyond these facts.
-- Tie-in: one line connecting his work to his region (e.g., the cattle-health IoT project designed for Pasto's farms).
+- **Paragraph** (Jeferson's draft): "Soy desarrollador de software y estudiante de Ingeniería de Software en la Universidad Cooperativa de Colombia, en Pasto. Me gusta crear aplicaciones de principio a fin: apps para Android y Wear OS, herramientas de escritorio con Flutter y aplicaciones web con React y Spring Boot. Disfruto convertir una idea en un producto que la gente pueda usar, cuidando tanto el código como la experiencia. Nací en El Contadero, Nariño, y hoy vivo en Pasto."
+- **Three highlights in one row**, one line each, taken from real projects: "Apps móviles y Wear OS", "Escritorio con Flutter", "Web full-stack".
+- His origin is mentioned here once; "Acerca de mí" does not repeat it in its paragraph.
 
-### 7.3 Capítulo II — Acerca de mí (Historias paralelas) — R4
+### 7.3 Acerca de mí — R4
 
 Only life **outside** software engineering. No tech here.
 
-- **Presentation paragraph (required by the course):** the section opens with one personal paragraph in first person (60–110 words) about who he is outside code: where he grew up, what he enjoys, what he's like. Draft it only from facts Jeferson gives you; until then use a clearly marked placeholder.
-- 3–5 **side-story cards** styled like light-novel insert pages ("Historia paralela 1: …"), each with a short paragraph and an original small illustration or glyph.
+- **Presentation paragraph (required by the course):** the section opens with one personal paragraph in first person (60–110 words) about who he is outside code: what he enjoys, what he's like (his origin is told once, in Presentación). Draft it only from facts Jeferson gives you; until then use a clearly marked placeholder.
+- 3–5 small **interest cards**, each with a short line and an original small glyph.
   - Known: watching/reading isekai and anime.
   - Unknown (ask Jeferson): other hobbies, sports, music, favorite places in Nariño, what he does on weekends, any personal ritual. Placeholders until answered.
 - **The shelf:** a row of book spines with his favorite anime/light novel titles as **text only** (original colors and typography, no official art). Hover/focus pulls a spine out and shows his one-line take on it. Keyboard accessible; on mobile, a horizontal scroll-snap row.
 
-### 7.4 Capítulo III — Habilidades (Grimorio) — R5
+### 7.4 Habilidades — R5
 
-Intro line (draft): "No mido mis habilidades en porcentajes: las muestro en lo que he construido. Cada hechizo enlaza al volumen donde lo usé."
+Intro line: "No mido mis habilidades en porcentajes: las muestro en lo que he construido. Cada herramienta enlaza al proyecto donde la usé."
 
-- Layout: an open-book spread. Left page: the **schools**; right page: **spell cards** for the selected school (on mobile: stacked schools with cards beneath).
-- Each spell card: an original **sigil** generated deterministically from the framework name (seeded rune circle in SVG) that draws itself (stroke-dashoffset) on hover/focus, the framework name, one line of what he does with it, and **"Invocado en:"** chips linking to the projects where he used it. This evidence replaces bars and percentages entirely.
+- Layout: an open-book spread. Left page: the **schools**; right page: **skill cards** for the selected category (on mobile: stacked schools with cards beneath).
+- Each skill card: an original **sigil** generated deterministically from the framework name (seeded rune circle in SVG) that draws itself (stroke-dashoffset) on hover/focus, the framework name, one line of what he does with it, and **"Usado en:"** chips linking to the projects where he used it. This evidence replaces bars and percentages entirely.
 - Optional: a small monochrome logo per framework (e.g., from Simple Icons) next to the sigil.
-- Initial grimoire (confirm every item with Jeferson; remove anything he doesn't want to claim; never add languages):
+- Initial skill list (confirm every item with Jeferson; remove anything he doesn't want to claim; never add languages):
   - **Interfaces web:** Next.js, React, Tailwind CSS, Vite, Zustand, TanStack Query, React Router
   - **Backend y datos:** Spring Boot, Spring Security (OAuth2 + JWT), Spring Data JPA, PostgreSQL, Liquibase
   - **Multimedia en el navegador:** FFmpeg.wasm (WebAssembly)
   - **Interfaces nativas:** Jetpack Compose, Material 3, Compose for Wear OS, Flutter
   - **Estado, datos y rutas:** Riverpod, go_router, Hive CE, Wearable Data Layer API
   - **Mundos 3D y movimiento:** Godot, Three.js / React Three Fiber, GSAP
-  - **Artes arcanas (IA):** ML Kit, Whisper (local), DeepSeek API
-  - **Herramientas del gremio:** Git, GitHub, Docker, Vitest, Android Studio, Vercel
+  - **Inteligencia artificial:** ML Kit, Whisper (local), DeepSeek API
+  - **Herramientas:** Git, GitHub, Docker, Vitest, Android Studio, Vercel
   - For AloMedia items, keep only what Jeferson confirms he used himself in his part of the project.
-- Optional live touch: "Último hechizo lanzado" — his most recent public GitHub activity for `jefer02` fetched server-side with revalidation (e.g., hourly). Must fail silently and never block rendering.
+- Optional live touch: "Última actividad en GitHub" — his most recent public GitHub activity for `jefer02` fetched server-side with revalidation (e.g., hourly). Must fail silently and never block rendering.
 
-### 7.5 Capítulo IV — Mis proyectos (Volúmenes publicados)
+### 7.5 Proyectos
 
-Intro line (draft): "Cada proyecto es un volumen: un problema real, una solución y lo que aprendí en el camino."
+Intro line: "Cada proyecto parte de un problema real: cómo lo resolví y qué aprendí en el camino."
 
-- Each project is a **light-novel volume cover** (3:4): framed screenshot or original key art, large volume number ("Vol. 03"), vertical title band, frameworks used, and a status ribbon (`Publicado`, `En desarrollo`, `Académico`).
+- Each project has a **light-novel style cover** (3:4): framed screenshot or original key art, a "Proyecto" label with a large project number ("03"), vertical title band, frameworks used, and a status ribbon (`Publicado`, `En desarrollo`, `Académico`).
 - **Links (required by the course):** every card and every case-study page shows two clearly labeled buttons: **"Repositorio en GitHub"** and **"Ver demo"**. "Demo" means a live URL (Vercel or other hosting) when the project is web; for apps and games it means the closest real equivalent: a GitHub Release / download page, a landing page (e.g., the Elyndra website, `TODO(jeferson)`: URL and status), or a demo video. Never invent a link: a project without a real repo or demo yet shows the missing link as `TODO(jeferson)` in development and is flagged in the final report.
-- **Include this portfolio as a project** ("Vol. 0 — Crónica de Atriz": Next.js, TypeScript, Tailwind CSS, React Three Fiber, GSAP), with its GitHub repository and its Vercel URL (`TODO(jeferson)` until he deploys). It guarantees at least one project with a true live demo on Vercel.
+- **Include this portfolio as a project** ("Portafolio personal", slug `jeferson-morillo`: Next.js, TypeScript, Tailwind CSS, React Three Fiber, GSAP), with its GitHub repository and its Vercel URL (`TODO(jeferson)` until he deploys). It guarantees at least one project with a true live demo on Vercel.
 - Desktop (≥ 1024 px, motion allowed): a short pinned horizontal **bookshelf** sequence scrubbed by scroll. Otherwise: a responsive grid / scroll-snap carousel with visible prev/next buttons.
-- Clicking a cover opens `/volumenes/[slug]` with a **View Transition**: the cover morphs into the case-study header (use React 19.2 / Next.js 16 view transitions per current docs; fall back gracefully where unsupported).
-- **Case-study page:** synopsis, the problem, what he built, frameworks, key challenges and decisions, what he learned, status, links (GitHub, release, demo), gallery. Add "Volumen anterior / siguiente" navigation.
+- Clicking a cover opens `/proyectos/[slug]` with a **View Transition**: the cover morphs into the case-study header (use React 19.2 / Next.js 16 view transitions per current docs; fall back gracefully where unsupported).
+- **Case-study page:** synopsis, the problem, what he built, frameworks, key challenges and decisions, what he learned, status, links (GitHub, release, demo), gallery. Add "Proyecto anterior / siguiente" navigation.
 - Media lives in `public/projects/<slug>/`. Missing media → elegant generated cover (typography + palette + sigil), plus a TODO.
 
-### 7.6 Capítulo V — Testimonios (Cartas del gremio) — R8
+### 7.6 Testimonios — R8
+
+Lede: "Lo que dicen de mi trabajo personas con las que he estudiado y trabajado. Cada testimonio se publica con su permiso."
+
 
 - Each testimonial is a **sealed letter**: envelope with an original wax seal (his "JM" monogram inside a small magic circle). When the letter enters the viewport (or on click/Enter), the seal cracks and the letter unfolds. Reduced motion: letters are already open.
 - Each letter shows: the quote, full name, **role**, **relationship to Jeferson** (e.g., "Fue mi docente de …", "Compañero de equipo en …"), optional organization, optional photo (only with permission), optional link to a LinkedIn profile/recommendation.
@@ -358,29 +354,29 @@ Intro line (draft): "Cada proyecto es un volumen: un problema real, una solució
 - **Enforcement:** in production, render only entries with `consent && verified`, and render the section only when at least the required minimum qualify (3, or the guide's minimum if higher). Because the course requires this section, also make `next build` print a loud warning while fewer than the minimum are verified, so Jeferson knows he can't deliver yet. In development, show placeholders with a visible "PLACEHOLDER — NO PUBLICAR" stamp. Never write testimonial text yourself.
 - Create `docs/pedir-testimonios.md` with a short, friendly Spanish message Jeferson can send to teachers, classmates or collaborators to request a testimonial (what to include, length, consent to publish).
 
-### 7.7 Capítulo VI — Experiencia académica y laboral (Re:Crónica) — R9
+### 7.7 Experiencia académica y laboral — R9
 
-Intro line (draft): "La historia se cuenta desde el último punto de guardado hacia atrás."
+Lede: "De lo más reciente a lo más antiguo." (shown once).
 
 - Entries of three types — **Académico** (universidad, cursos), **Laboral** (empleos, prácticas, freelance) and **Proyecto** — each with: title, organization/context, place, date range (or "Actualidad"), 1–3 lines of impact, frameworks. Both the academic and the work groups must be visibly present, as the course asks; if Jeferson has no work entry yet, ask him (prácticas, freelance, monitorías and paid personal projects count) and never invent one.
 - **Order is enforced in code:** sort by end date descending (ongoing first), then start date descending. Never rely on manual ordering.
-- Layout: a sticky column with a large year numeral that counts *down* as you scroll and an SVG clock whose hand turns **counter-clockwise** (decorative, `aria-hidden`); entries on the other side as "save point" cards that light up when reached. Filter chips: Todo · Académico · Laboral · Proyectos. Courses and certifications live here as Académico entries (issuer, date, verification link if any — `TODO(jeferson)`).
+- Layout: a sticky column with a large year numeral that counts *down* as you scroll and an SVG clock whose hand turns **counter-clockwise** (decorative, `aria-hidden`); entries on the other side on a timeline whose markers light up when reached. Filter chips: Todo · Académico · Laboral · Proyectos. Courses and certifications live here as Académico entries (issuer, date, verification link if any — `TODO(jeferson)`).
 - The UCC entry carries the "Actualmente estudiando" tag (R7).
-- Mobile: single column, clock shrinks into the chapter opener.
+- Mobile: single column, the clock sits beside the year above the entries.
 
-### 7.8 Capítulo VII — Adicional (Epílogo del autor · あとがき) — R12
+### 7.8 Adicional — R12
 
-Styled like a light-novel afterword: a more personal, handwritten-feeling page where "the author" speaks directly to the reader. No bars, no percentages.
+A more personal, handwritten-feeling page of notes. No bars, no percentages.
 
 - **Idiomas:** described in words (e.g., "Español — lengua materna"; English level `TODO(jeferson)` described by what he can do: read documentation, hold a conversation, etc.).
 - **Eventos / logros:** hackathons, talks, contests — `TODO(jeferson)`.
 - **Lo que estoy aprendiendo ahora:** e.g., 3D for the web while building this site.
 - **Datos curiosos:** e.g., "Programo a unos 9 km de un volcán activo."
-- A signature at the end (his name in a script-like treatment) with a small "Gracias por leer este volumen."
+- A signature at the end (his name in a script-like treatment) with a small "Gracias por tu tiempo."
 
-### 7.9 Capítulo VIII — Contacto (Continuará…) — R10, R11
+### 7.9 Contacto — R10, R11
 
-Heading: plain "Contacto", ruby "Continuará…". Lead (draft): "¿Escribimos juntos el próximo volumen?"
+Heading: "Contacto". Lede: "¿Tienes una oportunidad, un proyecto o una pregunta? Escríbeme y te respondo."
 
 - **Form fields:** Nombre · Correo · Motivo (select: Oportunidad laboral / Proyecto / Colaboración / Otro) · Mensaje · hidden honeypot.
 - **Magic-circle validation:** an SVG circle surrounds the form with one rune per field. Each rune ignites when its field passes its regex; the circle completes when all are valid. Errors appear inline in Spanish, linked with `aria-describedby`, `aria-invalid` set, and an `aria-live="polite"` region for the result.
@@ -388,31 +384,31 @@ Heading: plain "Contacto", ruby "Continuará…". Lead (draft): "¿Escribimos ju
 - **Email (required by the course):** his email address written out in full and visible without interaction, as a `mailto:` link with a copy-to-clipboard button (`TODO(jeferson)`: confirm which address to publish). Plus GitHub (https://github.com/jefer02) and LinkedIn (https://co.linkedin.com/in/jeferson-morillo-2a931b368). No phone, no WhatsApp.
 - Full technical spec in §10.
 
-### 7.10 Pie de página (Colofón) — R6, R11
+### 7.10 Pie de página — R6, R11
 
-Formatted like a light-novel colophon (奥付):
+Site details with dotted leaders, laid out like a book's colophon:
 ```
-Crónica de Atriz — Vol. 1
+Jeferson Morillo — Desarrollador de software
 Autor ............ Jeferson Manuel Morillo Vallejo
-Edición .......... 1.ª edición, <month year from build date>
-Impreso en ....... San Juan de Pasto, Nariño, Colombia
+Actualizado ...... <month year from build date>
+Ubicación ........ San Juan de Pasto, Nariño, Colombia
 Tipografía ....... <fonts used>
 Tecnología ....... Next.js · TypeScript · Tailwind CSS
 Estado ........... Actualmente estudiando Ingeniería de Software — UCC Pasto
 ```
-Plus a plain, always-visible line **"© <current year> Jeferson Morillo"** (required by the course; compute the year at build time), GitHub and LinkedIn icons, and "Volver a la portada".
+Plus a plain, always-visible line **"© <current year> Jeferson Morillo"** (required by the course; compute the year at build time), GitHub and LinkedIn icons, and "Volver arriba".
 
 ---
 
 ## 8. Global signature features
 
-1. **Menú de navegación (required by the course):** a real `<nav>` in the sticky header. Left: the JM monogram seal followed by the visible name **"Jeferson Morillo"** (initials "JM" alone are acceptable only below `sm:`). Desktop (`lg:`): inline links to every section. Mobile/tablet: a menu button that opens the Índice. The **Índice** itself: the button opens a full-screen table of contents styled like a light-novel 目次 page — chapter numerals, plain names with ruby, dotted leaders, folio numbers. Focus-trapped, `Esc` closes, returns focus to the trigger.
-2. **Running head:** on desktop, the current chapter name appears in small caps under or beside the nav links, like a printed book's running head; the right side holds the theme toggle and the command palette trigger.
-3. **Puntos de guardado (save-point rail):** desktop only, right edge. One original sigil per chapter; visited chapters stay lit (sessionStorage); the current one glows; hover/focus shows the chapter name. Clicking jumps there — with a ~400 ms **rewind** overlay (desaturation + reversed particle drift + clock sweep) when the target is *above* the current position, and a page-turn wipe when it is below. Accessible as a `<nav aria-label="Capítulos">` list of links.
-4. **"Lanzar hechizo" command palette:** `Ctrl/⌘ + K` (and a floating sigil button on mobile). Commands: go to any chapter, open any project, download CV (if present), copy email, open GitHub/LinkedIn, switch theme, "Regresar al punto de guardado" (top). Built with `cmdk`, fully keyboard accessible.
+1. **Menú de navegación (required by the course):** a real `<nav>` in the sticky header. Left: the JM monogram seal followed by the visible name **"Jeferson Morillo"** (initials "JM" alone are acceptable only below `sm:`). Desktop (`lg:`): inline links to every section. Mobile/tablet: a "Menú" button that opens a full-screen list of sections with dotted leaders and section numbers (01, 02…). Focus-trapped, `Esc` closes, returns focus to the trigger.
+2. **Header:** solid background (paper in light mode, the dark tone in dark mode) with a thin bottom rule. Under the name, the plain role "Desarrollador de software". The right side holds the search trigger and the theme toggle.
+3. **Side sigil rail:** desktop only (`xl` and up), right edge, hidden over the hero, always visible otherwise. One original sigil per section; visited sections stay lit for the session (sessionStorage); the current one is highlighted; hover/focus shows the section name. Clicking jumps straight to the section, with no overlay. Accessible as a `<nav aria-label="Secciones">` list of links.
+4. **Search / command palette ("Buscar"):** `Ctrl/⌘ + K` (and a floating search button on mobile). Commands: go to any section, open any project, download CV, copy email, open GitHub/LinkedIn, switch theme, go to the top. Built with `cmdk`, fully keyboard accessible.
 5. **Theme toggle "Día de Blancos / Día de Negros":** light and dark modes named after the Carnaval days. Defaults to the system preference; persisted. The switch plays a soft talc puff (to light) or ink bloom (to dark). Tooltip: "Inspirado en el Carnaval de Negros y Blancos de Pasto, Patrimonio de la Humanidad (UNESCO, 2009): negros en el cinco, blancos en el seis." No flash of incorrect theme on load.
 6. **Smooth scroll:** Lenis (`lenis/react`, `ReactLenis root`), driven from GSAP's ticker (`autoRaf: false`, `lenis.on('scroll', ScrollTrigger.update)`, `gsap.ticker.add(t => lenis.raf(t * 1000))`, `gsap.ticker.lagSmoothing(0)`). Disabled under reduced motion. Anchor links and the palette must work with it.
-7. **404 "Re:Inicio":** "Este camino no existe en esta línea temporal." A decorative clock rewinds; clear buttons "Volver a la portada" and "Ver proyectos". No forced auto-redirect.
+7. **404 "Página no encontrada":** one small playful line ("Este camino no existe en esta línea temporal. Vuelve al inicio y sigue explorando."). A decorative clock rewinds; clear buttons "Volver al inicio" and "Ver proyectos". No forced auto-redirect.
 8. **Optional (off by default):** a sound toggle for page turns and seal cracks. Ship only if assets are original or properly licensed.
 
 ---
@@ -448,17 +444,17 @@ If a flag is rejected, check `npx create-next-app@latest --help` and adapt (Turb
 app/
   layout.tsx              # fonts, theme provider, JSON-LD, skip link
   page.tsx                # imports the section components and renders them in the guide's order — nothing else
-  volumenes/[slug]/page.tsx
+  proyectos/[slug]/page.tsx
   not-found.tsx
   opengraph-image.tsx     # light-novel cover style
   sitemap.ts  robots.ts
   actions/contact.ts      # server action
 components/
-  Navbar.tsx  Hero.tsx  Origen.tsx  AcercaDeMi.tsx  Habilidades.tsx  Proyectos.tsx
+  Navbar.tsx  Hero.tsx  Presentacion.tsx  AcercaDeMi.tsx  Habilidades.tsx  Proyectos.tsx
   Testimonios.tsx  Experiencia.tsx  Adicional.tsx  Contacto.tsx  Footer.tsx
                           # ONE file per section, directly in components/, in the order of §6
-  fx/                     # MagicCircle, Sigil, SavePointRail, CommandPalette, WaxSealLetter, PageTurn,
-                          # RewindOverlay, MopaMopaPattern, TalcBurst, RubyHeading (helpers used by sections)
+  fx/                     # MagicCircle, Sigil, SavePointRail, CommandPalette, WaxSealLetter, Chronicle, Grimoire,
+                          # Shelf, TalcBurst, ChapterOpener (section heading) — helpers used by sections
   three/HeroScene.tsx
   ui/                     # buttons, chips, tags
 content/                  # profile.ts, skills.ts, projects.ts, experience.ts, testimonials.ts, extras.ts, socials.ts, schema.ts
@@ -540,8 +536,8 @@ Environment variables (document them in `.env.example`): `RESEND_API_KEY`, `CONT
 
 ## 11. SEO, accessibility and quality
 
-- **SEO:** Metadata API (title, description, canonical, `lang="es-CO"`), Open Graph image generated with `next/og` in the light-novel cover style (name, "Vol. 1", long title, Pasto), `sitemap.ts`, `robots.ts`, JSON-LD `Person` (name, alumniOf UCC, address Pasto/Nariño/Colombia, `sameAs` GitHub/LinkedIn).
-- **Accessibility:** semantic landmarks, one H1, logical heading order, skip link, visible focus styles that match the design, full keyboard support (Índice, palette, shelf, letters, carousel), alt text on all meaningful images, decorative SVG/3D `aria-hidden`, AA contrast in both themes, touch targets ≥ 44 px, no information conveyed by color alone, ruby annotations that don't break screen-reader names (verify with an accessibility tree check).
+- **SEO:** Metadata API (title, description, canonical, `lang="es-CO"`), Open Graph image generated with `next/og` in the light-novel cover style (name, role, welcome line, Pasto), `sitemap.ts`, `robots.ts`, JSON-LD `Person` (name, alumniOf UCC, address Pasto/Nariño/Colombia, `sameAs` GitHub/LinkedIn).
+- **Accessibility:** semantic landmarks, one H1, logical heading order, skip link, visible focus styles that match the design, full keyboard support (menu, search, shelf, letters, carousel), alt text on all meaningful images, decorative SVG/3D `aria-hidden`, AA contrast in both themes, touch targets ≥ 44 px, no information conveyed by color alone.
 - **Progressive enhancement:** the whole site is readable and navigable with JavaScript disabled (except the form, which degrades to the mailto fallback).
 
 ---
@@ -549,18 +545,18 @@ Environment variables (document them in `.env.example`): `RESEND_API_KEY`, `CONT
 ## 12. Workflow
 
 **Phase 0 — Setup and questions**
-- **First of all:** read §2.1 and confirm with Jeferson the final section list (8 required + extras Origen, Habilidades, Adicional). Optionally capture the guide's slides as described there.
+- **First of all:** read §2.1 and confirm with Jeferson the final section list (8 required + extras Presentación, Habilidades, Adicional). Optionally capture the guide's slides as described there.
 - If the **Impeccable** design skill is available (Jeferson may install it with `npx skills add pbakaus/impeccable`), use it: run its setup/teach command to record this brief's design context, and use its critique, audit and polish commands in Phase 5 (check the installed version's command names). If it isn't installed, apply the same principles manually (or Anthropic's frontend-design skill if present). If the official GSAP skills are available (`npx skills add https://github.com/greensock/gsap-skills`), follow them for GSAP code.
-- Ask Jeferson **one batch** of questions: photo, CV PDF (or permission to generate it from the site's content), which email to publish, a GitHub repo and demo link for each project, a personal presentation paragraph (or the facts to draft it), his LinkedIn experience and education (pasted, or the profile PDF), hobbies for "Acerca de mí", favorite anime list, work experience, project dates/status/media, real testimonials (or who he'll ask), spoken languages, courses/certifications, events, preferred welcome line and long title, and the Vercel subdomain he wants (e.g., `jeferson-morillo.vercel.app`). Continue with placeholders for anything he answers "later".
+- Ask Jeferson **one batch** of questions: photo, CV PDF (or permission to generate it from the site's content), which email to publish, a GitHub repo and demo link for each project, a personal presentation paragraph (or the facts to draft it), his LinkedIn experience and education (pasted, or the profile PDF), hobbies for "Acerca de mí", favorite anime list, work experience, project dates/status/media, real testimonials (or who he'll ask), spoken languages, courses/certifications, events, preferred welcome line, and the Vercel subdomain he wants (e.g., `jeferson-morillo.vercel.app`). Continue with placeholders for anything he answers "later".
 
-**Phase 1 — Foundation:** scaffold, `CLAUDE.md`, design tokens in `globals.css` (`@theme`, both themes), fonts, content schemas + content files, layout shell (header, running head, Índice, footer), theme toggle.
+**Phase 1 — Foundation:** scaffold, `CLAUDE.md`, design tokens in `globals.css` (`@theme`, both themes), fonts, content schemas + content files, layout shell (header, mobile menu, footer), theme toggle.
 
-**Phase 2 — Cover:** Portada with photo, status tag, CTAs, static magic circle, then the lazy R3F scene with all fallbacks.
+**Phase 2 — Hero:** Bienvenida with photo, status tag, CTAs, static magic circle, then the lazy R3F scene with all fallbacks.
 **Checkpoint A:** take screenshots (Playwright) at 375, 768 and 1440 px in both themes, show them to Jeferson, and wait for his OK on the visual direction before continuing.
 
-**Phase 3 — Sections:** build them one by one, **in the guide's order**, one component each in `components/`, each one responsive (phone → tablet → desktop with `md:` / `lg:`) before moving on. Order: Origen → Acerca de mí → Habilidades (Grimorio) → Mis proyectos (Volúmenes, + case-study pages and view transitions) → Testimonios (Cartas) → Experiencia (Re:Crónica) → Adicional (Epílogo) → Contactos (Continuará) → Pie de página (Colofón).
+**Phase 3 — Sections:** build them one by one, **in the guide's order**, one component each in `components/`, each one responsive (phone → tablet → desktop with `md:` / `lg:`) before moving on. Order: Presentación → Acerca de mí → Habilidades → Proyectos (+ case-study pages and view transitions) → Testimonios → Experiencia → Adicional → Contacto → Pie de página.
 
-**Phase 4 — Signature systems:** save-point rail with rewind/page-turn, command palette, Lenis + ScrollTrigger integration, loader, 404, contact backend and tests.
+**Phase 4 — Signature systems:** side sigil rail, command palette, Lenis + ScrollTrigger integration, 404, contact backend and tests.
 
 **Phase 5 — Polish and verification:**
 - `tsc --noEmit`, lint, `vitest`, `next build` — all clean.
@@ -597,7 +593,7 @@ Remember: no git writes at any point. Jeferson commits, pushes and deploys.
 - [ ] Testimonials: data model enforced; production shows only consented, verified entries, at least the required minimum; nothing invented.
 - [ ] Contact: shared regex validation client + server, honeypot, time trap, rate limit, tests passing, Spanish errors, accessible states.
 - [ ] Social links: tech only, no WhatsApp.
-- [ ] Origin chapter, theme toggle and colophon express pride in Pasto respectfully and accurately.
+- [ ] Presentación, the hero origin chip, the theme names and the barniz palette express pride in Nariño respectfully and accurately.
 - [ ] No copyrighted anime assets; all visuals original.
 - [ ] Reduced-motion and no-JS experiences complete; AA contrast in both themes; keyboard paths work.
 - [ ] Performance budgets met on the production build.
