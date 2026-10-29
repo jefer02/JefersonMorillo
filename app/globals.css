@@ -83,10 +83,9 @@
   --color-wood: var(--wood);
   --color-wood-ink: var(--wood-ink);
 
-  --font-display: var(--font-mincho), var(--font-cjk), "Hiragino Mincho ProN", serif;
+  --font-display: var(--font-mincho), "Hiragino Mincho ProN", serif;
   --font-sans: var(--font-gothic), system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;
-  --font-cjk: var(--font-cjk-subset), var(--font-mincho), serif;
   --font-hand: var(--font-klee), var(--font-gothic), cursive;
 }
 
@@ -137,8 +136,22 @@
   --text-lede: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
 
   --animate-gem: gem 2.8s var(--ease-book) infinite;
+  --animate-halo: halo 2.6s cubic-bezier(0, 0, 0.2, 1) infinite;
   --animate-spin-slow: spin 90s linear infinite;
   --animate-spin-slower: spin 140s linear infinite reverse;
+}
+
+/* A soft halo that grows and fades around a status dot. */
+@keyframes halo {
+  0% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(3);
+  }
 }
 
 @keyframes gem {
@@ -289,18 +302,6 @@ html[data-theme-switch="talc"]::view-transition-new(root) {
 
 dialog::backdrop {
   backdrop-filter: blur(2px);
-}
-
-@keyframes crater {
-  0%,
-  100% {
-    opacity: 0.75;
-    transform: scale(0.9);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.12);
-  }
 }
 
 /* Progressive reveal (components/fx/Reveal.tsx): only armed elements are ever hidden. */
