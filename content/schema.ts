@@ -2,7 +2,8 @@ import { z } from "zod";
 
 // Build-time validation for everything under content/. Run with `npm run check:content`.
 const todoString = z.string().startsWith("TODO(jeferson):");
-const isoDate = z.string().regex(/^\d{4}-\d{2}(-\d{2})?$/, "Fecha ISO YYYY-MM o YYYY-MM-DD");
+// A bare year (YYYY) is allowed when the month is unknown, e.g. the start of the degree.
+const isoDate = z.string().regex(/^\d{4}(-\d{2}(-\d{2})?)?$/, "Fecha ISO YYYY, YYYY-MM o YYYY-MM-DD");
 const dateOrTodo = z.union([isoDate, todoString]);
 const url = z.url({ protocol: /^https?$/ });
 
@@ -20,6 +21,7 @@ export const projectSchema = z.object({
   slug: z.string().regex(/^[a-z0-9-]+$/),
   volume: z.number().int().min(0),
   title: z.string().min(1),
+  titleEn: z.string().min(1).optional(),
   tagline: z.string().min(10).max(140),
   platforms: z.array(z.string()).min(1),
   status: z.enum(["publicado", "en-desarrollo", "academico"]),
