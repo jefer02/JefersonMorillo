@@ -1,6 +1,8 @@
-import { runeRingPath } from "@/lib/runes";
+import { profile } from "@/content/profile";
+import { encircle, runeRingPath } from "@/lib/runes";
 
-const RUNES = runeRingPath(1902, 16, 40, 0.55);
+// His name around the seal, in the site's rune alphabet (docs/runas.md).
+const RUNES = runeRingPath(encircle(profile.displayName), 40, 0.55);
 
 /** Jeferson's seal: "JM" inside a small magic circle. Used in the menu, wax seals and favicon. */
 export function Monogram({ className }: { className?: string }) {
