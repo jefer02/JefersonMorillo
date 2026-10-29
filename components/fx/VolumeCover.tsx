@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { profile } from "@/content/profile";
+import type { Locale } from "@/lib/i18n/config";
+import { messages } from "@/lib/i18n/messages";
 import type { Accent, Project } from "@/types";
 import { Sigil } from "./Sigil";
 
@@ -23,22 +25,17 @@ const COVER: Record<Accent, { ground: string; ink: string; band: string; bandInk
   wood: { ground: "bg-wood", ink: "text-wood-ink", band: "bg-barniz-gold", bandInk: "text-[oklch(0.24_0.05_70)]" },
 };
 
-const STATUS: Record<Project["status"], string> = {
-  publicado: "Publicado",
-  "en-desarrollo": "En desarrollo",
-  academico: "Académico",
-};
-
-type Props = { project: Project; size?: "card" | "hero"; priority?: boolean };
+type Props = { project: Project; locale: Locale; size?: "card" | "hero"; priority?: boolean };
 
 /**
- * A light-novel volume cover generated from the project's data: volume number, a sigil
+ * A light-novel style cover generated from the project's data: project number, a sigil
  * drawn from its name, a vertical title band and an obi with its status. If the project
  * has real cover art, the art fills the cover and the band and obi sit on top.
  */
-export function VolumeCover({ project, size = "card", priority = false }: Props) {
+export function VolumeCover({ project, locale, size = "card", priority = false }: Props) {
+  const t = messages[locale].projects;
   const c = COVER[project.accent];
-  const vol = `Vol. ${String(project.volume).padStart(2, "0")}`;
+  const number = String(project.volume).padStart(2, "0");
   const hero = size === "hero";
 
   return (
@@ -63,11 +60,11 @@ export function VolumeCover({ project, size = "card", priority = false }: Props)
       <span aria-hidden="true" className="absolute inset-y-0 left-0 w-3 bg-[linear-gradient(90deg,oklch(0_0_0/0.22),transparent)]" />
 
       <div className={`absolute top-0 left-0 p-[7%] ${hero ? "text-[1rem]" : "text-[0.8rem]"}`}>
-        <p className="font-mono tracking-[0.18em] uppercase opacity-85">{profile.seriesTitle}</p>
+        <p className="font-mono tracking-[0.18em] uppercase opacity-85">{t.coverLabel}</p>
         <p
           className={`font-display mt-1 leading-none font-extrabold tracking-[-0.02em] ${hero ? "text-[4.5rem]" : "text-[clamp(2.6rem,2rem+2vw,3.6rem)]"}`}
         >
-          {vol}
+          {number}
         </p>
       </div>
 
@@ -88,7 +85,7 @@ export function VolumeCover({ project, size = "card", priority = false }: Props)
 
       {/* Obi with the status */}
       <div className="bg-paper/95 text-ink absolute inset-x-0 bottom-0 flex h-[15%] items-center justify-between gap-2 px-[7%]">
-        <span className={`font-display font-bold ${hero ? "text-[1.15rem]" : "text-[0.95rem]"}`}>{STATUS[project.status]}</span>
+        <span className={`font-display font-bold ${hero ? "text-[1.15rem]" : "text-[0.95rem]"}`}>{t.status[project.status]}</span>
         <span className={`text-ink-soft truncate font-mono ${hero ? "text-[0.78rem]" : "text-[0.66rem]"}`}>
           {project.statusNote ?? profile.displayName}
         </span>
