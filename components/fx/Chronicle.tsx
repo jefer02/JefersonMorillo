@@ -3,18 +3,14 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { formatRange, yearOf } from "@/lib/experience";
+import { href } from "@/lib/i18n/config";
+import { useLocale, useMessages } from "@/lib/i18n/client";
 import { isProd, isRealLink, isTodo } from "@/lib/todo";
 import type { ExperienceEntry, ExperienceKind } from "@/types";
 import { Text } from "@/components/ui/Todo";
 import { IconArrowUpRight } from "@/components/ui/Icons";
 
-const KIND: Record<ExperienceKind, string> = { academico: "Académico", laboral: "Laboral", proyecto: "Proyecto" };
-const FILTERS: { id: "todo" | ExperienceKind; label: string }[] = [
-  { id: "todo", label: "Todo" },
-  { id: "academico", label: "Académico" },
-  { id: "laboral", label: "Laboral" },
-  { id: "proyecto", label: "Proyectos" },
-];
+const FILTERS = ["todo", "academico", "laboral", "proyecto"] as const;
 
 function KindGlyph({ kind }: { kind: ExperienceKind }) {
   const p = { fill: "none", stroke: "currentColor", strokeWidth: 1.6, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
@@ -78,9 +74,13 @@ type Props = { entries: ExperienceEntry[]; projectTitles: Record<string, string>
  * sorted newest → oldest). Filters work after hydration; without JS every entry shows.
  */
 export function Chronicle({ entries, projectTitles }: Props) {
+  const locale = useLocale();
+  const all = useMessages();
+  const t = all.experience;
+  const newTab = all.newTab;
   const visible = entries.filter((e) => !(isProd && (isTodo(e.title) || isTodo(e.organization))));
-  const [filter, setFilter] = useState<(typeof FILTERS)[number]["id"]>("todo");
-  const [year, setYear] = useState(visible[0] ? yearOf(visible[0]) : "");
+  const [filter, setFilter] = useState<(typeof FILTERS)[number]>("todo");
+  const [year, setYear] = useState(visible[0] ? yearOf(visible[0], locale) : "");
   const [reached, setReached] = useState<Set<string>>(new Set());
   const [turn, setTurn] = useState(0);
   const listRef = useRef<HTMLOListElement>(null);
@@ -137,42 +137,39 @@ export function Chronicle({ entries, projectTitles }: Props) {
           >
             {year}
           </p>
-          <p className="text-ink-soft mt-3 hidden max-w-[28ch] text-[0.9rem] lg:block">
-            Ordenado del punto de guardado más reciente al más antiguo.
-          </p>
         </div>
       </div>
 
       <div className="lg:col-span-8">
-        <div role="group" aria-label="Filtrar experiencia" className="flex flex-wrap gap-2">
+        <div role="group" aria-label={t.filterLabel} className="flex flex-wrap gap-2">
           {FILTERS.map((f) => {
-            const n = counts(f.id);
-            if (f.id !== "todo" && n === 0) return null;
+            const n = counts(f);
+            if (f !== "todo" && n === 0) return null;
             return (
               <button
-                key={f.id}
+                key={f}
                 type="button"
-                aria-pressed={filter === f.id}
-                onClick={() => setFilter(f.id)}
+                aria-pressed={filter === f}
+                onClick={() => setFilter(f)}
                 className={`inline-flex min-h-11 items-center gap-2 rounded-full border px-4 text-[0.88rem] transition-colors duration-200 ${
-                  filter === f.id ? "border-ink bg-ink text-paper" : "border-rule hover:border-vermilion hover:text-vermilion"
+                  filter === f ? "border-ink bg-ink text-paper" : "border-rule hover:border-vermilion hover:text-vermilion"
                 }`}
               >
-                {f.id !== "todo" && <KindGlyph kind={f.id} />}
-                {f.label}
+                {f !== "todo" && <KindGlyph kind={f} />}
+                {t.filters[f]}
               </button>
             );
           })}
         </div>
 
         <p className="sr-only" aria-live="polite">
-          Mostrando {shown.length} {shown.length === 1 ? "entrada" : "entradas"}
+          {t.showing(shown.length)}
         </p>
         <ol ref={listRef} className="border-rule relative mt-10 border-l pl-8 sm:pl-10">
           {shown.map((e) => {
             const lit = reached.has(e.id);
             return (
-              <li key={e.id} data-entry={e.id} data-year={yearOf(e)} className="relative pb-12 last:pb-0">
+              <li key={e.id} data-entry={e.id} data-year={yearOf(e, locale)} className="relative pb-12 last:pb-0">
                 {/* Save point on the rail */}
                 <span
                   aria-hidden="true"
@@ -185,9 +182,9 @@ export function Chronicle({ entries, projectTitles }: Props) {
                 <p className="text-ink-soft flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[0.75rem] tracking-[0.08em] uppercase">
                   <span className="text-ink inline-flex items-center gap-1.5">
                     <KindGlyph kind={e.kind} />
-                    {KIND[e.kind]}
+                    {t.kinds[e.kind]}
                   </span>
-                  <span>{formatRange(e)}</span>
+                  <span>{formatRange(e, locale)}</span>
                   {e.place && <span>· {e.place}</span>}
                 </p>
                 <h3 className="font-display mt-2 text-[1.3rem] leading-snug font-bold">
@@ -199,7 +196,7 @@ export function Chronicle({ entries, projectTitles }: Props) {
                 {e.studying && (
                   <p className="border-jade/45 bg-jade/8 mt-3 inline-flex min-h-8 items-center gap-2 rounded-full border px-3 text-[0.8rem] font-medium">
                     <span aria-hidden="true" className="bg-jade motion-safe:animate-gem size-2 rotate-45" />
-                    Actualmente estudiando
+                    {t.studying}
                   </p>
                 )}
                 <ul className="mt-3 grid gap-1.5">
@@ -214,10 +211,11 @@ export function Chronicle({ entries, projectTitles }: Props) {
                 <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-[0.88rem]">
                   {e.projectSlug && (
                     <Link
-                      href={`/volumenes/${e.projectSlug}`}
+                      href={href(locale, `/proyectos/${e.projectSlug}`)}
                       className="decoration-rule hover:text-vermilion hover:decoration-vermilion inline-flex min-h-10 items-center gap-1.5 underline"
                     >
-                      Ver el volumen {projectTitles[e.projectSlug]}
+                      {t.viewProject}
+                      <span className="sr-only">: {projectTitles[e.projectSlug]}</span>
                     </Link>
                   )}
                   {e.verification &&
@@ -229,7 +227,7 @@ export function Chronicle({ entries, projectTitles }: Props) {
                         className="decoration-rule hover:text-vermilion inline-flex min-h-10 items-center gap-1.5 underline"
                       >
                         {e.verification.label} <IconArrowUpRight width={14} height={14} />
-                        <span className="sr-only"> (se abre en otra pestaña)</span>
+                        <span className="sr-only"> {newTab}</span>
                       </a>
                     ) : (
                       !isProd && <Text value={e.verification.todo} />
