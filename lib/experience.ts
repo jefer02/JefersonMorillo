@@ -1,3 +1,5 @@
+import { defaultLocale, type Locale } from "@/lib/i18n/config";
+import { messages } from "@/lib/i18n/messages";
 import { isTodo } from "@/lib/todo";
 import type { ExperienceEntry } from "@/types";
 
@@ -25,23 +27,22 @@ export function sortExperience(entries: ExperienceEntry[]): ExperienceEntry[] {
   });
 }
 
-const MONTHS = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
-
-export function formatMonth(date: string | undefined): string {
+export function formatMonth(date: string | undefined, locale: Locale = defaultLocale): string {
   if (!date || isTodo(date)) return "—";
   const [y, m] = date.split("-");
-  return m ? `${MONTHS[Number(m) - 1]} ${y}` : y;
+  return m ? `${messages[locale].experience.months[Number(m) - 1]} ${y}` : y;
 }
 
-export function formatRange(entry: Pick<ExperienceEntry, "start" | "end" | "ongoing">): string {
-  const start = formatMonth(entry.start);
-  if (entry.ongoing) return start === "—" ? "Actualidad" : `${start} — Actualidad`;
-  const end = formatMonth(entry.end);
+export function formatRange(entry: Pick<ExperienceEntry, "start" | "end" | "ongoing">, locale: Locale = defaultLocale): string {
+  const present = messages[locale].experience.present;
+  const start = formatMonth(entry.start, locale);
+  if (entry.ongoing) return start === "—" ? present : `${start} — ${present}`;
+  const end = formatMonth(entry.end, locale);
   return start === end ? start : `${start} — ${end}`;
 }
 
-export function yearOf(entry: ExperienceEntry): string {
-  if (entry.ongoing) return "Hoy";
+export function yearOf(entry: ExperienceEntry, locale: Locale = defaultLocale): string {
+  if (entry.ongoing) return messages[locale].experience.now;
   const d = entry.end ?? entry.start;
   return isTodo(d) ? "—" : d.slice(0, 4);
 }
