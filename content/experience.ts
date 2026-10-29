@@ -9,10 +9,10 @@ export const experience: ExperienceEntry[] = [
     title: "Ingeniería de Software",
     organization: "Universidad Cooperativa de Colombia",
     place: "Pasto, Nariño",
-    start: todo("año de inicio de la carrera (YYYY)"),
+    start: "2024",
     ongoing: true,
     studying: true,
-    impact: [todo("semestre actual y materias o logros que quieras destacar")],
+    impact: ["Voy en 5.º semestre."],
   },
   {
     id: "cisco-ciberseguridad",
