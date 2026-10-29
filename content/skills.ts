@@ -3,13 +3,13 @@ import type { Skill, SkillSchool } from "@/types";
 // Frameworks, libraries and tools only. Never programming languages, never levels.
 // Proficiency is shown by evidence: every skill links to the projects where it was used.
 export const schools: SkillSchool[] = [
-  { id: "web", name: "Interfaces web", rune: "Escuela de la vitrina" },
-  { id: "backend", name: "Backend y datos", rune: "Escuela de los cimientos" },
-  { id: "native", name: "Interfaces nativas", rune: "Escuela del cristal" },
-  { id: "state", name: "Estado, datos y rutas", rune: "Escuela de la memoria" },
-  { id: "worlds", name: "Mundos 3D y movimiento", rune: "Escuela de la invocación" },
-  { id: "ai", name: "Inteligencia artificial", rune: "Artes arcanas" },
-  { id: "tools", name: "Herramientas", rune: "Herramientas del gremio" },
+  { id: "web", name: "Interfaces web" },
+  { id: "backend", name: "Backend y datos" },
+  { id: "native", name: "Interfaces nativas" },
+  { id: "state", name: "Estado, datos y rutas" },
+  { id: "worlds", name: "Mundos 3D y movimiento" },
+  { id: "ai", name: "Inteligencia artificial" },
+  { id: "tools", name: "Herramientas" },
 ];
 
 export const skills: Skill[] = [
@@ -18,21 +18,21 @@ export const skills: Skill[] = [
     name: "Next.js",
     school: "web",
     use: "App Router, componentes de servidor y server actions.",
-    usedIn: ["cronica-de-atriz"],
+    usedIn: ["jeferson-morillo"],
   },
   {
     id: "react",
     name: "React",
     school: "web",
     use: "Interfaces por componentes, del editor de video a este portafolio.",
-    usedIn: ["alomedia", "cronica-de-atriz"],
+    usedIn: ["alomedia", "jeferson-morillo"],
   },
   {
     id: "tailwind",
     name: "Tailwind CSS",
     school: "web",
     use: "Sistemas de temas claro y oscuro con utilidades y tokens.",
-    usedIn: ["alomedia", "cronica-de-atriz"],
+    usedIn: ["alomedia", "jeferson-morillo"],
   },
   { id: "vite", name: "Vite", school: "web", use: "El sitio web de Elyndra, con Three.js.", usedIn: ["elyndra"] },
 
@@ -105,10 +105,10 @@ export const skills: Skill[] = [
     id: "r3f",
     name: "Three.js · React Three Fiber",
     school: "worlds",
-    use: "Escenas 3D en la web, como el círculo mágico de la portada.",
-    usedIn: ["cronica-de-atriz", "elyndra"],
+    use: "Escenas 3D en la web, como el círculo mágico de la página de inicio.",
+    usedIn: ["jeferson-morillo", "elyndra"],
   },
-  { id: "gsap", name: "GSAP", school: "worlds", use: "Animaciones ligadas al scroll en este portafolio.", usedIn: ["cronica-de-atriz"] },
+  { id: "gsap", name: "GSAP", school: "worlds", use: "Animaciones ligadas al scroll en este portafolio.", usedIn: ["jeferson-morillo"] },
 
   {
     id: "deepseek",
@@ -145,7 +145,7 @@ export const skills: Skill[] = [
     name: "Vitest",
     school: "tools",
     use: "Pruebas de las expresiones regulares del formulario de contacto.",
-    usedIn: ["cronica-de-atriz"],
+    usedIn: ["jeferson-morillo"],
   },
-  { id: "vercel", name: "Vercel", school: "tools", use: "Despliegues automáticos en cada push.", usedIn: ["cronica-de-atriz", "alomedia"] },
+  { id: "vercel", name: "Vercel", school: "tools", use: "Despliegues automáticos en cada push.", usedIn: ["jeferson-morillo", "alomedia"] },
 ];
