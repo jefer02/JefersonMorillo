@@ -1,3 +1,5 @@
+import type { Locale } from "@/lib/i18n/config";
+import { messages } from "@/lib/i18n/messages";
 import { isProd, isRealLink } from "@/lib/todo";
 import type { MaybeLink, Project } from "@/types";
 import { buttonClass } from "@/components/ui/Button";
@@ -9,18 +11,23 @@ function LinkButton({
   label,
   variant,
   icon,
+  locale,
 }: {
   link: MaybeLink;
   label: string;
   variant: "primary" | "outline";
   icon: React.ReactNode;
+  locale: Locale;
 }) {
+  const t = messages[locale];
   if (isRealLink(link)) {
     return (
       <a href={link.href} target="_blank" rel="noopener noreferrer" className={buttonClass(variant, "text-[0.88rem]")} title={link.label}>
         {icon}
         <span>{label}</span>
-        <span className="sr-only">: {link.label} (se abre en otra pestaña)</span>
+        <span className="sr-only">
+          : {link.label} {t.newTab}
+        </span>
       </a>
     );
   }
@@ -34,22 +41,37 @@ function LinkButton({
       aria-disabled="true"
     >
       {icon}
-      <span>{label} · próximamente</span>
+      <span>
+        {label} · {t.projects.soon}
+      </span>
     </span>
   );
 }
 
 /** The two links the course requires on every project: GitHub repository and demo. */
-export function ProjectLinks({ project, size = "card" }: { project: Project; size?: "card" | "page" }) {
+export function ProjectLinks({ project, locale, size = "card" }: { project: Project; locale: Locale; size?: "card" | "page" }) {
+  const t = messages[locale];
   const demo = project.demo;
   return (
     <div>
       <div className="flex flex-wrap gap-2">
-        <LinkButton link={project.repo} label="Repositorio en GitHub" variant="primary" icon={<IconGitHub width={18} height={18} />} />
-        <LinkButton link={demo} label="Ver demo" variant="outline" icon={<IconArrowUpRight width={18} height={18} />} />
+        <LinkButton
+          link={project.repo}
+          label={t.projects.repo}
+          variant="primary"
+          icon={<IconGitHub width={18} height={18} />}
+          locale={locale}
+        />
+        <LinkButton
+          link={demo}
+          label={t.projects.demo}
+          variant="outline"
+          icon={<IconArrowUpRight width={18} height={18} />}
+          locale={locale}
+        />
       </div>
       <p className="text-ink-soft mt-2 text-[0.8rem]">
-        Demo: {demo.label}
+        {t.projects.demoPrefix} {demo.label}
         {!isRealLink(demo) && !isProd && (
           <>
             {" "}
@@ -69,7 +91,7 @@ export function ProjectLinks({ project, size = "card" }: { project: Project; siz
               >
                 {l.label}
                 <IconArrowUpRight width={16} height={16} />
-                <span className="sr-only"> (se abre en otra pestaña)</span>
+                <span className="sr-only"> {t.newTab}</span>
               </a>
             </li>
           ))}
