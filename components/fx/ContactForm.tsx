@@ -2,14 +2,19 @@
 
 import { useActionState, useEffect, useRef, useState } from "react";
 import { sendContact, type ContactState } from "@/app/actions/contact";
+import { useLocale, useMessages } from "@/lib/i18n/client";
 import { REASONS, validateField, type Field } from "@/lib/validation/patterns";
-import { runePath } from "@/lib/runes";
+import { glyph } from "@/lib/runes";
 import { buttonClass } from "@/components/ui/Button";
 import { IconMail } from "@/components/ui/Icons";
 import { TalcBurst } from "./TalcBurst";
 
 const FIELDS: Field[] = ["name", "email", "reason", "message"];
 const INITIAL: ContactState = { status: "idle", message: "" };
+// In the site's rune alphabet (docs/runas.md): the four field runes spell HOLA and the
+// centre rune, J, signs the letter once every field is valid.
+const FIELD_RUNES = [..."HOLA"].map((ch) => glyph(ch) ?? "");
+const SIGNATURE = glyph("J") ?? "";
 
 /** The validation circle: one rune per field ignites when its regex passes; the ring closes when all do. */
 function ValidationCircle({ valid }: { valid: Record<Field, boolean> }) {
@@ -43,7 +48,7 @@ function ValidationCircle({ valid }: { valid: Record<Field, boolean> }) {
               className="transition-[stroke] duration-500"
             />
             <path
-              d={runePath(700 + i * 31)}
+              d={FIELD_RUNES[i]}
               transform="scale(1.1) translate(-5 -7)"
               fill="none"
               stroke={lit ? "var(--vermilion)" : "var(--ink-soft)"}
@@ -57,7 +62,7 @@ function ValidationCircle({ valid }: { valid: Record<Field, boolean> }) {
       })}
       <g className={`ease-book transition-[opacity,transform] duration-700 ${complete ? "opacity-100" : "opacity-30"}`}>
         <path
-          d={runePath(5858)}
+          d={SIGNATURE}
           transform="scale(2.6) translate(-5 -7)"
           fill="none"
           stroke={complete ? "var(--vermilion)" : "var(--ink-soft)"}
@@ -72,6 +77,8 @@ function ValidationCircle({ valid }: { valid: Record<Field, boolean> }) {
 type Props = { email: string };
 
 export function ContactForm({ email }: Props) {
+  const locale = useLocale();
+  const t = useMessages().form;
   const [state, action, pending] = useActionState(sendContact, INITIAL);
   const [values, setValues] = useState<Record<Field, string>>({ name: "", email: "", reason: "", message: "" });
   const [touched, setTouched] = useState<Partial<Record<Field, boolean>>>({});
@@ -85,7 +92,7 @@ export function ContactForm({ email }: Props) {
     if (state.status === "success") formRef.current?.reset();
   }, [state]);
 
-  const clientErrors = Object.fromEntries(FIELDS.map((f) => [f, validateField(f, values[f])])) as Record<Field, string | null>;
+  const clientErrors = Object.fromEntries(FIELDS.map((f) => [f, validateField(f, values[f], locale)])) as Record<Field, string | null>;
   const valid = Object.fromEntries(FIELDS.map((f) => [f, !clientErrors[f]])) as Record<Field, boolean>;
   const errorFor = (f: Field) =>
     (touched[f] ? clientErrors[f] : null) ?? (state.status === "error" ? state.errors?.[f] : undefined) ?? null;
@@ -117,7 +124,7 @@ export function ContactForm({ email }: Props) {
         {sent ? (
           <div className="bg-paper-2 relative overflow-hidden p-8 text-center motion-safe:animate-[letter-in_700ms_var(--ease-book)]">
             <TalcBurst />
-            <p className="font-display text-[1.6rem] font-bold">Mensaje enviado</p>
+            <p className="font-display text-[1.6rem] font-bold">{t.sent}</p>
             <p className="text-ink-soft mt-2">{state.message}</p>
           </div>
         ) : (
@@ -139,21 +146,21 @@ export function ContactForm({ email }: Props) {
             <div className="grid gap-5 sm:grid-cols-2">
               <div>
                 <label htmlFor="contacto-name" className="text-[0.92rem] font-medium">
-                  Nombre
+                  {t.name}
                 </label>
-                <input {...bind("name")} type="text" autoComplete="name" placeholder="Tu nombre" className={input} />
+                <input {...bind("name")} type="text" autoComplete="name" placeholder={t.namePlaceholder} className={input} />
                 <FieldError field="name" error={errorFor("name")} />
               </div>
               <div>
                 <label htmlFor="contacto-email" className="text-[0.92rem] font-medium">
-                  Correo
+                  {t.email}
                 </label>
                 <input
                   {...bind("email")}
                   type="email"
                   autoComplete="email"
                   inputMode="email"
-                  placeholder="nombre@dominio.com"
+                  placeholder={t.emailPlaceholder}
                   className={input}
                 />
                 <FieldError field="email" error={errorFor("email")} />
@@ -161,18 +168,18 @@ export function ContactForm({ email }: Props) {
             </div>
             <div>
               <label htmlFor="contacto-reason" className="text-[0.92rem] font-medium">
-                Motivo
+                {t.reason}
               </label>
               <select
                 {...bind("reason")}
                 className={`${input} bg-[url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='1.6'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")] appearance-none bg-[length:1.1rem] bg-[right_0.9rem_center] bg-no-repeat pr-10`}
               >
                 <option value="" disabled>
-                  Elige un motivo
+                  {t.reasonPlaceholder}
                 </option>
                 {REASONS.map((r) => (
                   <option key={r.value} value={r.value}>
-                    {r.label}
+                    {r.label[locale]}
                   </option>
                 ))}
               </select>
@@ -180,9 +187,9 @@ export function ContactForm({ email }: Props) {
             </div>
             <div>
               <label htmlFor="contacto-message" className="text-[0.92rem] font-medium">
-                Mensaje
+                {t.message}
               </label>
-              <textarea {...bind("message")} rows={6} placeholder="Cuéntame qué tienes en mente." className={`${input} resize-y`} />
+              <textarea {...bind("message")} rows={6} placeholder={t.messagePlaceholder} className={`${input} resize-y`} />
               <div className="flex justify-between gap-4">
                 <FieldError field="message" error={errorFor("message")} />
                 <span className="text-ink-soft mt-1.5 ml-auto shrink-0 font-mono text-[0.75rem] tabular-nums">
@@ -193,17 +200,18 @@ export function ContactForm({ email }: Props) {
 
             {/* Honeypot (hidden from people and assistive tech) and time trap */}
             <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
-              <label htmlFor="contacto-website">No llenes este campo</label>
+              <label htmlFor="contacto-website">{t.honeypot}</label>
               <input id="contacto-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
             </div>
             <input type="hidden" name="startedAt" value={startedAt || ""} />
+            <input type="hidden" name="locale" value={locale} />
 
             <div className="flex flex-wrap items-center gap-4">
               <button type="submit" disabled={pending} className={buttonClass("primary", "min-w-44")}>
                 <IconMail />
-                {pending ? "Enviando…" : "Enviar mensaje"}
+                {pending ? t.sending : t.send}
               </button>
-              <p className="text-ink-soft text-[0.85rem]">Todos los campos son obligatorios.</p>
+              <p className="text-ink-soft text-[0.85rem]">{t.required}</p>
             </div>
           </form>
         )}
