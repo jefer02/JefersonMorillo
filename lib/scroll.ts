@@ -13,7 +13,8 @@ const HEADER_OFFSET = -72;
 
 /** Scrolls to a chapter by id, through Lenis when active, natively otherwise. */
 export function scrollToId(id: string, opts: { immediate?: boolean } = {}) {
-  const el = id === "top" ? null : document.getElementById(id);
+  // "inicio" is the hero at the top of the page: go to the very top, under the header.
+  const el = id === "top" || id === "inicio" ? null : document.getElementById(id);
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (lenis) {
     // Dimensions may be stale (e.g. Lenis started while a dialog locked scrolling).
