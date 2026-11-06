@@ -107,10 +107,10 @@ export default function Navbar({ locale }: { locale: Locale }) {
               onClick={() => setOpen(true)}
               aria-haspopup="dialog"
               aria-expanded={open}
-              className="hover:text-vermilion inline-flex min-h-11 items-center gap-2 rounded-[3px] px-2 text-[0.9rem] font-medium sm:px-3 lg:hidden"
+              aria-label={t.nav.openMenu}
+              className="hover:text-vermilion inline-flex size-11 items-center justify-center rounded-[3px] lg:hidden"
             >
               <IconMenu />
-              <span>{t.nav.menu}</span>
             </button>
           </div>
         </nav>
