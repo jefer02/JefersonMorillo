@@ -35,6 +35,8 @@ for (const theme of themes) {
       reducedMotion: reduced ? "reduce" : "no-preference",
       deviceScaleFactor: 1,
     });
+    // The site ignores the system scheme (next-themes, enableSystem off): seed the saved theme.
+    await ctx.addInitScript((t) => localStorage.setItem("theme", t), theme);
     const page = await ctx.newPage();
     page.on("pageerror", (e) => console.error(`[${theme} ${s.name}] pageerror:`, e.message));
     page.on("console", (m) => m.type() === "error" && console.error(`[${theme} ${s.name}] console:`, m.text()));
