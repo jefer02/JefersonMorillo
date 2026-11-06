@@ -7,7 +7,7 @@ test("home renders the required sections in the guide's order", async ({ page })
   await expect(page.getByRole("link", { name: /Descargar CV/ })).toHaveAttribute("download", "");
   await expect(page.getByText(/Actualmente estudiando · Ingeniería de Software/)).toBeVisible();
   const ids = await page.locator("main > section[id]").evaluateAll((els) => els.map((e) => e.id));
-  const order = ["inicio", "presentacion", "acerca-de-mi", "habilidades", "proyectos", "experiencia", "extras", "contacto"];
+  const order = ["inicio", "presentacion", "acerca-de-mi", "habilidades", "proyectos", "testimonios", "experiencia", "extras", "contacto"];
   expect(ids.filter((id) => order.includes(id))).toEqual(order);
   await expect(page.locator("footer")).toContainText(/© \d{4} Jeferson Morillo/);
   await expect(page.getByRole("link", { name: "jefersonmorillo5858@gmail.com" })).toBeVisible();
@@ -150,4 +150,83 @@ test("bookshelf opens and closes a book", async ({ page }) => {
   await page.keyboard.press("Escape");
   await expect(spine).toHaveAttribute("aria-expanded", "false");
   await expect(spine).toBeFocused({ timeout: 4000 });
+});
+
+test("project gallery swaps the main image in place and opens a lightbox", async ({ page, context, isMobile }) => {
+  const opened: string[] = [];
+  context.on("page", (p) => opened.push(p.url()));
+  await page.goto("/es/proyectos/voxara", { waitUntil: "networkidle" });
+
+  const thumbs = page.getByRole("list", { name: "Galería" }).getByRole("button");
+  await expect(thumbs).toHaveCount(5);
+  await expect(thumbs.first()).toHaveAttribute("aria-current", "true");
+  await thumbs.nth(2).click();
+  await expect(thumbs.nth(2)).toHaveAttribute("aria-current", "true");
+  await expect(thumbs.first()).not.toHaveAttribute("aria-current", "true");
+  await expect(page.getByRole("img", { name: /Tono en el reloj/ })).toBeVisible();
+
+  const enlarge = page.getByRole("button", { name: /^Ampliar imagen: Tono/ });
+  await enlarge.click();
+  const dialog = page.getByRole("dialog", { name: "Voxara: Galería" });
+  await expect(dialog).toBeVisible();
+  await expect(dialog.getByText("3 de 5")).toBeVisible();
+  expect(await page.evaluate(() => getComputedStyle(document.documentElement).overflow)).toBe("hidden");
+
+  await page.keyboard.press("ArrowRight");
+  await expect(dialog.getByText("4 de 5")).toBeVisible();
+  await dialog.getByRole("button", { name: "Imagen anterior" }).click();
+  await expect(dialog.getByText("3 de 5")).toBeVisible();
+
+  if (!isMobile) {
+    // Swipe left (pointer drag) goes to the next image.
+    const box = (await dialog.getByRole("img").boundingBox())!;
+    await page.mouse.move(box.x + box.width * 0.75, box.y + box.height / 2);
+    await page.mouse.down();
+    await page.mouse.move(box.x + box.width * 0.25, box.y + box.height / 2, { steps: 5 });
+    await page.mouse.up();
+    await expect(dialog.getByText("4 de 5")).toBeVisible();
+  }
+
+  await page.keyboard.press("Escape");
+  await expect(dialog).toBeHidden();
+  await expect(page.getByRole("button", { name: /^Ampliar imagen/ })).toBeFocused();
+
+  // A click on the dark area around the image closes it too.
+  await page.getByRole("button", { name: /^Ampliar imagen/ }).click();
+  await expect(dialog).toBeVisible();
+  await page.mouse.click(30, 200);
+  await expect(dialog).toBeHidden();
+  expect(opened).toEqual([]);
+});
+
+test("project gallery falls back to plain links without JavaScript", async ({ browser }) => {
+  const ctx = await browser.newContext({ javaScriptEnabled: false });
+  const page = await ctx.newPage();
+  await page.goto("/es/proyectos/sotto");
+  const links = page.getByRole("list", { name: "Galería" }).getByRole("link");
+  await expect(links).toHaveCount(4);
+  await expect(links.first()).toHaveAttribute("href", "/projects/sotto/inicio.webp");
+  await ctx.close();
+});
+
+test("testimonials render in Spanish on both sites and link to the full review", async ({ page }) => {
+  await page.goto("/es#testimonios");
+  const letters = page.locator("#testimonios li");
+  await expect(letters).toHaveCount(3);
+  await expect(page.locator("#testimonios")).not.toContainText(/TODO|PLACEHOLDER/);
+  await expect(letters.nth(0)).toContainText("Juan Manuel Guerrero Ibarra");
+  await expect(page.getByRole("link", { name: "Ver el proyecto Elyndra" })).toHaveAttribute("href", "/es/proyectos/elyndra");
+
+  await page.getByRole("link", { name: "Leer reseña completa" }).click();
+  await expect(page).toHaveURL(/\/es\/proyectos\/voxara#resena$/);
+  const review = page.locator("#resena");
+  await expect(review.getByRole("heading", { name: "Reseña de un usuario" })).toBeVisible();
+  await expect(review).toContainText("«Mucho ruido alrededor»");
+
+  await page.goto("/en#testimonios");
+  await expect(page.locator("#testimonios li")).toHaveCount(3);
+  await expect(page.locator("#testimonios blockquote[lang='es']")).toHaveCount(3);
+  await expect(page.getByText("Original testimonial in Spanish")).toHaveCount(3);
+  await expect(page.getByText("Friend · UCC graduate · We've worked together on projects")).toBeVisible();
+  await expect(page.getByRole("link", { name: "Read full review" })).toHaveAttribute("href", "/en/proyectos/voxara#resena");
 });
