@@ -12,7 +12,7 @@ Estado al 28 de octubre de 2026. ✅ cumplido · ⚠️ cumplido en código, fal
 | 2. Bienvenida / Hero con CV (botón «Descargar CV») | ✅ | `components/Hero.tsx`: botón con `download` hacia `public/cv/CV-Jeferson-Morillo.pdf` (PDF real, generado del contenido) |
 | 3. Acerca de mí (párrafo de presentación personal) | ⚠️ | `components/AcercaDeMi.tsx`: párrafo redactado con tus datos, pendiente de tu aprobación |
 | 4. Mis proyectos (link a GitHub + link a Vercel / demo) | ⚠️ | `components/Proyectos.tsx`: 6 proyectos, todos con «Repositorio en GitHub» y «Ver demo». Faltan las demos de Voxara, LAAF y la URL de Vercel del portafolio (se ven como «próximamente»). Casos de estudio en `/proyectos/[slug]` |
-| 5. Testimonios (mínimo 3) | ❌ | `components/Testimonios.tsx` listo y con validación; faltan 3 testimonios reales verificados (`docs/pedir-testimonios.md`). Sin ellos la sección no se publica |
+| 5. Testimonios (mínimo 3) | ✅ | 3 testimonios reales con consentimiento (`content/testimonials.ts`); la reseña de Voxara está en `/proyectos/voxara#resena` |
 | 6. Experiencia académica 🎓 y laboral 💼 | ⚠️ | `components/Experiencia.tsx`: académica (UCC + 2 cursos Cisco) y proyectos. Falta tu experiencia laboral, o tu confirmación de que no tienes |
 | 7. Contactos (correo electrónico) | ✅ | `components/Contacto.tsx`: correo visible con `mailto` y botón para copiarlo, GitHub, LinkedIn y formulario validado con expresiones regulares |
 | 8. Pie de página (tu nombre y © año) | ✅ | `components/Footer.tsx`: «© 2026 Jeferson Morillo» (año del build), datos del sitio, enlaces rápidos, redes, volver arriba, «Hecho con Next.js + Tailwind CSS» |
@@ -29,7 +29,7 @@ Estado al 28 de octubre de 2026. ✅ cumplido · ⚠️ cumplido en código, fal
 | R18 · Hero: rol/perfil y botón secundario (Ver proyectos o Contacto) | ✅ | «Desarrollador de software», «Ver proyectos» y «Contactar» |
 | R19 · Acerca de mí: foto, datos rápidos (ubicación, semestre, intereses) | ⚠️ | Ficha con ubicación, estudios e intereses; falta el semestre |
 | R20 · Proyectos: tarjeta con imagen, etiquetas de tecnologías, enlaces en otra pestaña, grid 1 / 2–3 columnas | ✅ | Portadas generadas (sin capturas aún), etiquetas, `target="_blank"`, grid 1 / 2 / 3 |
-| R21 · Testimonios: nombre, cargo o relación, foto opcional | ✅ | Modelo `Testimonial` con `role`, `relationship`, `avatar` opcional |
+| R21 · Testimonios: nombre, cargo o relación, foto opcional | ✅ | Modelo `Testimonial` con `relationship` (ES/EN) e iniciales en lugar de foto |
 | R22 · Experiencia: fechas, institución, logros, de lo más reciente a lo más antiguo | ✅ | Ordenado en código (`lib/experience.ts`) |
 | R23 · Contacto: formulario con validación y mensaje de confirmación | ✅ | Validación con regex en cliente y servidor, mensaje «Mensaje enviado» |
 | R24 · Pie de página: redes, enlaces rápidos, volver arriba, créditos | ✅ | |
@@ -43,9 +43,9 @@ Estado al 28 de octubre de 2026. ✅ cumplido · ⚠️ cumplido en código, fal
 | R3 «Descargar CV» con PDF real | ✅ | Generado con `npm run cv` |
 | R4 Acerca de mí: vida fuera de la ingeniería | ⚠️ | Párrafo, tarjetas de intereses y estante redactados con tus datos; pendientes de tu revisión final |
 | R5 Habilidades sin barras, frameworks y no lenguajes | ✅ | Validado en `content/schema.ts` |
-| R6 Orgullo de origen | ✅ | Presentación («Nací en El Contadero, Nariño, y hoy vivo en Pasto»), etiqueta del inicio, temas Día de Blancos / Día de Negros y colores del barniz de Pasto |
+| R6 Orgullo de origen | ✅ | Presentación («Nací en El Contadero, Nariño, y hoy vivo en Pasto»), etiqueta del inicio y colores del barniz de Pasto |
 | R7 Etiqueta «Actualmente estudiando» | ✅ | Inicio, experiencia (UCC) y pie de página |
-| R8 Testimonios reales, mínimo 3 | ❌ | Pendientes |
+| R8 Testimonios reales, mínimo 3 | ✅ | 3 publicados con su nombre y permiso |
 | R9 Experiencia de lo más reciente a lo más antiguo | ✅ | |
 | R10 Formulario validado con expresiones regulares | ✅ | `lib/validation/patterns.ts`, 46 pruebas en Vitest |
 | R11 Redes solo técnicas, sin WhatsApp | ✅ | GitHub y LinkedIn |
@@ -57,7 +57,6 @@ Estado al 28 de octubre de 2026. ✅ cumplido · ⚠️ cumplido en código, fal
 
 ## Para poder entregar
 
-1. Conseguir 3 testimonios reales (`docs/pedir-testimonios.md`).
-2. Revisar el texto final de Presentación y Acerca de mí.
-3. Confirmar tu experiencia laboral (o «ninguna por ahora»).
-4. Hacer commit, push e importar en Vercel; luego poner la URL en la demo del portafolio (`content/projects.ts`).
+1. Revisar el texto final de Presentación y Acerca de mí.
+2. Confirmar tu experiencia laboral (o «ninguna por ahora»).
+3. Hacer commit, push e importar en Vercel; luego poner la URL en la demo del portafolio (`content/projects.ts`).
