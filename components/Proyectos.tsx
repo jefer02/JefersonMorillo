@@ -4,12 +4,12 @@ import { getContent } from "@/content";
 import { ChapterOpener } from "@/components/fx/ChapterOpener";
 import { ProjectLinks } from "@/components/fx/ProjectLinks";
 import { Reveal } from "@/components/fx/Reveal";
-import { VolumeCover } from "@/components/fx/VolumeCover";
+import { ProjectStage } from "@/components/fx/ProjectStage";
 import { Text } from "@/components/ui/Todo";
 import { href, type Locale } from "@/lib/i18n/config";
 import { messages } from "@/lib/i18n/messages";
 
-/** Each project as a book cover, with its GitHub repository and demo. */
+/** Each project with a real screenshot in its device frame, its GitHub repository and demo. */
 export default function Proyectos({ locale }: { locale: Locale }) {
   const { chapterById, orderedProjects, skills } = getContent(locale);
   const t = messages[locale].projects;
@@ -25,7 +25,7 @@ export default function Proyectos({ locale }: { locale: Locale }) {
             <li
               key={project.slug}
               id={`proyecto-${project.slug}`}
-              className="reveal-item flex flex-col"
+              className="reveal-item flex min-w-0 flex-col"
               style={{ ["--i" as string]: i % 3 }}
             >
               <Link
@@ -36,14 +36,24 @@ export default function Proyectos({ locale }: { locale: Locale }) {
               >
                 <ViewTransition name={`cover-${project.slug}`} share="morph" default="none">
                   <div className="transition-transform duration-200 ease-out group-hover:-translate-y-1.5">
-                    <VolumeCover project={project} locale={locale} />
+                    <ProjectStage project={project} />
                   </div>
                 </ViewTransition>
               </Link>
-              {/* The shelf the volume stands on */}
-              <span aria-hidden="true" className="bg-ink block h-[3px] w-full" />
+              <div className="border-ink flex items-center justify-between gap-3 border-t-[3px] pt-3">
+                <p className="text-ink-soft flex min-w-0 items-baseline gap-2 font-mono text-[0.7rem] tracking-[0.1em] uppercase">
+                  <span className="font-display text-ink text-[1.05rem] font-extrabold tracking-normal">
+                    <span className="sr-only">{t.coverLabel} </span>
+                    {String(project.volume).padStart(2, "0")}
+                  </span>
+                  <span className="truncate">{project.platforms.join(" · ")}</span>
+                </p>
+                <p className="border-rule shrink-0 rounded-full border px-2.5 py-0.5 text-[0.78rem] font-medium">
+                  {t.status[project.status]}
+                </p>
+              </div>
 
-              <h3 className="font-display mt-6 text-[1.5rem] leading-tight font-bold">
+              <h3 className="font-display mt-4 text-[1.5rem] leading-tight font-bold">
                 <Link href={href(locale, `/proyectos/${project.slug}`)} className="hover:text-vermilion">
                   {project.title}
                 </Link>
