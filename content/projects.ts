@@ -1,5 +1,16 @@
 import { todo } from "@/lib/todo";
-import type { Project } from "@/types";
+import type { ImageAsset, Project } from "@/types";
+
+/** A screenshot in public/projects/<slug>/, processed from the README images or captured live. */
+const shot = (slug: string, file: string, width: number, height: number, alt: string, extra?: Partial<ImageAsset>): ImageAsset => ({
+  src: `/projects/${slug}/${file}.webp`,
+  width,
+  height,
+  alt,
+  ...extra,
+});
+const round = { round: true };
+const phone = { frame: "phone" } as const;
 
 // Facts verified against the public repositories (READMEs, releases, commit history).
 // Dates come from GitHub; Jeferson should confirm them before publishing.
@@ -32,6 +43,9 @@ export const projects: Project[] = [
     repo: { label: "Repositorio en GitHub", href: "https://github.com/jefer02/JefersonMorillo" },
     demo: { label: "Demo en vivo en Vercel", todo: todo("URL de Vercel cuando despliegues (jeferson-morillo.vercel.app)") },
     period: { start: "2026-10" },
+    frame: "browser",
+    cover: shot("jeferson-morillo", "inicio-oscuro", 1440, 900, "Inicio de este portafolio en tema oscuro, con mi foto en el centro del círculo mágico"),
+    gallery: [shot("jeferson-morillo", "inicio-claro", 1440, 900, "Inicio de este portafolio en tema claro")],
   },
   {
     slug: "voxara",
@@ -62,6 +76,14 @@ export const projects: Project[] = [
     repo: { label: "Repositorio en GitHub", href: "https://github.com/jefer02/Voxara" },
     demo: { label: "Video de la app en el reloj", todo: todo("enlace a un video de Voxara funcionando en el reloj") },
     period: { start: "2026-09" },
+    frame: "watch",
+    cover: shot("voxara", "reloj-ahora", 480, 480, "Voxara en el reloj: 70 dBA, nivel moderado y 0 % del límite de hoy", round),
+    gallery: [
+      shot("voxara", "reloj-dosis-semana", 480, 480, "Voxara en el reloj: 13 % del límite de la semana, todo en orden", round),
+      shot("voxara", "reloj-tono", 480, 480, "Tono en el reloj explica que el sonido de la calle está a nivel de conversación", round),
+      shot("voxara", "telefono-inicio", 540, 1200, "App del teléfono: 83 % del límite de hoy, con aviso de ruido alto", phone),
+      shot("voxara", "telefono-tendencias", 540, 1200, "Tendencias en el teléfono: 90 % del límite semanal y la dosis de cada día", phone),
+    ],
   },
   {
     slug: "sotto",
@@ -91,6 +113,13 @@ export const projects: Project[] = [
     repo: { label: "Repositorio en GitHub", href: "https://github.com/jefer02/Sotto" },
     demo: { label: "Descarga de la v1.0.0 en GitHub Releases", href: "https://github.com/jefer02/Sotto/releases/tag/v1.0.0" },
     period: { start: "2026-09" },
+    frame: "window",
+    cover: shot("sotto", "inicio", 1600, 900, "Pantalla de inicio de Sotto en tema oscuro, con las presentaciones recientes"),
+    gallery: [
+      shot("sotto", "teleprompter", 720, 300, "Ventana flotante del teleprompter con la línea actual del guion y el tiempo de la presentación"),
+      shot("sotto", "editor", 1600, 900, "Editor de guiones de Sotto, con las secciones de la presentación a la izquierda"),
+      shot("sotto", "preguntas", 1600, 900, "Preparación de preguntas del público, con los documentos de apoyo"),
+    ],
   },
   {
     slug: "elyndra",
@@ -99,7 +128,7 @@ export const projects: Project[] = [
     tagline: "Launcher de juegos para Android con experiencia de consola, pensado para control.",
     platforms: ["Android"],
     status: "publicado",
-    statusNote: "v1.1.0 publicada",
+    statusNote: "v1.2.0 publicada",
     accent: "gold",
     synopsis:
       "Elyndra reúne tus juegos de Android y tus ROMs de emuladores en una sola biblioteca que se maneja entera con un control. No emula nada: le entrega cada juego al emulador que elegiste. Masha, una asistente 3D holográfica, te recomienda qué jugar y con qué emulador.",
@@ -119,8 +148,15 @@ export const projects: Project[] = [
     skills: ["compose", "material3", "mlkit", "deepseek", "android-studio"],
     repo: { label: "Repositorio en GitHub", href: "https://github.com/jefer02/Elyndra" },
     demo: { label: "Sitio web oficial de Elyndra", href: "https://elyndra-website.jefer02.workers.dev/" },
-    extraLinks: [{ label: "Descargar v1.1.0", href: "https://github.com/jefer02/Elyndra/releases/tag/v1.1.0" }],
+    extraLinks: [{ label: "Descargar v1.2.0", href: "https://github.com/jefer02/Elyndra/releases/tag/v1.2.0" }],
     period: { start: "2026-09", end: "2026-10" },
+    frame: "handheld",
+    cover: shot("elyndra", "masha", 1600, 956, "Masha, la asistente holográfica 3D de Elyndra, con el tiempo de juego y sugerencias para el chat"),
+    gallery: [
+      shot("elyndra", "agregar-carpeta", 1600, 956, "Agregar a la biblioteca: tres pasos para sumar una carpeta de ROMs (carpeta, sistema y emulador)"),
+      shot("elyndra", "ajustes-pantalla", 1600, 964, "Ajustes de pantalla y tema: modo oscuro, intro al iniciar, color de la intro y frecuencia de cuadros"),
+      shot("elyndra", "ajustes-apariencia", 1600, 956, "Ajustes de apariencia: diseño Meridian o Clásico y color de fondo adaptable"),
+    ],
   },
   {
     slug: "laaf",
@@ -152,6 +188,13 @@ export const projects: Project[] = [
     repo: { label: "Repositorio en GitHub", href: "https://github.com/Juan17la/laaf_game" },
     demo: { label: "Video o build del juego", todo: todo("enlace a un video o build de LAAF") },
     period: { start: "2026-10" },
+    frame: "screen",
+    cover: shot("laaf", "jefe", 1599, 899, "Alex frente a The Harvester en la cantera, bajo una neblina roja, con la barra de vida del jefe"),
+    gallery: [
+      shot("laaf", "sigilo", 1599, 899, "Alex en una calle con niebla, de noche, junto a un desconocido mientras aparece una alerta"),
+      shot("laaf", "rueda", 1599, 899, "Rueda de selección con armas y objetos alrededor del revólver"),
+      shot("laaf", "menu", 1599, 899, "Menú principal con la elección de dificultad para un caso nuevo"),
+    ],
   },
   {
     slug: "alomedia",
@@ -184,6 +227,9 @@ export const projects: Project[] = [
     demo: { label: "Demo en vivo en Vercel", href: "https://alo-media.vercel.app" },
     extraLinks: [{ label: "Backend (Spring Boot)", href: "https://github.com/Juan17la/AloMediaSpringBoot" }],
     period: { start: "2026-03", end: "2026-05" },
+    frame: "browser",
+    cover: shot("alomedia", "editor", 1440, 900, "Editor de AloMedia en el navegador: medios, vista previa y línea de tiempo con pistas de video y audio"),
+    gallery: [shot("alomedia", "inicio", 1440, 900, "Página de inicio de AloMedia en tema oscuro")],
   },
 ];
 
