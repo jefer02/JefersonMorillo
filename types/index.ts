@@ -20,7 +20,14 @@ export type ImageAsset = {
   width: number;
   height: number;
   alt: string;
+  /** Round watch screenshots are clipped to a circle. */
+  round?: boolean;
+  /** Overrides the project's frame for this image, e.g. a phone shot in a watch project. */
+  frame?: ProjectFrame;
 };
+
+/** The device drawn around a project's screenshots. */
+export type ProjectFrame = "watch" | "phone" | "window" | "browser" | "handheld" | "screen";
 
 export type Accent = "vermilion" | "jade" | "gold" | "turquoise" | "ember" | "wood";
 
@@ -56,7 +63,10 @@ export type Project = {
     role: Text;
   };
   period: { start: string; end?: string };
+  /** Main screenshot, shown on the card and at the top of the case study. */
   cover?: ImageAsset;
+  frame?: ProjectFrame;
+  /** More screenshots, shown under the cover on the case study. */
   gallery?: ImageAsset[];
 };
 
@@ -100,11 +110,16 @@ export type ExperienceEntry = {
 export type Testimonial = {
   id: string;
   name: string;
-  role: string;
+  /** Shown in the round avatar instead of a photo. */
+  initials: string;
+  /** How the person knows Jeferson (Spanish; English in content/en.ts). */
   relationship: string;
-  organization?: string;
+  /** Card quote, word for word. */
   quote: string;
-  avatar?: string;
+  /** Longer review shown on the project page, word for word. */
+  review?: string;
+  /** The project the testimonial talks about. */
+  projectSlug?: string;
   link?: string;
   consent: boolean;
   verified: boolean;
