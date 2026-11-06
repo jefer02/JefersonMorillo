@@ -7,6 +7,8 @@ const isoDate = z.string().regex(/^\d{4}(-\d{2}(-\d{2})?)?$/, "Fecha ISO YYYY, Y
 const dateOrTodo = z.union([isoDate, todoString]);
 const url = z.url({ protocol: /^https?$/ });
 
+const words = (s: string) => s.trim().split(/\s+/).length;
+
 const link = z.object({ label: z.string().min(1), href: url });
 const maybeLink = z.union([link, z.object({ label: z.string().min(1), todo: todoString })]);
 
@@ -15,6 +17,8 @@ const image = z.object({
   width: z.number().int().positive(),
   height: z.number().int().positive(),
   alt: z.string().min(4),
+  round: z.boolean().optional(),
+  frame: z.enum(["watch", "phone", "window", "browser", "handheld", "screen"]).optional(),
 });
 
 export const projectSchema = z.object({
@@ -39,6 +43,7 @@ export const projectSchema = z.object({
   team: z.object({ credit: z.string(), role: z.string() }).optional(),
   period: z.object({ start: isoDate, end: isoDate.optional() }),
   cover: image.optional(),
+  frame: z.enum(["watch", "phone", "window", "browser", "handheld", "screen"]).optional(),
   gallery: z.array(image).optional(),
 });
 
@@ -74,16 +79,17 @@ export const testimonialSchema = z
   .object({
     id: z.string(),
     name: z.string().min(3),
-    role: z.string().min(3),
+    initials: z.string().regex(/^\p{Lu}{2}$/u, "Dos iniciales en mayúscula"),
     relationship: z.string().min(3),
-    organization: z.string().optional(),
     quote: z.string(),
-    avatar: z.string().optional(),
+    review: z.string().optional(),
+    projectSlug: z.string().optional(),
     link: url.optional(),
     consent: z.boolean(),
     verified: z.boolean(),
   })
   .refine(
-    (t) => !(t.consent && t.verified) || t.quote.trim().split(/\s+/).length <= 90,
-    "Un testimonio publicado debe ser breve (25–70 palabras recomendadas)",
-  );
+    (t) => !(t.consent && t.verified) || words(t.quote) <= 90,
+    "La cita de la tarjeta debe ser breve (25–70 palabras recomendadas); el texto largo va en `review`",
+  )
+  .refine((t) => !t.review || words(t.review) <= 220, "La reseña completa debe tener como máximo 220 palabras");
