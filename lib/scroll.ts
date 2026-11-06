@@ -11,6 +11,13 @@ export function setLenis(instance: Lenis | null) {
 
 const HEADER_OFFSET = -72;
 
+/** Locks page scrolling (native and Lenis) while a modal such as the lightbox is open. */
+export function setScrollLocked(locked: boolean) {
+  document.documentElement.style.overflow = locked ? "hidden" : "";
+  if (locked) lenis?.stop();
+  else lenis?.start();
+}
+
 /** Scrolls to a chapter by id, through Lenis when active, natively otherwise. */
 export function scrollToId(id: string, opts: { immediate?: boolean } = {}) {
   // "inicio" is the hero at the top of the page: go to the very top, under the header.
