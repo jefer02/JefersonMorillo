@@ -1,6 +1,6 @@
 import type { Locale } from "@/lib/i18n/config";
 import { messages } from "@/lib/i18n/messages";
-import type { ExperienceEntry, Project, Skill } from "@/types";
+import type { ExperienceEntry, ImageAsset, Project, Skill, Testimonial } from "@/types";
 import * as about from "./about";
 import { getChapters } from "./chapters";
 import * as en from "./en";
@@ -10,6 +10,7 @@ import { intro as introEs } from "./intro";
 import { profile as profileEs } from "./profile";
 import { projects as projectsEs } from "./projects";
 import { schools as schoolsEs, skills as skillsEs } from "./skills";
+import { publishableTestimonials } from "./testimonials";
 
 /** Strongest projects first; this portfolio (number 0) closes the list. */
 const order = (list: Project[]) => [...list].sort((a, b) => (a.volume === 0 ? 1 : b.volume === 0 ? -1 : a.volume - b.volume));
@@ -17,6 +18,7 @@ const order = (list: Project[]) => [...list].sort((a, b) => (a.volume === 0 ? 1 
 function localizeProject(p: Project): Project {
   const t = en.projects[p.slug];
   if (!t) return p;
+  const alt = (i: number, img: ImageAsset): ImageAsset => ({ ...img, alt: t.imageAlts?.[i] ?? img.alt });
   return {
     ...p,
     title: p.titleEn ?? p.title,
@@ -32,6 +34,8 @@ function localizeProject(p: Project): Project {
     demo: { ...p.demo, label: t.demoLabel },
     extraLinks: p.extraLinks?.map((l, i) => ({ ...l, label: t.extraLinkLabels?.[i] ?? l.label })),
     team: p.team && { credit: t.team?.credit ?? p.team.credit, role: t.team?.role ?? p.team.role },
+    cover: p.cover && alt(0, p.cover),
+    gallery: p.gallery?.map((img, i) => alt(i + 1, img)),
   };
 }
 
@@ -92,6 +96,10 @@ function build(locale: Locale) {
     orderedProjects: order(projects),
     projectBySlug: Object.fromEntries(projects.map((p) => [p.slug, p])) as Record<string, Project>,
     experience: isEn ? experienceEs.map(localizeEntry) : experienceEs,
+    /** Published testimonials; only the relationship line is translated, never the quote. */
+    testimonials: isEn
+      ? publishableTestimonials.map((t): Testimonial => ({ ...t, relationship: en.testimonials[t.id]?.relationship ?? t.relationship }))
+      : publishableTestimonials,
     ...getChapters(locale),
   };
 }
