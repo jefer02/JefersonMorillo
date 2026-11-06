@@ -24,12 +24,3 @@ export function Text({ value, fallback = null, className }: Props) {
     </span>
   );
 }
-
-/** Large rubber stamp for placeholder blocks (e.g. testimonials) in development. */
-export function PlaceholderStamp({ children = "PLACEHOLDER — NO PUBLICAR" }: { children?: ReactNode }) {
-  return (
-    <span className="border-vermilion text-vermilion pointer-events-none inline-block -rotate-3 rounded-sm border-2 px-2 py-1 font-mono text-[0.7rem] font-bold tracking-widest uppercase">
-      {children}
-    </span>
-  );
-}
