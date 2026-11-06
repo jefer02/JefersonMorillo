@@ -32,5 +32,5 @@ Full brief: `docs/brief.md` (single source of truth, with the course guide `docs
 ## Quality bar
 
 - Content visible in server HTML; every animation has a static equivalent under `prefers-reduced-motion`; readable without JS.
-- WCAG AA contrast in both themes ("Día de Blancos" / "Día de Negros"), keyboard paths, touch targets ≥ 44 px.
+- WCAG AA contrast in both themes (light and dark; dark is the default), keyboard paths, touch targets ≥ 44 px. The theme button is a plain icon labelled "Cambiar a tema claro / oscuro", with no tooltip.
 - Verify responsive at 375 / 768 / 1440 px with `node scripts/screenshots.mjs`.
