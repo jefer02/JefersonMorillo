@@ -45,6 +45,9 @@ for (const s of skills) {
 for (const p of projects) {
   for (const id of p.skills) if (!skillIds.has(id)) errors.push(`projects[${p.slug}] habilidad desconocida: ${id}`);
 }
+for (const t of testimonials) {
+  if (t.projectSlug && !slugs.has(t.projectSlug)) errors.push(`testimonials[${t.id}] proyecto desconocido: ${t.projectSlug}`);
+}
 for (const e of experience) {
   if (e.projectSlug && !slugs.has(e.projectSlug)) errors.push(`experience[${e.id}] proyecto desconocido: ${e.projectSlug}`);
 }
@@ -68,15 +71,23 @@ for (const locale of locales) {
   }
 }
 
+// Every project screenshot must exist in public/.
+for (const p of projects)
+  for (const img of [p.cover, ...(p.gallery ?? [])])
+    if (img && !existsSync(join(process.cwd(), "public", img.src))) errors.push(`${p.slug}: falta la imagen public${img.src}`);
+
 // English translations: every item of the Spanish content needs its English text.
 for (const p of projects) {
   const t = en.projects[p.slug];
   if (!t) errors.push(`en.projects: falta la traducción de ${p.slug}`);
   else if ((p.extraLinks?.length ?? 0) !== (t.extraLinkLabels?.length ?? 0))
     errors.push(`en.projects[${p.slug}]: extraLinkLabels no coincide con extraLinks`);
+  else if ((p.cover ? 1 : 0) + (p.gallery?.length ?? 0) !== (t.imageAlts?.length ?? 0))
+    errors.push(`en.projects[${p.slug}]: imageAlts no coincide con la portada y la galería`);
 }
 for (const s of skills) if (!en.skills[s.id]) errors.push(`en.skills: falta la traducción de ${s.id}`);
 for (const s of schools) if (!en.schools[s.id]) errors.push(`en.schools: falta la traducción de ${s.id}`);
+for (const t of testimonials) if (!en.testimonials[t.id]) errors.push(`en.testimonials: falta la relación en inglés de ${t.id}`);
 for (const e of experience) if (!en.experience[e.id]) errors.push(`en.experience: falta la traducción de ${e.id}`);
 for (const b of about.shelf) if (!en.shelf[b.title]) errors.push(`en.shelf: falta la traducción de ${b.title}`);
 for (const p of extras.passions) if (!en.passions[p.id]) errors.push(`en.passions: falta la traducción de ${p.id}`);
@@ -90,7 +101,7 @@ function collectTodos(value: unknown, path: string, out: string[]) {
   else if (value && typeof value === "object") for (const [k, v] of Object.entries(value)) collectTodos(v, `${path}.${k}`, out);
 }
 const todos: string[] = [];
-collectTodos({ profile, projects, skills, experience, about, extras }, "content", todos);
+collectTodos({ profile, projects, skills, experience, testimonials, about, extras }, "content", todos);
 
 if (todos.length) {
   console.warn(`\n📝 ${todos.length} TODO(jeferson) pendientes en content/:`);
