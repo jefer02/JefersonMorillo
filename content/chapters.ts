@@ -16,8 +16,8 @@ const allChapters: { id: string; name: Record<Locale, string> }[] = [
   { id: "contacto", name: { es: "Contacto", en: "Contact" } },
 ];
 
-// Testimonials stay out of the menu in production until 3 real ones are verified.
-const published = allChapters.filter((c) => c.id !== "testimonios" || testimonialsReady || process.env.NODE_ENV !== "production");
+// Testimonials stay out of the menu until 3 real ones are verified.
+const published = allChapters.filter((c) => c.id !== "testimonios" || testimonialsReady);
 
 /**
  * Section names in one language. The menu, the side rail, the search and the footer use
