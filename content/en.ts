@@ -155,6 +155,8 @@ export type ProjectText = Pick<Project, "tagline" | "synopsis" | "problem" | "bu
     demoLabel: string;
     extraLinkLabels?: string[];
     team?: { credit: string; role?: string };
+    /** Alt texts for the cover, then each gallery image, in order. */
+    imageAlts?: string[];
   };
 
 export const projects: Record<string, ProjectText> = {
@@ -176,6 +178,10 @@ export const projects: Record<string, ProjectText> = {
     ],
     repoLabel: "GitHub repository",
     demoLabel: "Live demo on Vercel",
+    imageAlts: [
+      "Home page of this portfolio in the dark theme, with my photo at the center of the magic circle",
+      "Home page of this portfolio in the light theme",
+    ],
   },
   voxara: {
     tagline: "Noise dosimeter for Wear OS watches that looks after your hearing.",
@@ -197,6 +203,13 @@ export const projects: Record<string, ProjectText> = {
     ],
     repoLabel: "GitHub repository",
     demoLabel: "Video of the app on the watch",
+    imageAlts: [
+      "Voxara on the watch: 70 dBA, moderate level and 0% of today's limit",
+      "Voxara on the watch: 13% of this week's limit, all OK",
+      "Tono on the watch explains that the street sound is at conversation level",
+      "Phone app: 83% of today's limit, with a loud-noise warning",
+      "Trends on the phone: 90% of the weekly limit and each day's dose",
+    ],
   },
   sotto: {
     tagline: "Desktop assistant for live presentations: a teleprompter that follows your voice.",
@@ -217,10 +230,16 @@ export const projects: Record<string, ProjectText> = {
     ],
     repoLabel: "GitHub repository",
     demoLabel: "v1.0.0 download on GitHub Releases",
+    imageAlts: [
+      "Sotto's home screen in the dark theme, with recent presentations",
+      "Floating teleprompter window with the current script line and the presentation timer",
+      "Sotto's script editor, with the presentation sections on the left",
+      "Audience question prep, with the supporting documents",
+    ],
   },
   elyndra: {
     tagline: "Android game launcher with a console experience, designed for controllers.",
-    statusNote: "v1.1.0 released",
+    statusNote: "v1.2.0 released",
     synopsis:
       "Elyndra brings your Android games and emulator ROMs together in a single library you can drive entirely with a controller. It doesn't emulate anything: it hands each game to the emulator you chose. Masha, a holographic 3D assistant, recommends what to play and with which emulator.",
     problem:
@@ -237,7 +256,13 @@ export const projects: Record<string, ProjectText> = {
     ],
     repoLabel: "GitHub repository",
     demoLabel: "Official Elyndra website",
-    extraLinkLabels: ["Download v1.1.0"],
+    imageAlts: [
+      "Masha, Elyndra's holographic 3D assistant, with play-time stats and chat suggestions",
+      "Add to library: three steps to add a ROM folder (folder, system and emulator)",
+      "Display and theme settings: dark mode, startup intro, intro color and frame rate",
+      "Appearance settings: Meridian or Classic layout and adaptive background color",
+    ],
+    extraLinkLabels: ["Download v1.2.0"],
   },
   laaf: {
     tagline: "Third-person survival horror made in Godot, with the fog of PS2 classics.",
@@ -259,6 +284,12 @@ export const projects: Record<string, ProjectText> = {
     },
     repoLabel: "GitHub repository",
     demoLabel: "Game video or build",
+    imageAlts: [
+      "Alex facing The Harvester in the quarry, under a red haze, with the boss health bar",
+      "Alex on a foggy street at night next to a stranger as an alert appears",
+      "Selection wheel with weapons and items around the revolver",
+      "Main menu with the difficulty choice for a new case",
+    ],
   },
   alomedia: {
     tagline: "In-browser video editor with local WebAssembly rendering. Team project.",
@@ -277,6 +308,10 @@ export const projects: Record<string, ProjectText> = {
     team: { credit: "Team project by Juan17la, CamiloParraS and Jeferson Morillo. Original repositories by Juan17la." },
     repoLabel: "GitHub repository",
     demoLabel: "Live demo on Vercel",
+    imageAlts: [
+      "AloMedia's editor in the browser: media, preview and a timeline with video and audio tracks",
+      "AloMedia's home page in the dark theme",
+    ],
     extraLinkLabels: ["Backend (Spring Boot)"],
   },
 };
@@ -318,7 +353,7 @@ export const experience: Record<
   "proyecto-elyndra": {
     title: "Elyndra — author",
     organization: "Personal project",
-    impact: ["Released three versions in one month; the latest is v1.1.0."],
+    impact: ["Released four versions in under a month, from v1.0.0 to v1.2.0."],
   },
   "proyecto-voxara": {
     title: "Voxara — author",
@@ -330,4 +365,11 @@ export const experience: Record<
     organization: "Team project (Juan17la's repositories)",
     impact: ["Light mode in the editor and backend performance improvements (109 commits on the frontend and 27 on the backend)."],
   },
+};
+
+/** How each person knows Jeferson. Their quotes stay in Spanish, word for word. */
+export const testimonials: Record<string, { relationship: string }> = {
+  "juan-manuel-guerrero": { relationship: "Friend · Software Engineering student, UCC Pasto · Voxara user" },
+  "jhon-fredy-moran": { relationship: "Friend · UCC graduate · We've worked together on projects" },
+  "jheiner-bladimir-ramirez": { relationship: "Friend and classmate · Elyndra user" },
 };
