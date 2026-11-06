@@ -29,13 +29,15 @@ Agrega cada testimonio en `content/testimonials.ts` copiando exactamente lo que 
 {
   id: "nombre-apellido",
   name: "Nombre Apellido",
-  role: "Docente de Ingeniería de Software, UCC",
-  relationship: "Fue mi docente de Diseño de Software",
+  initials: "NA", // el círculo del avatar (no se usan fotos)
+  relationship: "Docente de Ingeniería de Software, UCC",
   quote: "El texto tal como te lo enviaron.",
+  review: "Una reseña más larga, palabra por palabra.", // opcional: va en la página del proyecto
+  projectSlug: "voxara", // opcional: proyecto del que habla
   link: "https://www.linkedin.com/in/…", // opcional
   consent: true,  // la persona aceptó que se publique
   verified: true, // confirmas que es real y aprobado
 },
 ```
 
-Borra los tres marcadores de posición (`placeholder-…`). La sección **Testimonios** aparece en producción solo cuando hay 3 o más entradas con `consent: true` y `verified: true`; mientras tanto, `npm run build` muestra una advertencia.
+Agrega la relación en inglés en `content/en.ts` (`testimonials`); la cita nunca se traduce. La sección **Testimonios** aparece en producción solo cuando hay 3 o más entradas con `consent: true` y `verified: true`; mientras tanto, `npm run build` muestra una advertencia.
