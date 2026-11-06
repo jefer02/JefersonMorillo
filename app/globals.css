@@ -302,6 +302,12 @@ dialog::backdrop {
   backdrop-filter: blur(2px);
 }
 
+@keyframes lightbox-in {
+  from {
+    opacity: 0;
+  }
+}
+
 /* Progressive reveal (components/fx/Reveal.tsx): only armed elements are ever hidden. */
 [data-armed] .reveal-item {
   opacity: 0;
