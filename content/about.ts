@@ -1,4 +1,3 @@
-import { todo } from "@/lib/todo";
 import type { ShelfBook, SideStory } from "@/types";
 
 // "Acerca de mí": only life outside software engineering.
@@ -48,7 +47,8 @@ export const sideStories: SideStory[] = [
 ];
 
 // Titles as plain text only: no covers, art, logos or quotes from the works.
-// Phrases are Jeferson's own (draft, 27 oct 2026; he may still edit them).
+// Phrases are Jeferson's own (draft, 27 oct 2026; he may still edit them). The last six were
+// drafted at his request on 12 nov 2026 for him to review.
 // To Love Ru: pending Jeferson's decision, not listed.
 export const shelf: ShelfBook[] = [
   {
@@ -81,10 +81,40 @@ export const shelf: ShelfBook[] = [
     take: "Me recuerda que la familia y las personas cercanas son lo más importante.",
     color: "ember",
   },
-  { title: "Neon Genesis Evangelion", genre: "Mecha · drama psicológico", take: todo("tu frase sobre Neon Genesis Evangelion"), color: "wood" },
-  { title: "Kimi no Suizou wo Tabetai", genre: "Drama · romance", take: todo("tu frase sobre Kimi no Suizou wo Tabetai"), color: "vermilion" },
-  { title: "Kimi no Na wa", genre: "Romance · fantasía", take: todo("tu frase sobre Kimi no Na wa"), color: "turquoise" },
-  { title: "Koe no Katachi", genre: "Drama · vida escolar", take: todo("tu frase sobre Koe no Katachi"), color: "jade" },
-  { title: "Zero no Tsukaima", genre: "Fantasía · comedia romántica", take: todo("tu frase sobre Zero no Tsukaima"), color: "gold" },
-  { title: "Elfen Lied", genre: "Drama · terror psicológico", take: todo("tu frase sobre Elfen Lied"), color: "ember" },
+  {
+    title: "Neon Genesis Evangelion",
+    genre: "Mecha · drama psicológico",
+    take: "Me hizo pensar en lo difícil que es abrirse a los demás, y en que vale la pena intentarlo.",
+    color: "wood",
+  },
+  {
+    title: "Kimi no Suizou wo Tabetai",
+    genre: "Drama · romance",
+    take: "Me recordó que el tiempo con las personas que quieres no se debe dejar para después.",
+    color: "vermilion",
+  },
+  {
+    title: "Kimi no Na wa",
+    genre: "Romance · fantasía",
+    take: "Una historia sobre buscar a alguien sin rendirse, aunque no recuerdes bien por qué.",
+    color: "turquoise",
+  },
+  {
+    title: "Koe no Katachi",
+    genre: "Drama · vida escolar",
+    take: "Me enseñó que pedir perdón y cambiar de verdad cuesta, pero se puede.",
+    color: "jade",
+  },
+  {
+    title: "Zero no Tsukaima",
+    genre: "Fantasía · comedia romántica",
+    take: "Divertida y ligera; me gusta ver a alguien que todos subestiman demostrar lo que vale.",
+    color: "gold",
+  },
+  {
+    title: "Elfen Lied",
+    genre: "Drama · terror psicológico",
+    take: "Dura de ver, pero me dejó claro cuánto marcan el rechazo y la crueldad a una persona.",
+    color: "ember",
+  },
 ];

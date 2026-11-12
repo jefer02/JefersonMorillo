@@ -2,6 +2,7 @@
 
 import { useActionState, useEffect, useRef, useState } from "react";
 import { sendContact, type ContactState } from "@/app/actions/contact";
+import { sendWithEmailJs } from "@/lib/emailjs";
 import { useLocale, useMessages } from "@/lib/i18n/client";
 import { REASONS, validateField, type Field } from "@/lib/validation/patterns";
 import { glyph } from "@/lib/runes";
@@ -79,7 +80,17 @@ type Props = { email: string };
 export function ContactForm({ email }: Props) {
   const locale = useLocale();
   const t = useMessages().form;
-  const [state, action, pending] = useActionState(sendContact, INITIAL);
+  const [state, action, pending] = useActionState(async (prev: ContactState, formData: FormData): Promise<ContactState> => {
+    const result = await sendContact(prev, formData);
+    if (result.status !== "deliver" || !result.payload) return result;
+    try {
+      await sendWithEmailJs(result.payload);
+      return { status: "success", message: result.message };
+    } catch (e) {
+      console.error("[contact] EmailJS failed", e);
+      return { status: "fallback", message: result.failMessage ?? "", values: result.values };
+    }
+  }, INITIAL);
   const [values, setValues] = useState<Record<Field, string>>({ name: "", email: "", reason: "", message: "" });
   const [touched, setTouched] = useState<Partial<Record<Field, boolean>>>({});
   const [startedAt, setStartedAt] = useState(0);

@@ -72,13 +72,24 @@ export const shelf: Record<string, Pick<ShelfBook, "genre" | "take">> = {
     take: "A quiet story about seeing people beyond prejudice.",
   },
   Clannad: { genre: "Drama · romance", take: "It reminds me that family and the people close to you matter most." },
-  // Empty take: Jeferson still has to write it; the Spanish TODO shows in dev, nothing in production.
-  "Neon Genesis Evangelion": { genre: "Mecha · psychological drama", take: "" },
-  "Kimi no Suizou wo Tabetai": { genre: "Drama · romance", take: "" },
-  "Kimi no Na wa": { genre: "Romance · fantasy", take: "" },
-  "Koe no Katachi": { genre: "Drama · school life", take: "" },
-  "Zero no Tsukaima": { genre: "Fantasy · romantic comedy", take: "" },
-  "Elfen Lied": { genre: "Drama · psychological horror", take: "" },
+  "Neon Genesis Evangelion": {
+    genre: "Mecha · psychological drama",
+    take: "It made me think about how hard it is to open up to others, and that it's worth trying.",
+  },
+  "Kimi no Suizou wo Tabetai": { genre: "Drama · romance", take: "It reminded me not to put off time with the people you love." },
+  "Kimi no Na wa": {
+    genre: "Romance · fantasy",
+    take: "A story about searching for someone without giving up, even when you can't quite remember why.",
+  },
+  "Koe no Katachi": { genre: "Drama · school life", take: "It taught me that apologizing and truly changing is hard, but possible." },
+  "Zero no Tsukaima": {
+    genre: "Fantasy · romantic comedy",
+    take: "Fun and light; I like watching someone everyone underestimates prove what they're worth.",
+  },
+  "Elfen Lied": {
+    genre: "Drama · psychological horror",
+    take: "Hard to watch, but it showed me how deeply rejection and cruelty mark a person.",
+  },
 };
 
 export const languages = [
