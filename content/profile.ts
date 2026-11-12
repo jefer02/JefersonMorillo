@@ -10,6 +10,9 @@ export const profile = {
   roles: { es: "Desarrollador de software", en: "Software developer" },
   /** Chosen by Jeferson (option c). ≤ 25 words. */
   welcome: "Construyo software que se usa con la muñeca, con un control en la mano o frente a un público: Wear OS, Android, Flutter y web.",
+  /** The CV's profile paragraph, built only from facts on this site. */
+  cvSummary:
+    "Soy estudiante de Ingeniería de Software en la Universidad Cooperativa de Colombia (Pasto, 5.º semestre) y desarrollo aplicaciones para Wear OS, Android, escritorio y web. Trabajo sobre todo con Jetpack Compose, Flutter, React y Next.js, y en mis proyectos he integrado asistentes con IA, reconocimiento de voz en el dispositivo y escenas 3D. He publicado versiones de mis apps en GitHub Releases y he trabajado en equipo sobre repositorios compartidos. Me interesa especialmente el desarrollo de videojuegos.",
   /**
    * What the hero's magic circle says, written in the site's rune alphabet (docs/runas.md).
    * 2024 is the year he started the degree.

@@ -135,6 +135,30 @@ function CaseStudy({ slug, locale }: { slug: string; locale: Locale }) {
         </div>
       </div>
 
+      {project.video && (
+        <section id="video" aria-labelledby="video-titulo" className="mt-14 scroll-mt-24">
+          <h2 id="video-titulo" className="font-display text-[1.35rem] font-bold">
+            {t.video}
+          </h2>
+          <div className="mt-4 max-w-[64rem] overflow-hidden rounded-[3px] bg-black shadow-[0_24px_40px_-24px_oklch(0.15_0.02_50/0.55)]">
+            <video
+              controls
+              playsInline
+              preload="metadata"
+              poster={project.video.poster}
+              width={project.video.width}
+              height={project.video.height}
+              aria-label={project.video.label}
+              className="block aspect-video h-auto w-full"
+            >
+              <source src={project.video.src} type="video/mp4" />
+              <a href={project.video.src}>{t.openVideo}</a>
+            </video>
+          </div>
+          <p className="text-ink-soft mt-3 max-w-[64rem] text-[0.88rem]">{project.video.label}</p>
+        </section>
+      )}
+
       <div className="mt-14 grid md:grid-cols-12">
         <div className="md:col-span-8 lg:col-span-7">
           <section>

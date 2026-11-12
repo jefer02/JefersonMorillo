@@ -19,12 +19,13 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/cv">): P
 // Placeholders are always left out here (this page becomes the downloadable PDF).
 const real = (s: string) => !isTodo(s);
 
+/** A section title: bold, small, with a thin grey rule under it. */
 function H({ children }: { children: React.ReactNode }) {
-  return (
-    <h2 className="font-display mt-5 mb-2 border-b border-[#1d1a17] pb-1 text-[11pt] font-bold tracking-[0.04em] uppercase">{children}</h2>
-  );
+  return <h2 className="mt-[8pt] mb-[3pt] border-b border-[#9a9a9a] pb-[2pt] text-[10.5pt] font-bold">{children}</h2>;
 }
 
+// A plain, single-column CV that applicant tracking systems read well: a classic serif,
+// black text, no colors, icons or photos.
 export default async function CvPage({ params }: PageProps<"/[locale]/cv">) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
@@ -35,40 +36,33 @@ export default async function CvPage({ params }: PageProps<"/[locale]/cv">) {
   const academic = entries.filter((e) => e.kind === "academico");
   const work = entries.filter((e) => e.kind === "laboral");
   const projects = orderedProjects.filter((p) => p.volume !== 0);
+  const skillName = (id: string) => skills.find((s) => s.id === id)?.name ?? id;
+  const bare = (url: string) => url.replace(/^https?:\/\/(www\.|co\.)?/, "").replace(/\/$/, "");
 
   return (
-    <main className="cv mx-auto min-h-[297mm] w-[210mm] bg-white px-[16mm] py-[14mm] text-[9.5pt] leading-[1.45] text-[#1d1a17] print:p-0">
-      <header className="flex items-end justify-between gap-6 border-b-[3px] border-[#b02018] pb-3">
-        <div>
-          <h1 className="font-display text-[24pt] leading-none font-extrabold tracking-[-0.02em]">{profile.fullName}</h1>
-          <p className="mt-1.5 text-[11pt]">
-            {profile.role} · {t.student} {profile.studies.degree} ({profile.studies.universityShort} {profile.studies.campus})
-          </p>
-        </div>
-        <ul className="shrink-0 text-right text-[8.5pt] leading-[1.6]">
-          <li>{profile.email}</li>
-          <li>
-            {profile.city}, {profile.region}, {profile.country}
-          </li>
-          {socials.map((s) => (
-            <li key={s.id}>{s.href.replace("https://", "")}</li>
-          ))}
-        </ul>
+    <main className="cv mx-auto min-h-[297mm] w-[210mm] bg-white px-[16mm] pt-[10mm] pb-[6mm] print:min-h-0 font-['Times_New_Roman',Times,serif] text-[10pt] leading-[1.24] text-black">
+      <header className="text-center">
+        <h1 className="text-[17pt] leading-tight font-bold">{profile.fullName}</h1>
+        <p className="mt-[2pt]">
+          {profile.city}, {profile.country} / {profile.email}
+        </p>
+        <p>{[...socials.map((s) => bare(s.href)), `${bare(profile.siteUrl)}/${locale}`].join(" / ")}</p>
       </header>
 
-      <p className="mt-3 text-[10pt]">{profile.welcome}</p>
+      <H>{t.profile}</H>
+      <p className="text-pretty">{profile.cvSummary}</p>
 
       <H>{t.education}</H>
       {academic.map((e) => (
-        <div key={e.id} className="mb-1.5 flex justify-between gap-4">
-          <div>
-            <p className="font-semibold">{e.title}</p>
-            <p className="text-[#55504a]">
-              {e.organization}
-              {e.studying ? ` · ${t.studying} · ${t.semester(profile.studies.semester)}` : ""}
-            </p>
-          </div>
-          <p className="shrink-0 text-[8.5pt] text-[#55504a]">{formatRange(e, locale)}</p>
+        <div key={e.id} className="mb-[3pt] break-inside-avoid">
+          <p className="font-bold">
+            {e.title} — {e.organization}
+          </p>
+          <p className="pl-[14pt]">
+            {e.place ? `${e.place}, ` : ""}
+            {formatRange(e, locale)}
+            {e.studying && ` · ${t.semester(profile.studies.semester)}`}
+          </p>
         </div>
       ))}
 
@@ -76,68 +70,64 @@ export default async function CvPage({ params }: PageProps<"/[locale]/cv">) {
         <>
           <H>{t.work}</H>
           {work.map((e) => (
-            <div key={e.id} className="mb-1.5">
-              <div className="flex justify-between gap-4">
-                <p className="font-semibold">
-                  {e.title} · {e.organization}
-                </p>
-                <p className="shrink-0 text-[8.5pt] text-[#55504a]">{formatRange(e, locale)}</p>
-              </div>
-              <ul className="list-disc pl-4">
-                {e.impact.filter(real).map((line) => (
-                  <li key={line}>{line}</li>
-                ))}
-              </ul>
+            <div key={e.id} className="mb-[5pt] break-inside-avoid">
+              <p>
+                <span className="font-bold">
+                  {e.title} — {e.organization}
+                </span>
+                , {formatRange(e, locale)}
+              </p>
+              {e.impact.filter(real).map((line) => (
+                <p key={line}>{line}</p>
+              ))}
             </div>
           ))}
         </>
       )}
 
+      <H>{t.skills}</H>
+      {schools.map((s) => {
+        const names = skills.filter((k) => k.school === s.id).map((k) => k.name);
+        if (!names.length) return null;
+        return (
+          <p key={s.id}>
+            <span className="font-bold">{s.name}:</span> {names.join(", ")}
+          </p>
+        );
+      })}
+
       <H>{t.projects}</H>
       {projects.map((p) => (
-        <div key={p.slug} className="mb-2 break-inside-avoid">
-          <div className="flex justify-between gap-4">
-            <p>
-              <span className="font-semibold">{p.title}</span> — {p.tagline}
-            </p>
-            <p className="shrink-0 text-[8.5pt] text-[#55504a]">{p.platforms.join(", ")}</p>
-          </div>
-          {p.team && real(p.team.role) && <p className="text-[#55504a]">{p.team.role}</p>}
-          {p.team && <p className="text-[#55504a]">{p.team.credit}</p>}
-          <p className="text-[8.5pt] text-[#55504a]">
-            {p.skills.map((id) => skills.find((s) => s.id === id)?.name).join(" · ")}
-            {isRealLink(p.repo) && <> · {p.repo.href.replace("https://", "")}</>}
-            {isRealLink(p.demo) && <> · {p.demo.href.replace("https://", "")}</>}
+        <div key={p.slug} className="mb-[5pt] break-inside-avoid">
+          <p>
+            <span className="font-bold">{p.title}</span> - {p.skills.slice(0, 6).map(skillName).join(", ")}
           </p>
+          <p className="text-pretty">
+            {p.synopsis}
+            {p.team && ` ${p.team.credit}`}
+            {p.team && real(p.team.role) && ` ${p.team.role}`}
+          </p>
+          {isRealLink(p.repo) && (
+            <p className="text-[9.5pt] text-[#333]">
+              {[p.repo, p.demo]
+                .filter(isRealLink)
+                .filter((l) => l.href.startsWith("http"))
+                .map((l) => bare(l.href))
+                .join(" / ")}
+            </p>
+          )}
         </div>
       ))}
 
-      <H>{t.skills}</H>
-      <dl className="grid grid-cols-[9rem_1fr] gap-x-3 gap-y-0.5">
-        {schools.map((s) => (
-          <div key={s.id} className="contents">
-            <dt className="font-semibold">{s.name}</dt>
-            <dd>
-              {skills
-                .filter((k) => k.school === s.id)
-                .map((k) => k.name)
-                .join(" · ")}
-            </dd>
-          </div>
-        ))}
-      </dl>
-
       <H>{t.languages}</H>
-      <p>
-        {languages
-          .filter((l) => real(l.level))
-          .map((l) => `${l.name}: ${l.level}`)
-          .join(" · ")}
-      </p>
+      {languages
+        .filter((l) => real(l.level))
+        .map((l) => (
+          <p key={l.name}>
+            <span className="font-bold">{l.name}:</span> {l.level}
+          </p>
+        ))}
 
-      <p className="mt-6 text-[7.5pt] text-[#55504a]">
-        {t.footer} {profile.siteUrl.replace("https://", "")}/{locale}
-      </p>
     </main>
   );
 }

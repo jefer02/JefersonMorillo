@@ -1,3 +1,4 @@
+import { todo } from "@/lib/todo";
 import type { ShelfBook, SideStory } from "@/types";
 
 // "Acerca de mí": only life outside software engineering.
@@ -80,4 +81,10 @@ export const shelf: ShelfBook[] = [
     take: "Me recuerda que la familia y las personas cercanas son lo más importante.",
     color: "ember",
   },
+  { title: "Neon Genesis Evangelion", genre: "Mecha · drama psicológico", take: todo("tu frase sobre Neon Genesis Evangelion"), color: "wood" },
+  { title: "Kimi no Suizou wo Tabetai", genre: "Drama · romance", take: todo("tu frase sobre Kimi no Suizou wo Tabetai"), color: "vermilion" },
+  { title: "Kimi no Na wa", genre: "Romance · fantasía", take: todo("tu frase sobre Kimi no Na wa"), color: "turquoise" },
+  { title: "Koe no Katachi", genre: "Drama · vida escolar", take: todo("tu frase sobre Koe no Katachi"), color: "jade" },
+  { title: "Zero no Tsukaima", genre: "Fantasía · comedia romántica", take: todo("tu frase sobre Zero no Tsukaima"), color: "gold" },
+  { title: "Elfen Lied", genre: "Drama · terror psicológico", take: todo("tu frase sobre Elfen Lied"), color: "ember" },
 ];

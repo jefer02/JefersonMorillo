@@ -10,6 +10,8 @@ const url = z.url({ protocol: /^https?$/ });
 const words = (s: string) => s.trim().split(/\s+/).length;
 
 const link = z.object({ label: z.string().min(1), href: url });
+// A demo may also point inside the site, e.g. to the case study's promo video ("/proyectos/voxara#video").
+const demoLink = z.object({ label: z.string().min(1), href: z.union([url, z.string().regex(/^\/[a-z0-9/#-]+$/)]) });
 const maybeLink = z.union([link, z.object({ label: z.string().min(1), todo: todoString })]);
 
 const image = z.object({
@@ -38,13 +40,22 @@ export const projectSchema = z.object({
   learned: z.array(z.string()),
   skills: z.array(z.string()).min(1),
   repo: maybeLink,
-  demo: maybeLink,
+  demo: z.union([demoLink, maybeLink]),
   extraLinks: z.array(link).optional(),
   team: z.object({ credit: z.string(), role: z.string() }).optional(),
   period: z.object({ start: isoDate, end: isoDate.optional() }),
   cover: image.optional(),
   frame: z.enum(["watch", "phone", "window", "browser", "handheld", "screen"]).optional(),
   gallery: z.array(image).optional(),
+  video: z
+    .object({
+      src: z.string().startsWith("/"),
+      poster: z.string().startsWith("/"),
+      width: z.number().int().positive(),
+      height: z.number().int().positive(),
+      label: z.string().min(4),
+    })
+    .optional(),
 });
 
 // Programming languages are not skills on this site.
@@ -55,7 +66,7 @@ export const skillSchema = z.object({
   name: z.string().refine((n) => !LANGUAGES.test(n.trim()), "Los lenguajes de programación no van en Habilidades"),
   school: z.string(),
   use: z.string().min(10),
-  usedIn: z.array(z.string()).min(1, "Cada habilidad debe enlazar al menos un proyecto"),
+  usedIn: z.array(z.string()),
 });
 
 export const experienceSchema = z.object({

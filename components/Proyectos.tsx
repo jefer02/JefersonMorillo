@@ -4,6 +4,7 @@ import { getContent } from "@/content";
 import { ChapterOpener } from "@/components/fx/ChapterOpener";
 import { ProjectLinks } from "@/components/fx/ProjectLinks";
 import { Reveal } from "@/components/fx/Reveal";
+import { HoverVideo } from "@/components/fx/HoverVideo";
 import { ProjectStage } from "@/components/fx/ProjectStage";
 import { Text } from "@/components/ui/Todo";
 import { href, type Locale } from "@/lib/i18n/config";
@@ -36,7 +37,7 @@ export default function Proyectos({ locale }: { locale: Locale }) {
               >
                 <ViewTransition name={`cover-${project.slug}`} share="morph" default="none">
                   <div className="transition-transform duration-200 ease-out group-hover:-translate-y-1.5">
-                    <ProjectStage project={project} />
+                    <ProjectStage project={project} preview={project.video && <HoverVideo video={project.video} />} />
                   </div>
                 </ViewTransition>
               </Link>

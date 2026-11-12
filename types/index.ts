@@ -26,6 +26,16 @@ export type ImageAsset = {
   frame?: ProjectFrame;
 };
 
+/** A promo video in public/projects/<slug>/, compressed to 720p H.264 with its poster frame. */
+export type VideoAsset = {
+  src: string;
+  poster: string;
+  width: number;
+  height: number;
+  /** What the video shows, for screen readers (Spanish; English in content/en.ts). */
+  label: string;
+};
+
 /** The device drawn around a project's screenshots. */
 export type ProjectFrame = "watch" | "phone" | "window" | "browser" | "handheld" | "screen";
 
@@ -55,6 +65,7 @@ export type Project = {
   /** Skill ids from content/skills.ts. */
   skills: string[];
   repo: MaybeLink;
+  /** External URL, or a path inside the site (without locale) such as "/proyectos/voxara#video". */
   demo: MaybeLink;
   extraLinks?: ExternalLink[];
   /** Team projects credit the team and the original repositories. */
@@ -68,6 +79,8 @@ export type Project = {
   frame?: ProjectFrame;
   /** More screenshots, shown under the cover on the case study. */
   gallery?: ImageAsset[];
+  /** Promo video: previewed on hover in the card, played with controls on the case study. */
+  video?: VideoAsset;
 };
 
 export type SkillSchool = {
@@ -81,7 +94,7 @@ export type Skill = {
   school: string;
   /** One line: what he does with it. */
   use: string;
-  /** Project slugs where it was used. */
+  /** Project slugs where it was used; empty for know-how that no project shows yet. */
   usedIn: string[];
 };
 

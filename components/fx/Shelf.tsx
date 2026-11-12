@@ -244,12 +244,16 @@ export function Shelf({ books }: { books: ShelfBook[] }) {
 
   return (
     <div ref={rootRef} className="flex flex-col gap-5">
-      <ul className="border-ink relative z-10 flex shrink-0 items-end gap-2 border-b-[3px] px-1 pt-8" aria-label={t.label}>
+      {/* Books wrap onto a second shelf when the row is full; each book carries its piece of the board. */}
+      <ul className="relative z-10 flex shrink-0 flex-wrap items-end gap-y-8 pt-8" aria-label={t.label}>
         {visible.map((b, i) => {
           const selected = lifted === i;
           const dimmed = lifted !== null && !selected;
           return (
-            <li key={b.title} className={`relative transition-opacity duration-300 ${dimmed ? "opacity-55" : "opacity-100"}`}>
+            <li
+              key={b.title}
+              className={`border-ink relative border-b-[3px] px-1 transition-opacity duration-300 ${dimmed ? "opacity-55" : "opacity-100"}`}
+            >
               {/* The soft shadow the lifted book casts on the shelf. */}
               <motion.span
                 aria-hidden="true"

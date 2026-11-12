@@ -1,5 +1,5 @@
 import { todo } from "@/lib/todo";
-import type { ImageAsset, Project } from "@/types";
+import type { ImageAsset, Project, VideoAsset } from "@/types";
 
 /** A screenshot in public/projects/<slug>/, processed from the README images or captured live. */
 const shot = (slug: string, file: string, width: number, height: number, alt: string, extra?: Partial<ImageAsset>): ImageAsset => ({
@@ -8,6 +8,14 @@ const shot = (slug: string, file: string, width: number, height: number, alt: st
   height,
   alt,
   ...extra,
+});
+/** The promo video in public/projects/<slug>/ (see VideoAsset). */
+const promo = (slug: string, label: string): VideoAsset => ({
+  src: `/projects/${slug}/promo.mp4`,
+  poster: `/projects/${slug}/promo-poster.webp`,
+  width: 1280,
+  height: 720,
+  label,
 });
 const round = { round: true };
 const phone = { frame: "phone" } as const;
@@ -74,7 +82,7 @@ export const projects: Project[] = [
     learned: [todo("qué aprendiste con Voxara")],
     skills: ["compose", "compose-wear", "material3", "wear-data-layer", "wear-tiles", "deepseek", "android-studio"],
     repo: { label: "Repositorio en GitHub", href: "https://github.com/jefer02/Voxara" },
-    demo: { label: "Video de la app en el reloj", todo: todo("enlace a un video de Voxara funcionando en el reloj") },
+    demo: { label: "Video promocional de la app", href: "/proyectos/voxara#video" },
     period: { start: "2026-09" },
     frame: "watch",
     cover: shot("voxara", "reloj-ahora", 480, 480, "Voxara en el reloj: 70 dBA, nivel moderado y 0 % del límite de hoy", round),
@@ -84,6 +92,7 @@ export const projects: Project[] = [
       shot("voxara", "telefono-inicio", 540, 1200, "App del teléfono: 83 % del límite de hoy, con aviso de ruido alto", phone),
       shot("voxara", "telefono-tendencias", 540, 1200, "Tendencias en el teléfono: 90 % del límite semanal y la dosis de cada día", phone),
     ],
+    video: promo("voxara", "Video promocional de Voxara: el nivel de ruido en vivo, la dosis diaria y semanal y Tono en el reloj"),
   },
   {
     slug: "sotto",
@@ -120,6 +129,7 @@ export const projects: Project[] = [
       shot("sotto", "editor", 1600, 900, "Editor de guiones de Sotto, con las secciones de la presentación a la izquierda"),
       shot("sotto", "preguntas", 1600, 900, "Preparación de preguntas del público, con los documentos de apoyo"),
     ],
+    video: promo("sotto", "Video promocional de Sotto: el teleprompter avanza línea a línea siguiendo la voz"),
   },
   {
     slug: "elyndra",
@@ -157,6 +167,7 @@ export const projects: Project[] = [
       shot("elyndra", "ajustes-pantalla", 1600, 964, "Ajustes de pantalla y tema: modo oscuro, intro al iniciar, color de la intro y frecuencia de cuadros"),
       shot("elyndra", "ajustes-apariencia", 1600, 956, "Ajustes de apariencia: diseño Meridian o Clásico y color de fondo adaptable"),
     ],
+    video: promo("elyndra", "Video promocional de Elyndra: la biblioteca de juegos de Android y emuladores manejada con control"),
   },
   {
     slug: "laaf",
@@ -186,7 +197,7 @@ export const projects: Project[] = [
       role: "Desarrollador principal (149 de los 158 commits del repositorio).",
     },
     repo: { label: "Repositorio en GitHub", href: "https://github.com/Juan17la/laaf_game" },
-    demo: { label: "Video o build del juego", todo: todo("enlace a un video o build de LAAF") },
+    demo: { label: "Tráiler del juego", href: "/proyectos/laaf#video" },
     period: { start: "2026-10" },
     frame: "screen",
     cover: shot("laaf", "jefe", 1599, 899, "Alex frente a The Harvester en la cantera, bajo una neblina roja, con la barra de vida del jefe"),
@@ -195,6 +206,7 @@ export const projects: Project[] = [
       shot("laaf", "rueda", 1599, 899, "Rueda de selección con armas y objetos alrededor del revólver"),
       shot("laaf", "menu", 1599, 899, "Menú principal con la elección de dificultad para un caso nuevo"),
     ],
+    video: promo("laaf", "Tráiler de LAAF: escenas del juego en Hollowmere, de noche y con niebla"),
   },
   {
     slug: "alomedia",

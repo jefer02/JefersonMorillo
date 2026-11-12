@@ -9,6 +9,8 @@ export const profile = {
   welcome:
     "I build software you use on your wrist, with a controller in hand or in front of an audience: Wear OS, Android, Flutter and web.",
   degree: "Software Engineering",
+  cvSummary:
+    "I'm a Software Engineering student at Universidad Cooperativa de Colombia (Pasto, 5th semester) and I build apps for Wear OS, Android, desktop and the web. I work mostly with Jetpack Compose, Flutter, React and Next.js, and my projects include AI assistants, on-device speech recognition and 3D scenes. I've published releases of my apps on GitHub Releases and worked in teams on shared repositories. I'm especially interested in game development.",
   photoAlt: "Jeferson Morillo, wearing glasses and a hoodie",
   /** The inner ring of the hero circle says "Construyo software"; shown with the decoded runes. */
   inscriptionGloss: "I build software",
@@ -70,6 +72,13 @@ export const shelf: Record<string, Pick<ShelfBook, "genre" | "take">> = {
     take: "A quiet story about seeing people beyond prejudice.",
   },
   Clannad: { genre: "Drama · romance", take: "It reminds me that family and the people close to you matter most." },
+  // Empty take: Jeferson still has to write it; the Spanish TODO shows in dev, nothing in production.
+  "Neon Genesis Evangelion": { genre: "Mecha · psychological drama", take: "" },
+  "Kimi no Suizou wo Tabetai": { genre: "Drama · romance", take: "" },
+  "Kimi no Na wa": { genre: "Romance · fantasy", take: "" },
+  "Koe no Katachi": { genre: "Drama · school life", take: "" },
+  "Zero no Tsukaima": { genre: "Fantasy · romantic comedy", take: "" },
+  "Elfen Lied": { genre: "Drama · psychological horror", take: "" },
 };
 
 export const languages = [
@@ -147,6 +156,7 @@ export const skills: Record<string, { use: string; name?: string }> = {
   "android-studio": { use: "Emulators and wireless debugging on a Galaxy Watch 7." },
   vitest: { use: "Tests for the contact form's regular expressions." },
   vercel: { use: "Automatic deployments on every push." },
+  "arch-linux": { use: "I know how it works under the hood: installing it, managing packages and configuring it from the terminal." },
 };
 
 export type ProjectText = Pick<Project, "tagline" | "synopsis" | "problem" | "built" | "challenges"> &
@@ -157,6 +167,8 @@ export type ProjectText = Pick<Project, "tagline" | "synopsis" | "problem" | "bu
     team?: { credit: string; role?: string };
     /** Alt texts for the cover, then each gallery image, in order. */
     imageAlts?: string[];
+    /** Accessible label of the promo video, when the project has one. */
+    videoLabel?: string;
   };
 
 export const projects: Record<string, ProjectText> = {
@@ -202,7 +214,7 @@ export const projects: Record<string, ProjectText> = {
       "Making it clear that it is not a medical device and that the microphone needs calibration.",
     ],
     repoLabel: "GitHub repository",
-    demoLabel: "Video of the app on the watch",
+    demoLabel: "Promo video of the app",
     imageAlts: [
       "Voxara on the watch: 70 dBA, moderate level and 0% of today's limit",
       "Voxara on the watch: 13% of this week's limit, all OK",
@@ -210,6 +222,7 @@ export const projects: Record<string, ProjectText> = {
       "Phone app: 83% of today's limit, with a loud-noise warning",
       "Trends on the phone: 90% of the weekly limit and each day's dose",
     ],
+    videoLabel: "Voxara promo video: the live noise level, the daily and weekly dose, and Tono on the watch",
   },
   sotto: {
     tagline: "Desktop assistant for live presentations: a teleprompter that follows your voice.",
@@ -236,6 +249,7 @@ export const projects: Record<string, ProjectText> = {
       "Sotto's script editor, with the presentation sections on the left",
       "Audience question prep, with the supporting documents",
     ],
+    videoLabel: "Sotto promo video: the teleprompter moves line by line, following the voice",
   },
   elyndra: {
     tagline: "Android game launcher with a console experience, designed for controllers.",
@@ -262,6 +276,7 @@ export const projects: Record<string, ProjectText> = {
       "Display and theme settings: dark mode, startup intro, intro color and frame rate",
       "Appearance settings: Meridian or Classic layout and adaptive background color",
     ],
+    videoLabel: "Elyndra promo video: the Android and emulator game library, driven with a controller",
     extraLinkLabels: ["Download v1.2.0"],
   },
   laaf: {
@@ -283,13 +298,14 @@ export const projects: Record<string, ProjectText> = {
       role: "Lead developer (149 of the repository's 158 commits).",
     },
     repoLabel: "GitHub repository",
-    demoLabel: "Game video or build",
+    demoLabel: "Game trailer",
     imageAlts: [
       "Alex facing The Harvester in the quarry, under a red haze, with the boss health bar",
       "Alex on a foggy street at night next to a stranger as an alert appears",
       "Selection wheel with weapons and items around the revolver",
       "Main menu with the difficulty choice for a new case",
     ],
+    videoLabel: "LAAF trailer: scenes from the game in Hollowmere, at night and in the fog",
   },
   alomedia: {
     tagline: "In-browser video editor with local WebAssembly rendering. Team project.",

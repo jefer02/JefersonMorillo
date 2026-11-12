@@ -21,6 +21,7 @@ export function SpellList({ skills, projects, locale }: Props) {
           <div className="min-w-0">
             <h4 className="font-display text-[1.1rem] leading-tight font-bold">{skill.name}</h4>
             <p className="text-ink-soft mt-1.5 text-[0.92rem] leading-relaxed">{skill.use}</p>
+            {skill.usedIn.length > 0 && (
             <p className="mt-3 flex flex-wrap items-center gap-1.5 text-[0.8rem]">
               <span className="text-ink-soft font-mono text-[0.72rem] tracking-[0.08em] uppercase">{messages[locale].skills.usedIn}</span>
               {skill.usedIn.map((slug) => (
@@ -33,6 +34,7 @@ export function SpellList({ skills, projects, locale }: Props) {
                 </Link>
               ))}
             </p>
+            )}
           </div>
         </li>
       ))}

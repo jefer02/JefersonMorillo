@@ -126,7 +126,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[lo
         />
         <a
           href="#contenido"
-          className="bg-ink text-paper fixed top-3 left-3 z-[100] -translate-y-24 rounded-md px-4 py-3 font-medium transition-transform duration-200 focus:translate-y-0"
+          className="bg-ink text-paper fixed top-3 left-3 z-[100] -translate-y-24 rounded-md px-4 py-3 font-medium transition-transform duration-200 focus:translate-y-0 print:hidden"
         >
           {messages[locale].skipLink}
         </a>

@@ -36,6 +36,7 @@ function localizeProject(p: Project): Project {
     team: p.team && { credit: t.team?.credit ?? p.team.credit, role: t.team?.role ?? p.team.role },
     cover: p.cover && alt(0, p.cover),
     gallery: p.gallery?.map((img, i) => alt(i + 1, img)),
+    video: p.video && { ...p.video, label: t.videoLabel ?? p.video.label },
   };
 }
 
@@ -62,6 +63,7 @@ function build(locale: Locale) {
     ...profileEs,
     role: profileEs.roles[locale],
     welcome: isEn ? en.profile.welcome : profileEs.welcome,
+    cvSummary: isEn ? en.profile.cvSummary : profileEs.cvSummary,
     studies: { ...profileEs.studies, degree },
     photo: profileEs.photo && { ...profileEs.photo, alt: isEn ? en.profile.photoAlt : profileEs.photo.alt },
     cvPath: profileEs.cvPaths[locale],
@@ -78,7 +80,7 @@ function build(locale: Locale) {
     presentation: isEn ? en.presentation : about.presentation,
     quickFacts: isEn ? en.quickFacts : about.quickFacts,
     sideStories: isEn ? en.sideStories : about.sideStories,
-    shelf: isEn ? about.shelf.map((b) => ({ ...b, ...en.shelf[b.title] })) : about.shelf,
+    shelf: isEn ? about.shelf.map((b) => ({ ...b, ...en.shelf[b.title], take: en.shelf[b.title]?.take || b.take })) : about.shelf,
     languages: isEn ? en.languages : extras.languages,
     achievements: extras.achievements,
     learningNow: isEn ? en.learningNow : extras.learningNow,

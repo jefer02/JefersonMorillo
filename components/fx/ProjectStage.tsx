@@ -3,17 +3,26 @@ import type { ReactNode } from "react";
 import type { Accent, ImageAsset, Project, ProjectFrame } from "@/types";
 import { Sigil } from "./Sigil";
 
-// The thin margin around each screenshot keeps the project's color in both themes.
-const GROUND: Record<Accent, string> = {
-  vermilion: "bg-obi text-obi-ink",
-  jade: "bg-[oklch(0.42_0.09_165)] text-obi-ink",
-  gold: "bg-[oklch(0.72_0.13_78)] text-[oklch(0.24_0.05_70)]",
-  turquoise: "bg-[oklch(0.42_0.08_212)] text-obi-ink",
-  ember: "bg-[oklch(0.26_0.03_40)] text-[oklch(0.9_0.05_60)]",
-  wood: "bg-wood text-wood-ink",
+// A dark, neutral stage in both themes, like a book cover: the screenshot is the protagonist
+// and the project keeps only a soft glow of its color rising from the bottom.
+const GLOW: Record<Accent, string> = {
+  vermilion: "oklch(0.6 0.2 30)",
+  jade: "oklch(0.64 0.13 165)",
+  gold: "oklch(0.76 0.14 80)",
+  turquoise: "oklch(0.64 0.11 210)",
+  ember: "oklch(0.66 0.17 45)",
+  wood: "oklch(0.6 0.1 55)",
 };
 
-const BEZEL = "bg-[oklch(0.17_0.01_260)]";
+const groundOf = (accent: Accent) => ({
+  background: [
+    `radial-gradient(85% 65% at 50% 108%, color-mix(in oklch, ${GLOW[accent]} 34%, transparent), transparent 72%)`,
+    "radial-gradient(70% 45% at 50% -8%, oklch(1 0 0 / 0.06), transparent 70%)",
+    "linear-gradient(oklch(0.23 0.012 60), oklch(0.17 0.01 60))",
+  ].join(", "),
+});
+
+const BEZEL = "bg-[oklch(0.13_0.01_260)]";
 const SHADOW = "shadow-[0_14px_30px_-14px_oklch(0_0_0/0.6)]";
 
 export type StageSize = "card" | "hero";
@@ -26,18 +35,20 @@ export const STAGE_SIZES: Record<StageSize, string> = {
 /** Padding of the colored margin: thin, so the screenshot is the protagonist. */
 export const STAGE_PAD: Record<StageSize, string> = { card: "p-3 sm:p-4", hero: "p-4 sm:p-5 lg:p-6" };
 
-/** The colored stage with the small rune signature; the framed screenshot goes inside. */
+/** The dark stage with a thin gilded frame line and the small rune signature; the framed screenshot goes inside. */
 export function Stage({ project, size, children }: { project: Project; size: StageSize; children: ReactNode }) {
   return (
     <div
-      className={`relative isolate aspect-[16/10] w-full overflow-hidden ${GROUND[project.accent]} shadow-[0_24px_40px_-24px_oklch(0.15_0.02_50/0.55)]`}
+      className="relative isolate aspect-[16/10] w-full overflow-hidden rounded-[3px] shadow-[0_24px_40px_-24px_oklch(0.15_0.02_50/0.55)]"
+      style={groundOf(project.accent)}
     >
       {children}
+      <span aria-hidden="true" className="pointer-events-none absolute inset-[5px] z-10 rounded-[2px] border border-[oklch(0.86_0.07_82/0.16)]" />
       <span
         aria-hidden="true"
-        className={`absolute top-1 right-1 z-10 rounded-full p-1 ${GROUND[project.accent]} ${size === "hero" ? "sm:top-1.5 sm:right-1.5" : ""}`}
+        className={`pointer-events-none absolute top-2 right-2 z-10 text-[oklch(0.86_0.07_82)] ${size === "hero" ? "sm:top-3 sm:right-3" : ""}`}
       >
-        <Sigil name={project.title} className="size-5 opacity-80 sm:size-6" />
+        <Sigil name={project.title} className="size-5 opacity-55 sm:size-6" />
       </span>
     </div>
   );
@@ -108,13 +119,17 @@ export function Framed({ img, frame, size, priority = false }: FramedProps) {
 
 export const frameOf = (project: Project, img: ImageAsset): ProjectFrame => img.frame ?? project.frame ?? "window";
 
-type Props = { project: Project; size?: StageSize; priority?: boolean };
+type Props = { project: Project; size?: StageSize; priority?: boolean; preview?: ReactNode };
 
-/** The project's main screenshot on its stage. Without one, the stage shows the rune sigil. */
-export function ProjectStage({ project, size = "card", priority = false }: Props) {
+/**
+ * The project's main screenshot on its stage. Without one, the stage shows the rune sigil.
+ * `preview` lays something over the screenshot, e.g. the card's hover video.
+ */
+export function ProjectStage({ project, size = "card", priority = false, preview }: Props) {
   const img = project.cover;
   return (
     <Stage project={project} size={size}>
+      {preview}
       {img ? (
         <div className={`flex size-full items-center justify-center ${STAGE_PAD[size]}`}>
           <Framed img={img} frame={frameOf(project, img)} size={size} priority={priority} />

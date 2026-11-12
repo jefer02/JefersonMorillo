@@ -148,4 +148,11 @@ export const skills: Skill[] = [
     usedIn: ["jeferson-morillo"],
   },
   { id: "vercel", name: "Vercel", school: "tools", use: "Despliegues automáticos en cada push.", usedIn: ["jeferson-morillo", "alomedia"] },
+  {
+    id: "arch-linux",
+    name: "Arch Linux",
+    school: "tools",
+    use: "Sé cómo funciona por dentro: instalarlo, manejar sus paquetes y configurarlo desde la terminal.",
+    usedIn: [],
+  },
 ];

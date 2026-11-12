@@ -1,4 +1,5 @@
-import type { Locale } from "@/lib/i18n/config";
+import Link from "next/link";
+import { href, type Locale } from "@/lib/i18n/config";
 import { messages } from "@/lib/i18n/messages";
 import { isProd, isRealLink } from "@/lib/todo";
 import type { MaybeLink, Project } from "@/types";
@@ -20,6 +21,16 @@ function LinkButton({
   locale: Locale;
 }) {
   const t = messages[locale];
+  // A path inside the site (the case study's video): same tab, current language.
+  if (isRealLink(link) && link.href.startsWith("/")) {
+    return (
+      <Link href={href(locale, link.href)} className={buttonClass(variant, "text-[0.88rem]")} title={link.label}>
+        {icon}
+        <span>{label}</span>
+        <span className="sr-only">: {link.label}</span>
+      </Link>
+    );
+  }
   if (isRealLink(link)) {
     return (
       <a href={link.href} target="_blank" rel="noopener noreferrer" className={buttonClass(variant, "text-[0.88rem]")} title={link.label}>

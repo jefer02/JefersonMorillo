@@ -75,6 +75,10 @@ for (const locale of locales) {
 for (const p of projects)
   for (const img of [p.cover, ...(p.gallery ?? [])])
     if (img && !existsSync(join(process.cwd(), "public", img.src))) errors.push(`${p.slug}: falta la imagen public${img.src}`);
+// And every promo video with its poster.
+for (const p of projects)
+  for (const file of p.video ? [p.video.src, p.video.poster] : [])
+    if (!existsSync(join(process.cwd(), "public", file))) errors.push(`${p.slug}: falta el video public${file}`);
 
 // English translations: every item of the Spanish content needs its English text.
 for (const p of projects) {
